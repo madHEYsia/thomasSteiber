@@ -1,0 +1,65 @@
+.series0.chart-symbol {
+    -fx-background-color: #ff0000;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.series1.chart-symbol {
+    -fx-background-color: #f48024;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.series2.chart-symbol {
+    -fx-background-color: #edff00;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.series3.chart-symbol {
+    -fx-background-color: #25ff00;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.series4.chart-symbol {
+    -fx-background-color: #00ffe9;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.series5.chart-symbol {
+    -fx-background-color: #1d00ff;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.series6.chart-symbol {
+    -fx-background-color: #ff00af;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.series7.chart-symbol {
+    -fx-background-color: #40142a;
+    -fx-shape: "M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 ";
+    -fx-padding: 2px ;
+    -fx-background-radius: 50px;
+}
+.chart-plot-background.chart-bar {
+     -fx-background-color: transparent;
+ }
+ .chart-vertical-grid-lines.chart-bar {
+     -fx-stroke-width: 0;
+ }
+ .chart-horizontal-grid-lines.chart-bar {
+     -fx-stroke-width: 0;
+ }
+ .default-color0.chart-bar { -fx-bar-fill: green }
+ .default-color1.chart-bar { -fx-bar-fill: green }
+ .default-color2.chart-bar { -fx-bar-fill: green }
+ .default-color3.chart-bar { -fx-bar-fill: green }
+ .default-color4.chart-bar { -fx-bar-fill: green }
+ .default-color5.chart-bar { -fx-bar-fill: green }
+ .default-color6.chart-bar { -fx-bar-fill: green }
+ .default-color7.chart-bar { -fx-bar-fill: green }
