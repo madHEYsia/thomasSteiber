@@ -1,0 +1,59 @@
+//This is main window CSS file including menubar, etc css.
+
+//defining Main Window theme Color variable
+* {
+   -fx-mainWindowBackgroundColor: #323232;
+   -fx-menubarBackgroundColor: #545454;
+   -fx-menuTextColor: #bdbdbd;
+   -fx-menubarHoverColor: #383838;
+   -fx-WhiteColor: white;
+}
+
+
+.root{
+    -fx-background-color: -fx-mainWindowBackgroundColor;
+    -fx-cell-focus-inner-border: grey;
+}
+
+.menu-bar, .menu-bar .label,.context-menu, .menu-button{
+    -fx-background-color: -fx-menubarBackgroundColor;
+    -fx-text-fill: -fx-menuTextColor;
+}
+
+.menu-bar,.context-menu{
+    -fx-padding: 0;
+}
+
+.menu:focused, .menu-item:hover, .menu-item:hover .label, .menu-item:focused, .menu-item:focused .label{
+    -fx-background-color: -fx-menubarHoverColor;
+}
+
+
+.tree-view {
+    -fx-background-color: -fx-menubarBackgroundColor;
+    -fx-background-insets: 0, 0;
+    -fx-padding: 0em;
+}
+
+.tree-cell {
+    -fx-background-color: -fx-menubarBackgroundColor ;
+    -fx-text-fill: -fx-menuTextColor;
+}
+
+.tree-cell > .tree-disclosure-node > .arrow  {
+    -fx-background-color: -fx-menuTextColor;
+}
+
+.tree-view:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused {
+    -fx-background-color: -fx-menubarHoverColor;
+    -fx-background-insets: 0, 1, 3;
+}
+
+
+.tree-cell:expanded > .tree-disclosure-node > .arrow {
+    -fx-background-color: -fx-menuTextColor;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-padding: 0em;
+}

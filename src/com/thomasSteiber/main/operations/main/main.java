@@ -18,12 +18,14 @@ public class main extends Application {
 
         BorderPane layout = home.input();
 
-        Scene scene = new Scene(layout,600,500);
+        Scene scene = new Scene(layout,470,500);
+        scene.getStylesheets().add(main.class.getResource("../../resources/css/main.css").toExternalForm());
 
         primaryStage.setTitle("Sandy Shale Lamination using Thomas Steiber Method");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
         primaryStage.show();
+        primaryStage.setResizable(false);
 
     }
 }
