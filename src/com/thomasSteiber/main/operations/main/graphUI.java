@@ -1,33 +1,49 @@
 package com.thomasSteiber.main.operations.main;
 
+import javafx.concurrent.Task;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class graphUI {
 
     double coordinates[][] = new double[4][2];
+    Stage window;
+    static Label error = new Label("");
+
     public void plot(double values[]){
+        window = new Stage();
 
         getCoordinates(values);
 
         for (int i=0;i<4;++i)
             System.out.println(coordinates[i][0]+", "+coordinates[i][1]);
 
-        BorderPane layout = new BorderPane(null,null,null,null,lineGraph());
+        BorderPane layout = new BorderPane(null,null,parameter(),null,lineGraph());
 
         Scene scene = new Scene(layout,500,500);
-//        scene.getStylesheets().add(main.class.getResource("../../resources/css/main.css").toExternalForm());
 
-        Stage window = new Stage();
         window.setTitle("Graphical representation");
         window.setScene(scene);
         window.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        window.setMinWidth(400);
+        window.setMinHeight(400);
         window.initModality(Modality.APPLICATION_MODAL);
         window.showAndWait();
     }
@@ -89,7 +105,95 @@ public class graphUI {
         lineChart.getData().addAll(series1, series2, series3, series4);
 
         BorderPane layout = new BorderPane(lineChart);
+        window.widthProperty().addListener(e-> layout.setPrefWidth(window.getWidth()*0.6));
         return layout;
+    }
+
+    public BorderPane parameter(){
+
+        VBox parameters = new VBox(20);
+
+        String labelTitle[] = {"Line A Division", "Line B Division"};
+        for (int i=0;i<2;++i){
+            Label label = new Label(labelTitle[i]);
+            label.setFont(Font.font("Open Sans", FontWeight.NORMAL, 15));
+            label.setPrefWidth(100);
+            label.setWrapText(true);
+
+            TextField value = new TextField();
+            value.setPrefColumnCount(15);
+            value.setPrefHeight(30);
+            int finalI = i;
+            value.textProperty().addListener((observable, oldValue, newValue) -> {
+                double temp;
+                try{
+                    newValue = newValue.replaceAll("\\s+",""); //this removes all white spaces from input
+                    temp = Double.parseDouble(newValue);
+                    value.setText(temp+"");
+                }
+                catch (Exception e){
+                    value.setText(oldValue);
+                    errorPopup("Invalid "+labelTitle[finalI]+" entry");
+                }
+            });
+
+            Button submit = new Button("Divide");
+            submit.setFont(Font.font("Open Sans", FontWeight.SEMI_BOLD, 15));
+            submit.setAlignment(Pos.CENTER);
+            submit.setTextFill(Color.web("e5e5e5"));
+            submit.setStyle("-fx-background-color : #004c00");
+            submit.setPadding(new Insets(5));
+            submit.setCursor(Cursor.HAND);
+            submit.setOnAction(e-> {
+                if (Integer.parseInt(value.getText())>0)
+                    divide(finalI);
+                else
+                    errorPopup("Positive Numeric Values required");
+
+            });
+
+            HBox divideRow = new HBox(10, label, value, submit);
+            parameters.getChildren().add(divideRow);
+        }
+
+
+
+        error.setPadding(new Insets(5,15,5,15));
+        error.setFont(Font.font("Open Sans", FontWeight.SEMI_BOLD, 15));
+        error.setTextFill(Color.web("#330000"));
+        error.setStyle("-fx-background-color: transparent");
+
+        parameters.getChildren().add(error);
+
+        BorderPane layout = new BorderPane(parameters);
+        window.widthProperty().addListener(e-> layout.setPrefWidth(window.getWidth()*0.4));
+        return layout;
+
+    }
+
+    public static void divide(int i){
+
+    }
+
+    public static void errorPopup(String errorText){
+        error.setStyle("-fx-background-color: #ff7f7f");
+        error.setText(errorText);
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(ee-> {
+            error.setStyle("-fx-background-color: transparent");
+            error.setText("");
+        });
+        new Thread(sleeper).start();
     }
 
 }
