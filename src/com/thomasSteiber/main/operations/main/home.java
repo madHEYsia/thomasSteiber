@@ -24,12 +24,14 @@ public class home {
         double values[] = new double[8];
         String labelTitle[] = {"Porosity (Φ_a)  ", "Porosity (Φ_b)  ", "Reuss (R_a)  ", "Reuss (R_b)  ", "Gamma y  ", "X_b  ", "Y_max  ", "Y_min  "};
         String textFieldValue[] = {null,null,null,null,null,null,"1","0"};
-        String promptText[] = {"Enter Φ_a value", "Enter Φ_b value", "Enter R_a value", "Enter R_b value", "Enter y value", "Enter X_b value (Optional). Default is null", "Enter Y_max value ", "Enter Y_min value" };
+        String promptText[] = {"Enter Φ_a value b/w 0-1", "Enter Φ_b value  b/w 0-1", "Enter R_a value in API", "Enter R_b value  in API", "Enter y value", "Enter X_b value (Optional). Default is null", "Enter Y_max value ", "Enter Y_min value" };
 
         for (int i=0;i<labelTitle.length;++i){
 
-            if(i<6)
+            if(textFieldValue[i]==null)
                 values[i]=-999999;
+            else
+                values[i]=Double.parseDouble(textFieldValue[i]);
 
             Label label = new Label(labelTitle[i]);
             label.setFont(Font.font("Open Sans", FontWeight.BOLD, 18));
@@ -42,9 +44,9 @@ public class home {
             value.setPrefHeight(30);
             int finalI = i;
             value.textProperty().addListener((observable, oldValue, newValue) -> {
-                newValue = newValue.replaceAll("\\s+",""); //this removes all white spaces from input
                 double temp;
                 try{
+                    newValue = newValue.replaceAll("\\s+",""); //this removes all white spaces from input
                     temp = Double.parseDouble(newValue);
                     values[finalI] = temp;
                 }
@@ -74,9 +76,10 @@ public class home {
                     break;
                 }
             }
-            if (check)
-                graphUI.plot(values);
-
+            if (check){
+                graphUI ob = new graphUI();
+                ob.plot(values);
+            }
         });
 
         error.setPadding(new Insets(5,15,5,15));
