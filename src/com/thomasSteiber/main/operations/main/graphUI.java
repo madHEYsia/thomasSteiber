@@ -124,10 +124,13 @@ public class graphUI {
             double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
             Number x = xAxis.getValueForDisplay(xAxisLoc);
             Number y = yAxis.getValueForDisplay(yAxisLoc);
-            l32.setXValue(x);
-            l11.setXValue(x);
-            l32.setYValue(y);
-            l11.setYValue(y);
+//            System.out.println("---->  "+x+"  "+x.intValue()+"   "+x.doubleValue()+);
+            if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
+                l32.setXValue(x);
+                l11.setXValue(x);
+                l32.setYValue(y);
+                l11.setYValue(y);
+            }
         });
 
         Node phiMin = l31.getNode();
@@ -138,10 +141,12 @@ public class graphUI {
             double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
             Number x = xAxis.getValueForDisplay(xAxisLoc);
             Number y = yAxis.getValueForDisplay(yAxisLoc);
-            l31.setXValue(x);
-            l22.setXValue(x);
-            l31.setYValue(y);
-            l22.setYValue(y);
+            if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
+                l31.setXValue(x);
+                l22.setXValue(x);
+                l31.setYValue(y);
+                l22.setYValue(y);
+            }
         });
 
         Node cleanSand = l42.getNode();
@@ -152,12 +157,14 @@ public class graphUI {
             double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
             Number x = xAxis.getValueForDisplay(xAxisLoc);
             Number y = yAxis.getValueForDisplay(yAxisLoc);
-            l42.setXValue(x);
-            l12.setXValue(x);
-            l21.setXValue(x);
-            l42.setYValue(y);
-            l12.setYValue(y);
-            l21.setYValue(y);
+            if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
+                l42.setXValue(x);
+                l12.setXValue(x);
+                l21.setXValue(x);
+                l42.setYValue(y);
+                l12.setYValue(y);
+                l21.setYValue(y);
+            }
         });
 
         Node satPorosity = l41.getNode();
@@ -168,8 +175,10 @@ public class graphUI {
             double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
             Number x = xAxis.getValueForDisplay(xAxisLoc);
             Number y = yAxis.getValueForDisplay(yAxisLoc);
-            l41.setXValue(x);
-            l41.setYValue(y);
+            if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
+                l41.setXValue(x);
+                l41.setYValue(y);
+            }
         });
 
         BorderPane layout = new BorderPane(lineChart);
