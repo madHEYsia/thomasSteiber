@@ -2,8 +2,10 @@ package com.thomasSteiber.main.operations.main;
 
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -20,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 
 public class graphUI {
 
@@ -81,28 +84,93 @@ public class graphUI {
         final LineChart<Number,Number> lineChart = new LineChart<>(xAxis,yAxis);
 
         lineChart.setTitle("Plot of Gamma Vs Porosity");
+        lineChart.setAnimated(false);
 
-        XYChart.Series series1 = new XYChart.Series();
+        XYChart.Series<Number, Number> series1 = new XYChart.Series();
         series1.setName("Line A");
-        series1.getData().add(new XYChart.Data(coordinates[0][0], coordinates[0][1]));
-        series1.getData().add(new XYChart.Data(coordinates[2][0], coordinates[2][1]));
+        XYChart.Data l11 = new XYChart.Data<>(coordinates[0][0], coordinates[0][1]);
+        series1.getData().add(l11);
+        XYChart.Data l12 = new XYChart.Data<>(coordinates[2][0], coordinates[2][1]);
+        series1.getData().add(l12);
 
-        XYChart.Series series2 = new XYChart.Series();
+        XYChart.Series<Number, Number> series2 = new XYChart.Series();
         series2.setName("Line B");
-        series2.getData().add(new XYChart.Data(coordinates[2][0], coordinates[2][1]));
-        series2.getData().add(new XYChart.Data(coordinates[3][0], coordinates[3][1]));
+        XYChart.Data l21 = new XYChart.Data<>(coordinates[2][0], coordinates[2][1]);
+        series2.getData().add(l21);
+        XYChart.Data l22 = new XYChart.Data<>(coordinates[3][0], coordinates[3][1]);
+        series2.getData().add(l22);
 
-        XYChart.Series series3 = new XYChart.Series();
+        XYChart.Series<Number, Number> series3 = new XYChart.Series();
         series3.setName("Line C");
-        series3.getData().add(new XYChart.Data(coordinates[0][0], coordinates[0][1]));
-        series3.getData().add(new XYChart.Data(coordinates[3][0], coordinates[3][1]));
+        XYChart.Data l31 = new XYChart.Data<>(coordinates[3][0], coordinates[3][1]);
+        series3.getData().add(l31);
+        XYChart.Data l32 = new XYChart.Data<>(coordinates[0][0], coordinates[0][1]);
+        series3.getData().add(l32);
 
-        XYChart.Series series4 = new XYChart.Series();
+        XYChart.Series<Number, Number> series4 = new XYChart.Series();
         series4.setName("Line D");
-        series4.getData().add(new XYChart.Data(coordinates[1][0], coordinates[1][1]));
-        series4.getData().add(new XYChart.Data(coordinates[2][0], coordinates[2][1]));
+        XYChart.Data l41 = new XYChart.Data<>(coordinates[1][0], coordinates[1][1]);
+        series4.getData().add(l41);
+        XYChart.Data l42 = new XYChart.Data<>(coordinates[2][0], coordinates[2][1]);
+        series4.getData().add(l42);
 
         lineChart.getData().addAll(series1, series2, series3, series4);
+
+        Node cleanShale = l32.getNode();
+        cleanShale.setCursor(Cursor.HAND);
+        cleanShale.setOnMouseDragged(e -> {
+            Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
+            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
+            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
+            Number x = xAxis.getValueForDisplay(xAxisLoc);
+            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            l32.setXValue(x);
+            l11.setXValue(x);
+            l32.setYValue(y);
+            l11.setYValue(y);
+        });
+
+        Node phiMin = l31.getNode();
+        phiMin.setCursor(Cursor.HAND);
+        phiMin.setOnMouseDragged(e -> {
+            Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
+            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
+            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
+            Number x = xAxis.getValueForDisplay(xAxisLoc);
+            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            l31.setXValue(x);
+            l22.setXValue(x);
+            l31.setYValue(y);
+            l22.setYValue(y);
+        });
+
+        Node cleanSand = l42.getNode();
+        cleanSand.setCursor(Cursor.HAND);
+        cleanSand.setOnMouseDragged(e -> {
+            Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
+            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
+            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
+            Number x = xAxis.getValueForDisplay(xAxisLoc);
+            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            l42.setXValue(x);
+            l12.setXValue(x);
+            l21.setXValue(x);
+            l42.setYValue(y);
+            l12.setYValue(y);
+            l21.setYValue(y);
+        });
+
+        Node satPorosity = l41.getNode();
+        satPorosity.setCursor(Cursor.HAND);
+        satPorosity.setOnMouseDragged(e -> {
+            Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
+            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
+            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
+            Number x = xAxis.getValueForDisplay(xAxisLoc);
+            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            l41.setXValue(x);
+            l41.setYValue(y);
+        });
 
         BorderPane layout = new BorderPane(lineChart);
         window.widthProperty().addListener(e-> layout.setPrefWidth(window.getWidth()*0.6));
