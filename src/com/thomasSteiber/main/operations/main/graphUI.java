@@ -222,9 +222,7 @@ public class graphUI {
             submit.setPadding(new Insets(5));
             submit.setCursor(Cursor.HAND);
             submit.setOnAction(e-> {
-                if (Integer.parseInt(value.getText())>0)
-                    divide(finalI);
-                else
+                if (Integer.parseInt(value.getText())<=0)
                     errorPopup("Positive Numeric Values required");
 
             });
@@ -248,8 +246,13 @@ public class graphUI {
 
     }
 
-    public static void divide(int i){
+    public Button losLoad() {
+        Button loadFile = new Button("Load las");
+        loadFile.setPadding(new Insets(10));
 
+
+
+        return loadFile;
     }
 
     public static void errorPopup(String errorText){
