@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/testing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java" />
-    </list>
+    <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +16,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="graphUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="graphUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
@@ -33,6 +28,16 @@
                 <element signature="method#divide#0;class#graphUI#0" expanded="false" />
                 <marker date="1517140018713" expanded="true" signature="71:767" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,9 +89,9 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/main.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/function/errorPopup.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/testing.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -593,14 +598,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/themes/maintheme1.css" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/function/errorPopup.java" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -638,6 +635,14 @@
             <element signature="method#divide#0;class#graphUI#0" expanded="false" />
             <marker date="1517140018713" expanded="true" signature="71:767" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
