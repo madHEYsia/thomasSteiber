@@ -40,65 +40,23 @@ public class readLas {
             int indexArray[] = {};
 
             NumberAxis xDepthAxis = new NumberAxis();
-            LineChart<Number,Number> lineChartDepth = new LineChart<>(xDepthAxis, yAxis);
-            lineChartDepth.setTitle("Depth");
-            lineChartDepth.getXAxis().setTickLabelsVisible(false);
-            lineChartDepth.getXAxis().setOpacity(0);
-            lineChartDepth.setPrefWidth(30);
-            lineChartDepth.setMaxWidth(70);
-            lineChartDepth.setMinWidth(30);
-            lineChartDepth.setPadding(new Insets(0,0,10,0));
-            curves.getChildren().add(lineChartDepth);
+            LineChart<Number,Number> lineChartDepth;
 
             NumberAxis xGRAxis = new NumberAxis();
-            LineChart<Number,Number> lineChartGr = new LineChart<>(xGRAxis, yAxis);
-            lineChartGr.setCreateSymbols(false);
-            lineChartGr.setLegendVisible(false);
-            lineChartGr.setAnimated(false);
-            lineChartGr.setTitle("GR");
-            lineChartGr.getYAxis().setTickLabelsVisible(false);
-            lineChartGr.getYAxis().setOpacity(0);
-            lineChartGr.setPadding(new Insets(0));
-            curves.getChildren().add(lineChartGr);
+            LineChart<Number,Number> lineChartGr = null;
             XYChart.Series grSeries = new XYChart.Series();
-            lineChartGr.getData().add(grSeries);
 
             NumberAxis xVshaleAxis = new NumberAxis();
-            AreaChart<Number,Number> areaChartVshale = new AreaChart<>(xVshaleAxis, yAxis);
-            areaChartVshale.getYAxis().setTickLabelsVisible(false);
-            areaChartVshale.getYAxis().setOpacity(0);
-            areaChartVshale.setCreateSymbols(false);
-            areaChartVshale.setLegendVisible(false);
-            areaChartVshale.setTitle("Vshale");
-            curves.getChildren().add(areaChartVshale);
+            AreaChart<Number,Number> areaChartVshale = null;
             XYChart.Series vShaleSeries= new XYChart.Series();
-            areaChartVshale.getData().add(vShaleSeries);
 
             NumberAxis xNPhiAxis = new NumberAxis();
-            LineChart<Number,Number> lineChartNphi = new LineChart<>(xNPhiAxis, yAxis);
-            lineChartNphi.setCreateSymbols(false);
-            lineChartNphi.setLegendVisible(false);
-            lineChartNphi.setAnimated(false);
-            lineChartNphi.setTitle("Nphi");
-            lineChartNphi.getYAxis().setTickLabelsVisible(false);
-            lineChartNphi.getYAxis().setOpacity(0);
-            lineChartNphi.setPadding(new Insets(0));
-            curves.getChildren().add(lineChartNphi);
+            LineChart<Number,Number> lineChartNphi = null;
             XYChart.Series NPhiSeries = new XYChart.Series();
-            lineChartNphi.getData().add(NPhiSeries);
 
             NumberAxis xRhobAxis = new NumberAxis();
-            LineChart<Number,Number> lineChartRhob = new LineChart<>(xRhobAxis, yAxis);
-            lineChartRhob.setCreateSymbols(false);
-            lineChartRhob.setLegendVisible(false);
-            lineChartRhob.setAnimated(false);
-            lineChartRhob.setTitle("RHOB");
-            lineChartRhob.getYAxis().setTickLabelsVisible(false);
-            lineChartRhob.getYAxis().setOpacity(0);
-            lineChartRhob.setPadding(new Insets(0));
-            curves.getChildren().add(lineChartRhob);
+            LineChart<Number,Number> lineChartRhob = null;
             XYChart.Series RhobSeries = new XYChart.Series();
-            lineChartRhob.getData().add(RhobSeries);
 
             getIndex ob = new getIndex();
 
@@ -125,7 +83,60 @@ public class readLas {
                         break inner;
                     }
                     data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)+1][totalIndexes];
-                    yAxis = new NumberAxis(stopValue, startValue,-100*startValue);
+                    yAxis = new NumberAxis(stopValue, startValue,-100);
+
+                    lineChartDepth = new LineChart<>(xDepthAxis, yAxis);
+                    lineChartDepth.setTitle("Depth");
+                    lineChartDepth.getXAxis().setTickLabelsVisible(false);
+                    lineChartDepth.getXAxis().setOpacity(0);
+                    lineChartDepth.setPrefWidth(30);
+                    lineChartDepth.setMaxWidth(70);
+                    lineChartDepth.setMinWidth(30);
+                    lineChartDepth.setPadding(new Insets(0,0,10,0));
+                    curves.getChildren().add(lineChartDepth);
+
+                    lineChartGr = new LineChart<>(xGRAxis, yAxis);
+                    lineChartGr.setCreateSymbols(false);
+                    lineChartGr.setLegendVisible(false);
+                    lineChartGr.setAnimated(false);
+                    lineChartGr.setTitle("GR");
+                    lineChartGr.getYAxis().setTickLabelsVisible(false);
+                    lineChartGr.getYAxis().setOpacity(0);
+                    lineChartGr.setPadding(new Insets(0));
+                    curves.getChildren().add(lineChartGr);
+                    lineChartGr.getData().add(grSeries);
+
+                    areaChartVshale = new AreaChart<>(xVshaleAxis, yAxis);
+                    areaChartVshale.getYAxis().setTickLabelsVisible(false);
+                    areaChartVshale.getYAxis().setOpacity(0);
+                    areaChartVshale.setCreateSymbols(false);
+                    areaChartVshale.setLegendVisible(false);
+                    areaChartVshale.setTitle("Vshale");
+                    curves.getChildren().add(areaChartVshale);
+                    areaChartVshale.getData().add(vShaleSeries);
+
+                    lineChartNphi = new LineChart<>(xNPhiAxis, yAxis);
+                    lineChartNphi.setCreateSymbols(false);
+                    lineChartNphi.setLegendVisible(false);
+                    lineChartNphi.setAnimated(false);
+                    lineChartNphi.setTitle("Nphi");
+                    lineChartNphi.getYAxis().setTickLabelsVisible(false);
+                    lineChartNphi.getYAxis().setOpacity(0);
+                    lineChartNphi.setPadding(new Insets(0));
+                    curves.getChildren().add(lineChartNphi);
+                    lineChartNphi.getData().add(NPhiSeries);
+
+                    lineChartRhob = new LineChart<>(xRhobAxis, yAxis);
+                    lineChartRhob.setCreateSymbols(false);
+                    lineChartRhob.setLegendVisible(false);
+                    lineChartRhob.setAnimated(false);
+                    lineChartRhob.setTitle("RHOB");
+                    lineChartRhob.getYAxis().setTickLabelsVisible(false);
+                    lineChartRhob.getYAxis().setOpacity(0);
+                    lineChartRhob.setPadding(new Insets(0));
+                    curves.getChildren().add(lineChartRhob);
+                    lineChartRhob.getData().add(RhobSeries);
+
                     continue;
                 }
                 else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0)=='~'){

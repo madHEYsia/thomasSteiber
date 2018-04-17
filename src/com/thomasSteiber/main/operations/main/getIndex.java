@@ -47,6 +47,7 @@ public class getIndex {
             grids.add(curve_i,0,i,2,1);
 
             ChoiceBox<String> choice_i = new ChoiceBox<>(FXCollections.observableArrayList(names));
+            choice_i.setValue(names[0]);
             int finalI = i;
             choice_i.getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> {
                 String intValue = index[new_value.intValue()];
