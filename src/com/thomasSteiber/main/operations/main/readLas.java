@@ -47,7 +47,7 @@ public class readLas {
                         data[0][0] = -999999;
                         break inner;
                     }
-                    data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)][totalIndexes];
+                    data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)+1][totalIndexes];
                     continue;
                 }
                 else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0)=='~'){
@@ -69,16 +69,14 @@ public class readLas {
                     while (text.indexOf(" ", textindex) > 0) {
                         int indexOf = text.indexOf(" ", textindex);
                         double value = Double.parseDouble(text.substring(textindex, indexOf));
-                        if (value!=-nullValue){
-                            if (textindex == indexArray[ob.getDepthIndex()])
-                                data[dataRowIndex][depthIndex] = value;
-                            else  if (textindex == indexArray[ob.getGrIndex()])
-                                data[dataRowIndex][grIndex] = value;
-                            else  if (textindex == indexArray[ob.getnPhiIndex()])
-                                data[dataRowIndex][nPhiIndex] = value;
-                            else  if (textindex == indexArray[ob.getRhobIndex()])
-                                data[dataRowIndex][rhobIndex] = value;
-                        }
+                        if (textInd == indexArray[ob.getDepthIndex()])
+                            data[dataRowIndex][depthIndex] = value;
+                        else  if (textInd == indexArray[ob.getGrIndex()])
+                            data[dataRowIndex][grIndex] = value;
+                        else  if (textInd == indexArray[ob.getnPhiIndex()])
+                            data[dataRowIndex][nPhiIndex] = value;
+                        else  if (textInd == indexArray[ob.getRhobIndex()])
+                            data[dataRowIndex][rhobIndex] = value;
                         textindex = indexOf + 1;
                         ++textInd;
                     }

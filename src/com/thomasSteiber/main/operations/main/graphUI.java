@@ -281,7 +281,6 @@ public class graphUI {
             if(selectedlas != null){
                 readLas ob = new readLas();
                 double data[][] = ob.readFile(selectedlas);
-                System.out.println("Wait here");
                 if(data[0][0]!=-999999){
                     error.setStyle("-fx-text-fill: green;");
                     error.setText(selectedlas.getName()+" loaded successfully.");
