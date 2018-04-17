@@ -20,8 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 public class graphUI {
@@ -250,7 +253,17 @@ public class graphUI {
         Button loadFile = new Button("Load las");
         loadFile.setPadding(new Insets(10));
 
+        loadFile.setOnAction(e->{
+            FileChooser loadlasdirectory = new FileChooser();
+            loadlasdirectory.getExtensionFilters().add(new FileChooser.ExtensionFilter("LAS Files", "*.las"));
+            loadlasdirectory.setTitle("Load LAS file for thomas steiber");
+            File selectedlas =  loadlasdirectory.showOpenDialog(window);
 
+            if(selectedlas != null){
+                readLas ob = new readLas();
+                double data[][] = ob.readFile(selectedlas);
+            }
+        });
 
         return loadFile;
     }
