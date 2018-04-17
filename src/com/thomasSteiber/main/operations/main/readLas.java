@@ -39,22 +39,17 @@ public class readLas {
             int textInd = 0, dataRowIndex = 0;
             int indexArray[] = {};
 
-            NumberAxis xDepthAxis = new NumberAxis();
             LineChart<Number,Number> lineChartDepth;
 
-            NumberAxis xGRAxis = new NumberAxis();
             LineChart<Number,Number> lineChartGr = null;
             XYChart.Series grSeries = new XYChart.Series();
 
-            NumberAxis xVshaleAxis = new NumberAxis();
             AreaChart<Number,Number> areaChartVshale = null;
             XYChart.Series vShaleSeries= new XYChart.Series();
 
-            NumberAxis xNPhiAxis = new NumberAxis();
             LineChart<Number,Number> lineChartNphi = null;
             XYChart.Series NPhiSeries = new XYChart.Series();
 
-            NumberAxis xRhobAxis = new NumberAxis();
             LineChart<Number,Number> lineChartRhob = null;
             XYChart.Series RhobSeries = new XYChart.Series();
 
@@ -85,6 +80,7 @@ public class readLas {
                     data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)+1][totalIndexes];
                     yAxis = new NumberAxis(stopValue, startValue,-100);
 
+                    NumberAxis xDepthAxis = new NumberAxis();
                     lineChartDepth = new LineChart<>(xDepthAxis, yAxis);
                     lineChartDepth.setTitle("Depth");
                     lineChartDepth.getXAxis().setTickLabelsVisible(false);
@@ -95,17 +91,11 @@ public class readLas {
                     lineChartDepth.setPadding(new Insets(0,0,10,0));
                     curves.getChildren().add(lineChartDepth);
 
-                    lineChartGr = new LineChart<>(xGRAxis, yAxis);
-                    lineChartGr.setCreateSymbols(false);
-                    lineChartGr.setLegendVisible(false);
-                    lineChartGr.setAnimated(false);
-                    lineChartGr.setTitle("GR");
-                    lineChartGr.getYAxis().setTickLabelsVisible(false);
-                    lineChartGr.getYAxis().setOpacity(0);
-                    lineChartGr.setPadding(new Insets(0));
+                    lineChartGr = linecharts("GR");
                     curves.getChildren().add(lineChartGr);
                     lineChartGr.getData().add(grSeries);
 
+                    NumberAxis xVshaleAxis = new NumberAxis();
                     areaChartVshale = new AreaChart<>(xVshaleAxis, yAxis);
                     areaChartVshale.getYAxis().setTickLabelsVisible(false);
                     areaChartVshale.getYAxis().setOpacity(0);
@@ -115,25 +105,11 @@ public class readLas {
                     curves.getChildren().add(areaChartVshale);
                     areaChartVshale.getData().add(vShaleSeries);
 
-                    lineChartNphi = new LineChart<>(xNPhiAxis, yAxis);
-                    lineChartNphi.setCreateSymbols(false);
-                    lineChartNphi.setLegendVisible(false);
-                    lineChartNphi.setAnimated(false);
-                    lineChartNphi.setTitle("Nphi");
-                    lineChartNphi.getYAxis().setTickLabelsVisible(false);
-                    lineChartNphi.getYAxis().setOpacity(0);
-                    lineChartNphi.setPadding(new Insets(0));
+                    lineChartNphi = linecharts("Nphi");
                     curves.getChildren().add(lineChartNphi);
                     lineChartNphi.getData().add(NPhiSeries);
 
-                    lineChartRhob = new LineChart<>(xRhobAxis, yAxis);
-                    lineChartRhob.setCreateSymbols(false);
-                    lineChartRhob.setLegendVisible(false);
-                    lineChartRhob.setAnimated(false);
-                    lineChartRhob.setTitle("RHOB");
-                    lineChartRhob.getYAxis().setTickLabelsVisible(false);
-                    lineChartRhob.getYAxis().setOpacity(0);
-                    lineChartRhob.setPadding(new Insets(0));
+                    lineChartRhob = linecharts("Rhob");
                     curves.getChildren().add(lineChartRhob);
                     lineChartRhob.getData().add(RhobSeries);
 
@@ -271,5 +247,18 @@ public class readLas {
 
         lasHb.getChildren().addAll(loadFile, error);
         return lasHb;
+    }
+
+    public LineChart<Number, Number> linecharts(String plotName){
+        NumberAxis xAxis = new NumberAxis();
+        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setCreateSymbols(false);
+        lineChart.setLegendVisible(false);
+        lineChart.setAnimated(false);
+        lineChart.setTitle(plotName);
+        lineChart.getYAxis().setTickLabelsVisible(false);
+        lineChart.getYAxis().setOpacity(0);
+        lineChart.setPadding(new Insets(0));
+        return lineChart;
     }
 }

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -36,10 +35,12 @@
       <file leaf-file-name="readLas.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="94" column="59" selection-start-line="94" selection-start-column="59" selection-end-line="94" selection-end-column="59" />
+            <state relative-caret-position="-952">
+              <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#plot#0;class#readLas#0" />
+                <element signature="method#losLoad#0;class#readLas#0" />
               </folding>
             </state>
           </provider>
@@ -412,15 +413,15 @@
       <workItem from="1523938784022" duration="9081000" />
       <workItem from="1523952078736" duration="16601000" />
       <workItem from="1523980825689" duration="1253000" />
-      <workItem from="1523984024509" duration="2382000" />
+      <workItem from="1523984024509" duration="3822000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36604000" />
+    <option name="totallyTimeSpent" value="38044000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -514,6 +515,8 @@
           <caret line="182" column="85" lean-forward="true" selection-start-line="182" selection-start-column="85" selection-end-line="182" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#plot#0;class#readLas#0" />
+            <element signature="method#losLoad#0;class#readLas#0" />
           </folding>
         </state>
       </provider>
@@ -554,6 +557,8 @@
           <caret line="190" column="13" lean-forward="true" selection-start-line="190" selection-start-column="13" selection-end-line="190" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#plot#0;class#readLas#0" />
+            <element signature="method#losLoad#0;class#readLas#0" />
           </folding>
         </state>
       </provider>
@@ -584,6 +589,8 @@
           <caret line="73" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#plot#0;class#readLas#0" />
+            <element signature="method#losLoad#0;class#readLas#0" />
           </folding>
         </state>
       </provider>
@@ -614,6 +621,8 @@
           <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#plot#0;class#readLas#0" />
+            <element signature="method#losLoad#0;class#readLas#0" />
           </folding>
         </state>
       </provider>
@@ -644,6 +653,8 @@
           <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#plot#0;class#readLas#0" />
+            <element signature="method#losLoad#0;class#readLas#0" />
           </folding>
         </state>
       </provider>
@@ -666,6 +677,8 @@
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#plot#0;class#readLas#0" />
+            <element signature="method#losLoad#0;class#readLas#0" />
           </folding>
         </state>
       </provider>
@@ -801,10 +814,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="94" column="59" selection-start-line="94" selection-start-column="59" selection-end-line="94" selection-end-column="59" />
+        <state relative-caret-position="-952">
+          <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#plot#0;class#readLas#0" />
+            <element signature="method#losLoad#0;class#readLas#0" />
           </folding>
         </state>
       </provider>
