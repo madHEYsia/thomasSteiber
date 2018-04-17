@@ -44,7 +44,7 @@ public class readLas {
             LineChart<Number,Number> lineChartGr = null;
             XYChart.Series grSeries = new XYChart.Series();
 
-            AreaChart<Number,Number> areaChartVshale = null;
+            AreaChart<Number,Number> areaChartVshale;
             XYChart.Series vShaleSeries= new XYChart.Series();
 
             LineChart<Number,Number> lineChartNphi = null;
@@ -78,10 +78,11 @@ public class readLas {
                         break inner;
                     }
                     data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)+1][totalIndexes];
-                    yAxis = new NumberAxis(stopValue, startValue,-100);
+                    yAxis = new NumberAxis(stopValue, startValue,-100*stepValue);
 
                     NumberAxis xDepthAxis = new NumberAxis();
-                    lineChartDepth = new LineChart<>(xDepthAxis, yAxis);
+                    NumberAxis yDepthAxis = new NumberAxis(stopValue, startValue,-100*stepValue);
+                    lineChartDepth = new LineChart<>(xDepthAxis, yDepthAxis);
                     lineChartDepth.setTitle("Depth");
                     lineChartDepth.getXAxis().setTickLabelsVisible(false);
                     lineChartDepth.getXAxis().setOpacity(0);
@@ -102,6 +103,7 @@ public class readLas {
                     areaChartVshale.setCreateSymbols(false);
                     areaChartVshale.setLegendVisible(false);
                     areaChartVshale.setTitle("Vshale");
+                    areaChartVshale.setPadding(new Insets(0));
                     curves.getChildren().add(areaChartVshale);
                     areaChartVshale.getData().add(vShaleSeries);
 
