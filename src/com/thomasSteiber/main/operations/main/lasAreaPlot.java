@@ -22,7 +22,7 @@ public class lasAreaPlot {
         for(int i=0;i<len;++i){
             if (i==depthIndex){
                 NumberAxis xAxis = new NumberAxis();
-                NumberAxis yAxis = new NumberAxis(data[len-1][depthIndex],data[0][depthIndex],-100);
+                NumberAxis yAxis = new NumberAxis(data[len-1][depthIndex],data[0][depthIndex],5);
                 LineChart<Number,Number> lineChart = new LineChart<>(xAxis, yAxis);
                 lineChart.setTitle("Depth");
                 lineChart.getXAxis().setTickLabelsVisible(false);
@@ -49,19 +49,19 @@ public class lasAreaPlot {
                 areaChart.getData().add(seriesApril);
                 curves.getChildren().add(areaChart);
             }
-            else if(i==nPhiIndex || i==rhobIndex || i==grIndex){
+//            else if(i==nPhiIndex || i==rhobIndex || i==grIndex){
+            else if(i==grIndex){
                 String plotName = "";
                 if (i==nPhiIndex) plotName = "Nphi";
                 if (i==rhobIndex) plotName = "Rhob";
                 if (i==grIndex) plotName = "GRI";
 
                 NumberAxis xAxis = new NumberAxis();
-                NumberAxis yAxis = new NumberAxis(data[len-1][depthIndex],data[0][depthIndex],-100);
+                NumberAxis yAxis = new NumberAxis(data[len-1][depthIndex],data[0][depthIndex],5);
                 LineChart<Number,Number> lineChart = new LineChart<>(xAxis, yAxis);
                 lineChart.setCreateSymbols(false);
                 lineChart.setLegendVisible(false);
                 lineChart.setAnimated(false);
-                lineChart.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
                 lineChart.setTitle(plotName);
                 lineChart.getYAxis().setTickLabelsVisible(false);
                 lineChart.getYAxis().setOpacity(0);
@@ -72,6 +72,7 @@ public class lasAreaPlot {
                     if(data[j][i]!=nullvalue) {
                         series.getData().add(new XYChart.Data(data[j][i], data[j][depthIndex]));
                     }
+                lineChart.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
 
                 lineChart.getData().add(series);
                 series.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
