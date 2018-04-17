@@ -23,7 +23,7 @@ public class home {
 
         double values[] = new double[8];
         String labelTitle[] = {"Porosity (Φ_a)  ", "Porosity (Φ_b)  ", "Reuss (R_a)  ", "Reuss (R_b)  ", "Gamma y  ", "X_b  ", "Y_max  ", "Y_min  "};
-        String textFieldValue[] = {null,null,null,null,null,null,"1","0"};
+        String textFieldValue[] = {"0.33","0.15","20","100","0.85",null,"1","0"};
         String promptText[] = {"Enter Φ_a value b/w 0-1", "Enter Φ_b value  b/w 0-1", "Enter R_a value in API", "Enter R_b value  in API", "Enter y value", "Enter X_b value (Optional). Default is null", "Enter Y_max value ", "Enter Y_min value" };
 
         for (int i=0;i<labelTitle.length;++i){
