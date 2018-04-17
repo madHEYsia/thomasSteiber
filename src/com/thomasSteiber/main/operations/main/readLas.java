@@ -8,7 +8,7 @@ import static com.thomasSteiber.main.operations.main.indexes.*;
 
 public class readLas {
 
-    double data[][];
+    double data[][] = new double[1][1];
     String[][] header = new String[500][4];
     String curve[][] = new String[1000][4];
     int wellIndex = 0, curveIndex = 0;
@@ -16,12 +16,11 @@ public class readLas {
 
     public double[][] readFile(File lasFile){
         BufferedReader bufferedReader;
-        try {
+        inner: try {
             bufferedReader = new BufferedReader(new FileReader(lasFile));
             String text;
             boolean Isversion = false, Iswell = false, Iscurve = false, Isother = false, Isdata = false;
             int textInd = 0, dataRowIndex = 0;
-            double currentDepth = 0;
             int indexArray[] = {};
 
             getIndex ob = new getIndex();
@@ -41,14 +40,18 @@ public class readLas {
                     Isversion = false; Iswell = false; Iscurve = true; Isother = false; Isdata = false;
                     continue;
                 }
-                else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0)=='~'){
-                    Isversion = false; Iswell = false; Iscurve = false; Isother = false; Isdata = false;
-                    continue;
-                }
                 else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~A")){
                     Isversion = false; Iswell = false; Iscurve = false; Isother = false; Isdata = true;
-                    indexArray = ob.get(curve);
+                    indexArray = ob.get(curve, curveIndex);
+                    if (indexArray[0]==-1) {
+                        data[0][0] = -999999;
+                        break inner;
+                    }
                     data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)][totalIndexes];
+                    continue;
+                }
+                else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0)=='~'){
+                    Isversion = false; Iswell = false; Iscurve = false; Isother = false; Isdata = false;
                     continue;
                 }
 
@@ -67,13 +70,13 @@ public class readLas {
                         int indexOf = text.indexOf(" ", textindex);
                         double value = Double.parseDouble(text.substring(textindex, indexOf));
                         if (value!=-nullValue){
-                            if (textindex==ob.getDepthIndex())
+                            if (textindex == indexArray[ob.getDepthIndex()])
                                 data[dataRowIndex][depthIndex] = value;
-                            else  if (textindex==ob.getGrIndex())
+                            else  if (textindex == indexArray[ob.getGrIndex()])
                                 data[dataRowIndex][grIndex] = value;
-                            else  if (textindex==ob.getnPhiIndex())
+                            else  if (textindex == indexArray[ob.getnPhiIndex()])
                                 data[dataRowIndex][nPhiIndex] = value;
-                            else  if (textindex==ob.getRhobIndex())
+                            else  if (textindex == indexArray[ob.getRhobIndex()])
                                 data[dataRowIndex][rhobIndex] = value;
                         }
                         textindex = indexOf + 1;
@@ -84,6 +87,14 @@ public class readLas {
                     header[wellIndex][0] = text.substring(0,text.indexOf(".")).replaceAll("\\s", "");
                     header[wellIndex][1] = text.substring(text.indexOf(".")+1,text.indexOf(" ", text.indexOf(".")+1));
                     header[wellIndex][2] = text.substring(text.indexOf(" ", text.indexOf(".")+1),text.indexOf(":")).trim();
+                    if (header[wellIndex][0].equalsIgnoreCase("STRT"))
+                        startValue = Double.parseDouble(header[wellIndex][2]);
+                    else if (header[wellIndex][0].equalsIgnoreCase("STOP"))
+                        stopValue = Double.parseDouble(header[wellIndex][2]);
+                    else if (header[wellIndex][0].equalsIgnoreCase("STEP"))
+                        stepValue = Double.parseDouble(header[wellIndex][2]);
+                    else if (header[wellIndex][0].equalsIgnoreCase("NULL"))
+                        nullValue = Double.parseDouble(header[wellIndex][2]);
                     header[wellIndex++][3] = text.substring(text.indexOf(":")+1).trim();
                 }
                 else if (Iscurve){
@@ -91,14 +102,6 @@ public class readLas {
                     curve[curveIndex][1] = text.substring(text.indexOf(".")+1,text.indexOf(" ", text.indexOf(".")+1));
                     curve[curveIndex][2] = text.substring(text.indexOf(" ", text.indexOf(".")+1), text.indexOf(":")).trim();
                     curve[curveIndex++][3] = text.substring(text.indexOf(":")+1).trim();
-                    if (curve[curveIndex][0].equalsIgnoreCase("STRT"))
-                        startValue = Double.parseDouble(curve[curveIndex][0]);
-                    else if (curve[curveIndex][0].equalsIgnoreCase("STOP"))
-                        stopValue = Double.parseDouble(curve[curveIndex][0]);
-                    else if (curve[curveIndex][0].equalsIgnoreCase("STEP"))
-                        stepValue = Double.parseDouble(curve[curveIndex][0]);
-                    else if (curve[curveIndex][0].equalsIgnoreCase("NULL"))
-                        nullValue = Double.parseDouble(curve[curveIndex][0]);
                 }
             }
         }
