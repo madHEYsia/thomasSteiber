@@ -22,7 +22,7 @@ public class lasAreaPlot {
         for(int i=0;i<len;++i){
             if (i==depthIndex){
                 NumberAxis xAxis = new NumberAxis();
-                NumberAxis yAxis = new NumberAxis(data[len-1][depthIndex],data[0][depthIndex],5);
+                NumberAxis yAxis = new NumberAxis(data[rows-1][depthIndex],data[0][depthIndex],-100);
                 LineChart<Number,Number> lineChart = new LineChart<>(xAxis, yAxis);
                 lineChart.setTitle("Depth");
                 lineChart.getXAxis().setTickLabelsVisible(false);
@@ -49,15 +49,14 @@ public class lasAreaPlot {
                 areaChart.getData().add(seriesApril);
                 curves.getChildren().add(areaChart);
             }
-//            else if(i==nPhiIndex || i==rhobIndex || i==grIndex){
-            else if(i==grIndex){
+            else if(i==nPhiIndex || i==rhobIndex || i==grIndex){
                 String plotName = "";
                 if (i==nPhiIndex) plotName = "Nphi";
                 if (i==rhobIndex) plotName = "Rhob";
                 if (i==grIndex) plotName = "GRI";
 
                 NumberAxis xAxis = new NumberAxis();
-                NumberAxis yAxis = new NumberAxis(data[len-1][depthIndex],data[0][depthIndex],5);
+                NumberAxis yAxis = new NumberAxis(data[rows-1][depthIndex],data[0][depthIndex],5);
                 LineChart<Number,Number> lineChart = new LineChart<>(xAxis, yAxis);
                 lineChart.setCreateSymbols(false);
                 lineChart.setLegendVisible(false);
