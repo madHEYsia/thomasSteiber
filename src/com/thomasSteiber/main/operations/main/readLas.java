@@ -1,5 +1,14 @@
 package com.thomasSteiber.main.operations.main;
 
+import javafx.concurrent.Task;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -108,5 +117,57 @@ public class readLas {
             data[0][0] = -999999;
         }
         return data;
+    }
+
+    public HBox losLoad(Stage stage) {
+
+        HBox lasHb = new HBox(10);
+        lasHb.setPadding(new Insets(10));
+
+        Label error = new Label("");
+        error.setFont(new Font("Arial", 11));
+        error.setStyle("-fx-text-fill: red;");
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        Button loadFile = new Button("Load las");
+        loadFile.setPadding(new Insets(10));
+
+        loadFile.setOnAction(e->{
+            FileChooser loadlasdirectory = new FileChooser();
+            loadlasdirectory.getExtensionFilters().add(new FileChooser.ExtensionFilter("LAS Files", "*.las"));
+            loadlasdirectory.setTitle("Load LAS file for thomas steiber");
+            File selectedlas =  loadlasdirectory.showOpenDialog(stage);
+
+            if(selectedlas != null){
+                double data[][] = readFile(selectedlas);
+                if(data[0][0]!=-999999){
+                    error.setStyle("-fx-text-fill: green;");
+                    error.setText(selectedlas.getName()+" loaded successfully.");
+                    sleeper.setOnSucceeded(event-> error.setText(""));
+                    new Thread(sleeper).start();
+                    lasAreaPlot object = new lasAreaPlot();
+                    object.plot(data, nullValue);
+                }
+                else{
+                    error.setStyle("-fx-text-fill: red;");
+                    error.setText("Error reading las file");
+                    sleeper.setOnSucceeded(event-> error.setText(""));
+                    new Thread(sleeper).start();
+                }
+            }
+        });
+
+        lasHb.getChildren().addAll(loadFile, error);
+        return lasHb;
     }
 }

@@ -20,11 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 
 public class graphUI {
@@ -41,7 +38,8 @@ public class graphUI {
         for (int i=0;i<4;++i)
             System.out.println(coordinates[i][0]+", "+coordinates[i][1]);
 
-        BorderPane layout = new BorderPane(null,losLoad(),parameter(),null,lineGraph());
+        readLas ob = new readLas();
+        BorderPane layout = new BorderPane(null,ob.losLoad(window),parameter(),null,lineGraph());
 
         Scene scene = new Scene(layout,500,500);
 
@@ -247,59 +245,6 @@ public class graphUI {
         window.widthProperty().addListener(e-> layout.setPrefWidth(window.getWidth()*0.4));
         return layout;
 
-    }
-
-    public HBox losLoad() {
-
-        HBox lasHb = new HBox(10);
-        lasHb.setPadding(new Insets(10));
-
-        Label error = new Label("");
-        error.setFont(new Font("Arial", 11));
-        error.setStyle("-fx-text-fill: red;");
-        Task<Void> sleeper = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        };
-
-        Button loadFile = new Button("Load las");
-        loadFile.setPadding(new Insets(10));
-
-        loadFile.setOnAction(e->{
-            FileChooser loadlasdirectory = new FileChooser();
-            loadlasdirectory.getExtensionFilters().add(new FileChooser.ExtensionFilter("LAS Files", "*.las"));
-            loadlasdirectory.setTitle("Load LAS file for thomas steiber");
-            File selectedlas =  loadlasdirectory.showOpenDialog(window);
-
-            if(selectedlas != null){
-                readLas ob = new readLas();
-                double data[][] = ob.readFile(selectedlas);
-                if(data[0][0]!=-999999){
-                    error.setStyle("-fx-text-fill: green;");
-                    error.setText(selectedlas.getName()+" loaded successfully.");
-                    sleeper.setOnSucceeded(event-> error.setText(""));
-                    new Thread(sleeper).start();
-                    lasAreaPlot object = new lasAreaPlot();
-                    object.plot(data);
-                }
-                else{
-                    error.setStyle("-fx-text-fill: red;");
-                    error.setText("Error reading las file");
-                    sleeper.setOnSucceeded(event-> error.setText(""));
-                    new Thread(sleeper).start();
-                }
-            }
-        });
-
-        lasHb.getChildren().addAll(loadFile, error);
-        return lasHb;
     }
 
     public static void errorPopup(String errorText){
