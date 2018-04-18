@@ -20,8 +20,8 @@
       <file leaf-file-name="graphUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1326">
-              <caret line="256" column="33" lean-forward="true" selection-start-line="256" selection-start-column="33" selection-end-line="256" selection-end-column="33" />
+            <state relative-caret-position="120">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#lineGraph#0;class#graphUI#0" />
@@ -35,12 +35,13 @@
       <file leaf-file-name="readLas.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="86" column="74" lean-forward="true" selection-start-line="86" selection-start-column="74" selection-end-line="86" selection-end-column="74" />
+            <state relative-caret-position="375">
+              <caret line="125" column="58" lean-forward="true" selection-start-line="125" selection-start-column="58" selection-end-line="125" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#plot#0;class#readLas#0" />
-                <element signature="method#losLoad#0;class#readLas#0" />
+                <element signature="e#10490#10808#0" expanded="true" />
+                <element signature="e#10807#10808#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,6 +82,7 @@
       <find>datas</find>
       <find>DEPTH</find>
       <find>Reu</find>
+      <find>LineChartSample</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -104,12 +106,14 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/testing.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/mnemonics.java" />
-        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/indexes.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/ScatterXChart.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/LineChartSample.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java" />
       </list>
     </option>
@@ -413,12 +417,12 @@
       <workItem from="1523938784022" duration="9081000" />
       <workItem from="1523952078736" duration="16601000" />
       <workItem from="1523980825689" duration="1253000" />
-      <workItem from="1523984024509" duration="5241000" />
+      <workItem from="1523984024509" duration="15128000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39463000" />
+    <option name="totallyTimeSpent" value="49350000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -440,7 +444,7 @@
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16717096" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24962178" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -516,7 +520,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#plot#0;class#readLas#0" />
-            <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="e#10490#10808#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -558,7 +563,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#plot#0;class#readLas#0" />
-            <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="e#10490#10808#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -590,7 +596,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#plot#0;class#readLas#0" />
-            <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="e#10490#10808#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -622,7 +629,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#plot#0;class#readLas#0" />
-            <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="e#10490#10808#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -654,7 +662,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#plot#0;class#readLas#0" />
-            <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="e#10490#10808#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -678,7 +687,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#plot#0;class#readLas#0" />
-            <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="e#10490#10808#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -758,23 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="21" column="79" lean-forward="true" selection-start-line="21" selection-start-column="79" selection-end-line="21" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="30" column="39" lean-forward="true" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
-          <folding>
-            <element signature="method#errorPopup#0;class#home#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1258">
@@ -799,10 +792,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/ScatterXChart.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/LineChartSample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2780#2781#0" expanded="true" />
+            <element signature="e#2808#2809#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="256" column="33" lean-forward="true" selection-start-line="256" selection-start-column="33" selection-end-line="256" selection-end-column="33" />
+        <state relative-caret-position="120">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#lineGraph#0;class#graphUI#0" />
@@ -812,14 +820,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/RotationTransformExample.java.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="method#errorPopup#0;class#home#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="86" column="74" lean-forward="true" selection-start-line="86" selection-start-column="74" selection-end-line="86" selection-end-column="74" />
+        <state relative-caret-position="375">
+          <caret line="125" column="58" lean-forward="true" selection-start-line="125" selection-start-column="58" selection-end-line="125" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#plot#0;class#readLas#0" />
-            <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="e#10490#10808#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
           </folding>
         </state>
       </provider>

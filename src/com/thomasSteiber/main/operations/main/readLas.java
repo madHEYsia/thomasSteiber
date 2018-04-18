@@ -1,7 +1,13 @@
 package com.thomasSteiber.main.operations.main;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.LineChart;
@@ -9,7 +15,11 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,6 +27,7 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Objects;
 
 import static com.thomasSteiber.main.operations.main.indexes.*;
 
@@ -41,7 +52,7 @@ public class readLas {
 
             LineChart<Number,Number> lineChartDepth;
 
-            LineChart<Number,Number> lineChartGr = null;
+            LineChartWithMarkers<Number,Number> lineChartGr = null;
             XYChart.Series grSeries = new XYChart.Series();
 
             AreaChart<Number,Number> areaChartVshale;
@@ -81,7 +92,9 @@ public class readLas {
                     yAxis = new NumberAxis(stopValue, startValue,-100*stepValue);
 
                     NumberAxis xDepthAxis = new NumberAxis();
-                    NumberAxis yDepthAxis = new NumberAxis(stopValue, startValue,-100*stepValue);
+                    NumberAxis yDepthAxis = new NumberAxis();
+                    yDepthAxis.setLowerBound(stopValue);
+                    yDepthAxis.setUpperBound(startValue);
                     lineChartDepth = new LineChart<>(xDepthAxis, yDepthAxis);
                     lineChartDepth.setTitle("Depth");
                     lineChartDepth.getXAxis().setTickLabelsVisible(false);
@@ -92,9 +105,29 @@ public class readLas {
                     lineChartDepth.setPadding(new Insets(0,0,10,0));
                     curves.getChildren().add(lineChartDepth);
 
-                    lineChartGr = linecharts("GR");
-                    curves.getChildren().add(lineChartGr);
+                    NumberAxis xGrAxis = new NumberAxis();
+                    lineChartGr = new LineChartWithMarkers<>(xGrAxis,yAxis);
+                    lineChartGr.setCreateSymbols(false);
+                    lineChartGr.setLegendVisible(false);
+                    lineChartGr.setAnimated(false);
+                    lineChartGr.setTitle("GR");
+                    lineChartGr.getYAxis().setTickLabelsVisible(false);
+                    lineChartGr.getYAxis().setOpacity(0);
+                    lineChartGr.setPadding(new Insets(0));
                     lineChartGr.getData().add(grSeries);
+                    XYChart.Data<Number, Number> horizontalMarker = new XYChart.Data<>(0, 25);
+                    lineChartGr.addHorizontalValueMarker(horizontalMarker);
+                    Slider horizontalMarkerSlider = new Slider(startValue, stopValue, 0);
+                    horizontalMarkerSlider.setOrientation(Orientation.VERTICAL);
+                    horizontalMarkerSlider.setShowTickLabels(false);
+                    horizontalMarkerSlider.setShowTickMarks(false);
+                    horizontalMarkerSlider.setCursor(Cursor.HAND);
+                    horizontalMarkerSlider.setTooltip(new Tooltip("Mark boundary of regions"));
+                    horizontalMarkerSlider.setRotate(180);
+                    horizontalMarkerSlider.valueProperty().bindBidirectional(horizontalMarker.YValueProperty());
+                    horizontalMarkerSlider.setPadding(new Insets(30));
+                    BorderPane borderPane = new BorderPane(lineChartGr, null, null, null, horizontalMarkerSlider);
+                    curves.getChildren().add(borderPane);
 
                     NumberAxis xVshaleAxis = new NumberAxis();
                     areaChartVshale = new AreaChart<>(xVshaleAxis, yAxis);
@@ -103,7 +136,6 @@ public class readLas {
                     areaChartVshale.setCreateSymbols(false);
                     areaChartVshale.setLegendVisible(false);
                     areaChartVshale.setTitle("Vshale");
-                    areaChartVshale.setPadding(new Insets(0));
                     curves.getChildren().add(areaChartVshale);
                     areaChartVshale.getData().add(vShaleSeries);
 
@@ -262,5 +294,47 @@ public class readLas {
         lineChart.getYAxis().setOpacity(0);
         lineChart.setPadding(new Insets(0));
         return lineChart;
+    }
+
+    private class LineChartWithMarkers<X,Y> extends LineChart {
+
+        private ObservableList<Data<X, Y>> horizontalMarkers;
+
+        public LineChartWithMarkers(NumberAxis xAxis, NumberAxis yAxis) {
+            super(xAxis, yAxis);
+            horizontalMarkers = FXCollections.observableArrayList(data -> new Observable[] {data.YValueProperty()});
+            horizontalMarkers.addListener((InvalidationListener) observable -> layoutPlotChildren());
+        }
+
+        public void addHorizontalValueMarker(Data<X, Y> marker) {
+            Objects.requireNonNull(marker, "the marker must not be null");
+            if (horizontalMarkers.contains(marker)) return;
+            Line line = new Line();
+            marker.setNode(line );
+            getPlotChildren().add(line);
+            horizontalMarkers.add(marker);
+        }
+
+        public void removeHorizontalValueMarker(Data<X, Y> marker) {
+            Objects.requireNonNull(marker, "the marker must not be null");
+            if (marker.getNode() != null) {
+                getPlotChildren().remove(marker.getNode());
+                marker.setNode(null);
+            }
+            horizontalMarkers.remove(marker);
+        }
+
+        @Override
+        protected void layoutPlotChildren() {
+            super.layoutPlotChildren();
+            for (Data<X, Y> horizontalMarker : horizontalMarkers) {
+                Line line = (Line) horizontalMarker.getNode();
+                line.setStartX(0);
+                line.setEndX(getBoundsInLocal().getWidth());
+                line.setStartY(getYAxis().getDisplayPosition(horizontalMarker.getYValue()) + 0.5); // 0.5 for crispness
+                line.setEndY(line.getStartY());
+                line.toFront();
+            }
+        }
     }
 }
