@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -15,34 +17,32 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="graphUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#lineGraph#0;class#graphUI#0" />
-                <element signature="method#parameter#0;class#graphUI#0" />
-                <marker date="1523958710289" expanded="true" signature="71:767" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="readLas.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="328" lean-forward="true" selection-start-line="328" selection-end-line="328" />
+            <state relative-caret-position="272">
+              <caret line="290" selection-start-line="290" selection-end-line="290" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#plot#0;class#readLas#0" />
                 <element signature="method#losLoad#0;class#readLas#0" />
-                <element signature="e#10490#10808#0" expanded="true" />
-                <element signature="e#10807#10808#0" expanded="true" />
+                <element signature="e#15523#15841#0" expanded="true" />
+                <element signature="e#15840#15841#0" expanded="true" />
                 <element signature="method#linecharts#0;class#readLas#0" />
                 <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
               </folding>
@@ -50,20 +50,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexes.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/indexes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="getIndex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+            <state relative-caret-position="289">
+              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,6 +82,11 @@
       <find>LineChartSample</find>
       <find>Context</find>
       <find>areac</find>
+      <find>side</find>
+      <find>setMaximized</find>
+      <find>pb.setProgress(</find>
+      <find>pb</find>
+      <find>screenHeight</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -115,11 +114,11 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java" />
-        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/ScatterXChart.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/LineChartSample.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/main.css" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java" />
       </list>
     </option>
@@ -144,8 +143,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -171,6 +170,21 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thomasSteiber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thomasSteiber" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thomasSteiber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thomasSteiber" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -423,15 +437,17 @@
       <workItem from="1523938784022" duration="9081000" />
       <workItem from="1523952078736" duration="16601000" />
       <workItem from="1523980825689" duration="1253000" />
-      <workItem from="1523984024509" duration="24715000" />
+      <workItem from="1523984024509" duration="27123000" />
+      <workItem from="1524050815090" duration="9211000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58937000" />
+    <option name="totallyTimeSpent" value="70556000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="547" y="20" width="1382" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -442,19 +458,18 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32343236" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.09735974" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3289689" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16717096" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16944024" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24962178" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.34488449" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.29867986" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -464,6 +479,7 @@
       <window_info id="DB Browser" order="2" />
       <window_info anchor="bottom" id="Running Result" order="7" side_tool="true" />
       <window_info anchor="right" id="Properties" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="MaxCompute Console" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -483,12 +499,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java</url>
-          <line>151</line>
+          <line>157</line>
           <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java</url>
+          <line>282</line>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="28" />
+      <option name="time" value="41" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -496,29 +518,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="247" column="5" selection-start-line="247" selection-start-column="5" selection-end-line="247" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#lineGraph#0;class#graphUI#0" />
-            <element signature="method#parameter#0;class#graphUI#0" />
-            <marker date="1523958710289" expanded="true" signature="71:767" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="84" column="7" selection-start-line="15" selection-start-column="6" selection-end-line="84" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/indexes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -532,10 +531,9 @@
           <caret line="182" column="85" lean-forward="true" selection-start-line="182" selection-start-column="85" selection-end-line="182" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#plot#0;class#readLas#0" />
             <element signature="method#losLoad#0;class#readLas#0" />
-            <element signature="e#10490#10808#0" expanded="true" />
-            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="e#15523#15841#0" expanded="true" />
+            <element signature="e#15840#15841#0" expanded="true" />
             <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
           </folding>
@@ -555,16 +553,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="84" column="7" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="84" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/indexes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -578,10 +567,9 @@
           <caret line="190" column="13" lean-forward="true" selection-start-line="190" selection-start-column="13" selection-end-line="190" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#plot#0;class#readLas#0" />
             <element signature="method#losLoad#0;class#readLas#0" />
-            <element signature="e#10490#10808#0" expanded="true" />
-            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="e#15523#15841#0" expanded="true" />
+            <element signature="e#15840#15841#0" expanded="true" />
             <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
           </folding>
@@ -614,10 +602,9 @@
           <caret line="73" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#plot#0;class#readLas#0" />
             <element signature="method#losLoad#0;class#readLas#0" />
-            <element signature="e#10490#10808#0" expanded="true" />
-            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="e#15523#15841#0" expanded="true" />
+            <element signature="e#15840#15841#0" expanded="true" />
             <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
           </folding>
@@ -650,10 +637,9 @@
           <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#plot#0;class#readLas#0" />
             <element signature="method#losLoad#0;class#readLas#0" />
-            <element signature="e#10490#10808#0" expanded="true" />
-            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="e#15523#15841#0" expanded="true" />
+            <element signature="e#15840#15841#0" expanded="true" />
             <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
           </folding>
@@ -686,10 +672,9 @@
           <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#plot#0;class#readLas#0" />
             <element signature="method#losLoad#0;class#readLas#0" />
-            <element signature="e#10490#10808#0" expanded="true" />
-            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="e#15523#15841#0" expanded="true" />
+            <element signature="e#15840#15841#0" expanded="true" />
             <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
           </folding>
@@ -714,10 +699,9 @@
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#plot#0;class#readLas#0" />
             <element signature="method#losLoad#0;class#readLas#0" />
-            <element signature="e#10490#10808#0" expanded="true" />
-            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="e#15523#15841#0" expanded="true" />
+            <element signature="e#15840#15841#0" expanded="true" />
             <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
           </folding>
@@ -799,23 +783,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="74" column="2" lean-forward="true" selection-start-line="74" selection-start-column="2" selection-end-line="74" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/indexes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -823,24 +791,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/ScatterXChart.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/LineChartSample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2780#2781#0" expanded="true" />
-            <element signature="e#2808#2809#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/LineChartSample.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="510">
           <caret line="51" selection-start-line="51" selection-end-line="51" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -851,13 +805,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/RotationTransformExample.java.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/RotationTransformExample.java.txt" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -875,16 +823,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -899,16 +838,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/caspian.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="328" lean-forward="true" selection-start-line="328" selection-end-line="328" />
+          <caret line="3288" column="27" selection-start-line="3288" selection-start-column="23" selection-end-line="3288" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/beans/property/ReadOnlyDoubleWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/beans/property/DoublePropertyBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="148" selection-start-line="148" selection-end-line="148" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/layout/Region.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="2238" selection-start-line="2238" selection-end-line="2238" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/Parent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="1089" selection-start-line="1089" selection-end-line="1089" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/Scene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="1720" selection-start-line="1720" selection-end-line="1720" />
+          <folding>
+            <element signature="e#65189#65190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/stage/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="849" selection-start-line="849" selection-end-line="849" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/beans/property/BooleanPropertyBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/beans/property/ReadOnlyDoublePropertyBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+          <folding>
+            <element signature="e#1664#1665#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/layout/HBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="639" selection-start-line="639" selection-end-line="639" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#plot#0;class#readLas#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="290" selection-start-line="290" selection-end-line="290" />
+          <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#losLoad#0;class#readLas#0" />
-            <element signature="e#10490#10808#0" expanded="true" />
-            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="e#15523#15841#0" expanded="true" />
+            <element signature="e#15840#15841#0" expanded="true" />
             <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
           </folding>

@@ -95,6 +95,8 @@ public class getIndex {
             stage.close();
         });
 
+        stage.setOnCloseRequest(e-> indexes[0] = -1);
+
         layout.getChildren().addAll(grids, error, new HBox(10, proceed, cancel));
 
         Scene scene = new Scene(layout);

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
@@ -39,10 +40,15 @@ public class readLas {
     HBox curves = new HBox();
     double[] slidersPosition = new double[100];
     XYChart.Series vShaleSeries= new XYChart.Series();
-
+    AreaChart<Number,Number> areaChartVshale;
+    boolean isChartRotated = false;
+    Stage plotStage = new Stage();
+    double screenWidth;
+    double screenHeight;
     public double[][] readFile(File lasFile){
         BufferedReader bufferedReader;
         inner: try {
+
             bufferedReader = new BufferedReader(new FileReader(lasFile));
             String text;
             boolean Isversion = false, Iswell = false, Iscurve = false, Isother = false, Isdata = false;
@@ -54,8 +60,6 @@ public class readLas {
 
             LineChartWithMarkers<Number,Number> lineChartGr = null;
             XYChart.Series grSeries = new XYChart.Series();
-
-            AreaChart<Number,Number> areaChartVshale;
 
             LineChart<Number,Number> lineChartNphi = null;
             XYChart.Series NPhiSeries = new XYChart.Series();
@@ -160,13 +164,13 @@ public class readLas {
                     curves.getChildren().add(borderPane);
 
                     NumberAxis xVshaleAxis = new NumberAxis();
-                    areaChartVshale = new AreaChart<>(xVshaleAxis, yAxis);
-                    areaChartVshale.getYAxis().setTickLabelsVisible(false);
-
-                    areaChartVshale.getYAxis().setOpacity(0);
+                    xVshaleAxis.setLabel("Vshale");
+                    NumberAxis yVshaleAxis = yAxis;
+                    areaChartVshale = new AreaChart<>(yVshaleAxis, xVshaleAxis);
+                    areaChartVshale.getXAxis().setOpacity(0);
+                    areaChartVshale.getXAxis().setTickLabelsVisible(false);
                     areaChartVshale.setCreateSymbols(false);
                     areaChartVshale.setLegendVisible(false);
-                    areaChartVshale.setTitle("Vshale");
                     curves.getChildren().add(areaChartVshale);
                     areaChartVshale.getData().add(vShaleSeries);
 
@@ -270,10 +274,18 @@ public class readLas {
     }
 
     public void plot(){
-        Stage stage = new Stage();
         Scene scene = new Scene(curves);
-        stage.setScene(scene);
-        stage.show();
+        plotStage.setScene(scene);
+        plotStage.show();
+        plotStage.setMaximized(true);
+//        screenWidth = plotStage.getWidth();
+//        screenHeight = plotStage.getHeight();
+//        areaChartVshale.setPrefHeight(screenWidth/5);
+//        areaChartVshale.setMinHeight(screenWidth/5);
+//        areaChartVshale.setMaxHeight(screenWidth/5);
+//        areaChartVshale.setPrefWidth(screenHeight);
+//        areaChartVshale.setMinWidth(screenHeight);
+//        areaChartVshale.setMaxWidth(screenHeight);
     }
 
     public HBox losLoad(Stage stage) {
@@ -383,6 +395,8 @@ public class readLas {
     }
 
     void plotVshale(double startingDepth,double endingDepth, double grMin, double grMax){
+        if (isChartRotated)
+            areaChartVshale.setRotate(-90);
         int len = data.length;
         inner: for (int i=0;i<len;++i){
             double depthValue = data[i][depthIndex];
@@ -396,8 +410,14 @@ public class readLas {
                 Igr = Igr<=0 ? 0.020 : Igr;
                 Igr = Igr>=1 ? 0.999 : Igr;
                 double vshale = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
-                vShaleSeries.getData().add(new XYChart.Data(vshale, depthValue));
+                vShaleSeries.getData().add(new XYChart.Data(depthValue, vshale));
             }
         }
+
+        areaChartVshale.setRotate(90);
+        areaChartVshale.getXAxis().setSide(Side.BOTTOM);
+        isChartRotated = true;
+        curves.getChildren().remove(areaChartVshale);
+        curves.getChildren().add(2, areaChartVshale);
     }
 }
