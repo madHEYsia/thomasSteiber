@@ -38,6 +38,7 @@ public class readLas {
     NumberAxis yAxis = new NumberAxis();
     HBox curves = new HBox();
     double[] slidersPosition = new double[100];
+    XYChart.Series vShaleSeries= new XYChart.Series();
 
     public double[][] readFile(File lasFile){
         BufferedReader bufferedReader;
@@ -47,6 +48,7 @@ public class readLas {
             boolean Isversion = false, Iswell = false, Iscurve = false, Isother = false, Isdata = false;
             int textInd = 0, dataRowIndex = 0;
             int indexArray[] = {};
+            double[] grInitial = new double[2];
 
             LineChart<Number,Number> lineChartDepth;
 
@@ -54,7 +56,6 @@ public class readLas {
             XYChart.Series grSeries = new XYChart.Series();
 
             AreaChart<Number,Number> areaChartVshale;
-            XYChart.Series vShaleSeries= new XYChart.Series();
 
             LineChart<Number,Number> lineChartNphi = null;
             XYChart.Series NPhiSeries = new XYChart.Series();
@@ -161,6 +162,7 @@ public class readLas {
                     NumberAxis xVshaleAxis = new NumberAxis();
                     areaChartVshale = new AreaChart<>(xVshaleAxis, yAxis);
                     areaChartVshale.getYAxis().setTickLabelsVisible(false);
+
                     areaChartVshale.getYAxis().setOpacity(0);
                     areaChartVshale.setCreateSymbols(false);
                     areaChartVshale.setLegendVisible(false);
@@ -201,8 +203,17 @@ public class readLas {
                             data[dataRowIndex][depthIndex] = value;
                         else  if (textInd == indexArray[ob.getGrIndex()]){
                             data[dataRowIndex][grIndex] = value;
-                            if (value!=nullValue)
+                            if (value!=nullValue) {
                                 grSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][depthIndex]));
+                                if(grInitial[0] == nullValue){
+                                    grInitial[0] = value;
+                                    grInitial[1] = value;
+                                }
+                                else{
+                                    grInitial[0] = Math.min(grInitial[0],value);
+                                    grInitial[1] = Math.max(grInitial[1],value);
+                                }
+                            }
                         }
                         else  if (textInd == indexArray[ob.getnPhiIndex()]){
                             data[dataRowIndex][nPhiIndex] = value;
@@ -228,8 +239,11 @@ public class readLas {
                         stopValue = Double.parseDouble(header[wellIndex][2]);
                     else if (header[wellIndex][0].equalsIgnoreCase("STEP"))
                         stepValue = Double.parseDouble(header[wellIndex][2]);
-                    else if (header[wellIndex][0].equalsIgnoreCase("NULL"))
+                    else if (header[wellIndex][0].equalsIgnoreCase("NULL")) {
                         nullValue = Double.parseDouble(header[wellIndex][2]);
+                        grInitial[0] = nullValue;
+                        grInitial[1] = nullValue;
+                    }
                     header[wellIndex++][3] = text.substring(text.indexOf(":")+1).trim();
                 }
                 else if (Iscurve){
@@ -246,6 +260,7 @@ public class readLas {
             NPhiSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
             lineChartRhob.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
             RhobSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
+            plotVshale(startValue, stopValue, grInitial[0],grInitial[1]);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -363,6 +378,25 @@ public class readLas {
                 line.setStartY(getYAxis().getDisplayPosition(horizontalMarker.getYValue()) + 0.5); // 0.5 for crispness
                 line.setEndY(line.getStartY());
                 line.toFront();
+            }
+        }
+    }
+
+    void plotVshale(double startingDepth,double endingDepth, double grMin, double grMax){
+        int len = data.length;
+        inner: for (int i=0;i<len;++i){
+            double depthValue = data[i][depthIndex];
+            if (depthValue < startingDepth)
+                continue;
+            if (depthValue > endingDepth)
+                break inner;
+            double grValue = data[i][grIndex];
+            if (grValue!=nullValue){
+                double Igr = (grValue - grMin)/(grMax - grMin);
+                Igr = Igr<=0 ? 0.020 : Igr;
+                Igr = Igr>=1 ? 0.999 : Igr;
+                double vshale = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
+                vShaleSeries.getData().add(new XYChart.Data(vshale, depthValue));
             }
         }
     }
