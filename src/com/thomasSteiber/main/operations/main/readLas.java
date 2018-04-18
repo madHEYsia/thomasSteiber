@@ -13,10 +13,7 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
@@ -40,6 +37,7 @@ public class readLas {
     double startValue, stopValue, stepValue, nullValue;
     NumberAxis yAxis = new NumberAxis();
     HBox curves = new HBox();
+    double[] slidersPosition = new double[100];
 
     public double[][] readFile(File lasFile){
         BufferedReader bufferedReader;
@@ -115,18 +113,49 @@ public class readLas {
                     lineChartGr.getYAxis().setOpacity(0);
                     lineChartGr.setPadding(new Insets(0));
                     lineChartGr.getData().add(grSeries);
-                    XYChart.Data<Number, Number> horizontalMarker = new XYChart.Data<>(0, 25);
-                    lineChartGr.addHorizontalValueMarker(horizontalMarker);
-                    Slider horizontalMarkerSlider = new Slider(startValue, stopValue, 0);
-                    horizontalMarkerSlider.setOrientation(Orientation.VERTICAL);
-                    horizontalMarkerSlider.setShowTickLabels(false);
-                    horizontalMarkerSlider.setShowTickMarks(false);
-                    horizontalMarkerSlider.setCursor(Cursor.HAND);
-                    horizontalMarkerSlider.setTooltip(new Tooltip("Mark boundary of regions"));
-                    horizontalMarkerSlider.setRotate(180);
-                    horizontalMarkerSlider.valueProperty().bindBidirectional(horizontalMarker.YValueProperty());
-                    horizontalMarkerSlider.setPadding(new Insets(30));
-                    BorderPane borderPane = new BorderPane(lineChartGr, null, null, null, horizontalMarkerSlider);
+
+                    HBox sliders = new HBox(0);
+
+                    final int[] sliderIndex = {-1};
+                    MenuItem addSlider = new MenuItem("Add Slider");
+                    LineChartWithMarkers<Number, Number> finalLineChartGr = lineChartGr;
+                    addSlider.setOnAction(e-> {
+                        final int currentSlider = ++sliderIndex[0];
+                        XYChart.Data<Number, Number> horizontalMarker = new XYChart.Data<>(0, 0.5*(stopValue-startValue));
+                        finalLineChartGr.addHorizontalValueMarker(horizontalMarker);
+                        Slider horizontalMarkerSlider = new Slider(startValue, stopValue, 0);
+                        horizontalMarkerSlider.setOrientation(Orientation.VERTICAL);
+                        horizontalMarkerSlider.setShowTickLabels(false);
+                        horizontalMarkerSlider.setShowTickMarks(false);
+                        horizontalMarkerSlider.setCursor(Cursor.HAND);
+                        horizontalMarkerSlider.setTooltip(new Tooltip("Mark boundary of regions"));
+                        horizontalMarkerSlider.setRotate(180);
+                        horizontalMarkerSlider.valueProperty().bindBidirectional(horizontalMarker.YValueProperty());
+                        horizontalMarkerSlider.setPadding(new Insets(30,0,30,5));
+                        sliders.getChildren().add(horizontalMarkerSlider);
+                        slidersPosition[currentSlider] = (double) horizontalMarker.getYValue();
+
+                        MenuItem removeSlider = new MenuItem("Remove");
+                        removeSlider.setOnAction(ee-> {
+                            sliders.getChildren().remove(horizontalMarkerSlider);
+                            finalLineChartGr.removeHorizontalValueMarker(horizontalMarker);
+                            slidersPosition[currentSlider] = nullValue;
+                        });
+                        ContextMenu sliderMenus = new ContextMenu();
+                        sliderMenus.getItems().addAll(removeSlider);
+                        horizontalMarkerSlider.setOnContextMenuRequested(ee-> sliderMenus.show(horizontalMarkerSlider, ee.getScreenX(), ee.getScreenY()));
+                    });
+
+                    MenuItem updateVshale = new MenuItem("Update Vshale");
+                    updateVshale.setOnAction(e-> {
+                        System.out.println("Wait");
+                    });
+
+                    ContextMenu grMenus = new ContextMenu();
+                    grMenus.getItems().addAll(addSlider,updateVshale);
+                    lineChartGr.setOnContextMenuRequested(e-> grMenus.show(finalLineChartGr, e.getScreenX(), e.getScreenY()));
+
+                    BorderPane borderPane = new BorderPane(lineChartGr, null, null, null, sliders);
                     curves.getChildren().add(borderPane);
 
                     NumberAxis xVshaleAxis = new NumberAxis();

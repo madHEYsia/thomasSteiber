@@ -1,6 +1,4 @@
-//This is main window CSS file including menubar, etc css.
 
-//defining Main Window theme Color variable
 * {
    -fx-mainWindowBackgroundColor: #323232;
    -fx-menubarBackgroundColor: #545454;
