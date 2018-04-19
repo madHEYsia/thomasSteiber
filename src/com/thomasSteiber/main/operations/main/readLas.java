@@ -40,11 +40,7 @@ public class readLas {
     HBox curves = new HBox();
     double[] slidersPosition = new double[100];
     XYChart.Series vShaleSeries= new XYChart.Series();
-    AreaChart<Number,Number> areaChartVshale;
-    boolean isChartRotated = false;
-    Stage plotStage = new Stage();
-    double screenWidth;
-    double screenHeight;
+
     public double[][] readFile(File lasFile){
         BufferedReader bufferedReader;
         inner: try {
@@ -164,11 +160,10 @@ public class readLas {
                     curves.getChildren().add(borderPane);
 
                     NumberAxis xVshaleAxis = new NumberAxis();
-                    xVshaleAxis.setLabel("Vshale");
-                    NumberAxis yVshaleAxis = yAxis;
-                    areaChartVshale = new AreaChart<>(yVshaleAxis, xVshaleAxis);
-                    areaChartVshale.getXAxis().setOpacity(0);
-                    areaChartVshale.getXAxis().setTickLabelsVisible(false);
+                    modifiedAreaPlot<Number,Number> areaChartVshale = new modifiedAreaPlot<>(xVshaleAxis, yAxis, vShaleSeries);
+                    areaChartVshale.getYAxis().setOpacity(0);
+                    areaChartVshale.getYAxis().setTickLabelsVisible(false);
+                    areaChartVshale.setTitle("Vshale");
                     areaChartVshale.setCreateSymbols(false);
                     areaChartVshale.setLegendVisible(false);
                     curves.getChildren().add(areaChartVshale);
@@ -274,18 +269,11 @@ public class readLas {
     }
 
     public void plot(){
+        Stage plotStage = new Stage();
         Scene scene = new Scene(curves);
         plotStage.setScene(scene);
         plotStage.show();
         plotStage.setMaximized(true);
-//        screenWidth = plotStage.getWidth();
-//        screenHeight = plotStage.getHeight();
-//        areaChartVshale.setPrefHeight(screenWidth/5);
-//        areaChartVshale.setMinHeight(screenWidth/5);
-//        areaChartVshale.setMaxHeight(screenWidth/5);
-//        areaChartVshale.setPrefWidth(screenHeight);
-//        areaChartVshale.setMinWidth(screenHeight);
-//        areaChartVshale.setMaxWidth(screenHeight);
     }
 
     public HBox losLoad(Stage stage) {
@@ -395,8 +383,6 @@ public class readLas {
     }
 
     void plotVshale(double startingDepth,double endingDepth, double grMin, double grMax){
-        if (isChartRotated)
-            areaChartVshale.setRotate(-90);
         int len = data.length;
         inner: for (int i=0;i<len;++i){
             double depthValue = data[i][depthIndex];
@@ -410,14 +396,12 @@ public class readLas {
                 Igr = Igr<=0 ? 0.020 : Igr;
                 Igr = Igr>=1 ? 0.999 : Igr;
                 double vshale = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
-                vShaleSeries.getData().add(new XYChart.Data(depthValue, vshale));
+                vShaleSeries.getData().add(new XYChart.Data(vshale, depthValue));
             }
         }
+    }
 
-        areaChartVshale.setRotate(90);
-        areaChartVshale.getXAxis().setSide(Side.BOTTOM);
-        isChartRotated = true;
-        curves.getChildren().remove(areaChartVshale);
-        curves.getChildren().add(2, areaChartVshale);
+    public XYChart.Series getvShaleSeries() {
+        return vShaleSeries;
     }
 }
