@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,6 +23,13 @@ public class getIndex {
     int rhobIndex = 3;
     int resIndex = 4;
     String[] curvesRequired = {"Depth: ","GR: ","Nphi: ","Rhob: ","Resistivity: "};      //Just make changes here for curves required
+    int initialRmfIndex = 0;
+    int sandDensityIndex = 1;
+    int shaleDensityIndex = 2;
+    int mudFiltrateDensityIndex = 3;
+    int fluidDensityIndex = 4;
+    String[] inputRequired = {"Inital Rmf","Sand Density","Shale Density","Mud filtrate Density","Fluid Density"};
+    double[] values = {0.0,2.65,2.71,0.0,1.0};
 
     public int[] get(String[][] curves, int curveIndex){
         Stage stage = new Stage();
@@ -56,6 +64,22 @@ public class getIndex {
             });
             grids.add(choice_i,2,i,5,1);
         }
+        for (int i=0;i<inputRequired.length;++i){
+            Label input = new Label(inputRequired[i]);
+            grids.add(input,0,curvesRequired.length+i,2,1);
+
+            TextField value = new TextField("0");
+            int finalI = i;
+            value.textProperty().addListener((observable, oldValue, newValue) -> {
+                try{
+                    values[finalI -curvesRequired.length] = Double.parseDouble(newValue);
+                }
+                catch (Exception e){
+                    value.setText(oldValue);
+                }
+            });
+            grids.add(value,2,curvesRequired.length+i,5,1);
+        }
 
         Label error = new Label("");
         error.setFont(new Font("Arial", 11));
@@ -76,9 +100,17 @@ public class getIndex {
         proceed.setOnAction(e-> {
             boolean errorFound = false;
             for(int i=0;i<curvesRequired.length;++i){
-                if(indexes[i]==0){
+                if(indexes[i]==0 && i!=nPhiIndex){
                     errorFound = true;
                     error.setText("Please select parameter "+curvesRequired[i]);
+                    sleeper.setOnSucceeded(event-> error.setText(""));
+                    new Thread(sleeper).start();
+                }
+            }
+            for (int i=0;i<inputRequired.length;++i){
+                if (values[i]==0.0d){
+                    errorFound = true;
+                    error.setText(inputRequired[i]+" cannot be 0 or empty");
                     sleeper.setOnSucceeded(event-> error.setText(""));
                     new Thread(sleeper).start();
                 }
@@ -126,5 +158,33 @@ public class getIndex {
 
     public int getResIndex() {
         return resIndex;
+    }
+
+    public int getInitialRmfIndex() {
+        return initialRmfIndex;
+    }
+
+    public int getSandDensityIndex() {
+        return sandDensityIndex;
+    }
+
+    public int getShaleDensityIndex() {
+        return shaleDensityIndex;
+    }
+
+    public int getMudFiltrateDensityIndex() {
+        return mudFiltrateDensityIndex;
+    }
+
+    public int getFluidDensityIndex() {
+        return fluidDensityIndex;
+    }
+
+    public double[] getValues() {
+        return values;
+    }
+
+    public void setValues(int index, double indexValue) {
+        this.values[index] = indexValue;
     }
 }
