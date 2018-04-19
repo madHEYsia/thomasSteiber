@@ -61,6 +61,9 @@ public class readLas {
             LineChart<Number,Number> lineChartRhob = null;
             XYChart.Series RhobSeries = new XYChart.Series();
 
+            LineChart<Number,Number> lineChartRes = null;
+            XYChart.Series ResSeries = new XYChart.Series();
+
             getIndex ob = new getIndex();
 
             while ((text = bufferedReader.readLine()) != null) {
@@ -88,11 +91,7 @@ public class readLas {
                     data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)+1][totalIndexes];
                     yAxis = new NumberAxis(stopValue, startValue,-100*stepValue);
 
-                    NumberAxis xDepthAxis = new NumberAxis();
-                    NumberAxis yDepthAxis = new NumberAxis();
-                    yDepthAxis.setLowerBound(stopValue);
-                    yDepthAxis.setUpperBound(startValue);
-                    lineChartDepth = new LineChart<>(xDepthAxis, yDepthAxis);
+                    lineChartDepth = new LineChart<>(new NumberAxis(), yAxis);
                     lineChartDepth.setTitle("Depth");
                     lineChartDepth.getXAxis().setTickLabelsVisible(false);
                     lineChartDepth.getXAxis().setOpacity(0);
@@ -158,10 +157,8 @@ public class readLas {
                     curves.getChildren().add(borderPane);
 
                     NumberAxis xVshaleAxis = new NumberAxis(0,1,0.1);
-                    for (int i=0;i<areaSeries.length;++i) {
+                    for (int i=0;i<areaSeries.length;++i)
                         areaSeries[i] = new XYChart.Series();
-                        areaSeries[i].
-                    }
                     modifiedAreaPlot<Number,Number> areaChartVshale = new modifiedAreaPlot<>(xVshaleAxis, yAxis, areaSeries);
                     areaChartVshale.getYAxis().setOpacity(0);
                     areaChartVshale.getYAxis().setTickLabelsVisible(false);
@@ -179,6 +176,10 @@ public class readLas {
                     lineChartRhob = linecharts("Rhob");
                     curves.getChildren().add(lineChartRhob);
                     lineChartRhob.getData().add(RhobSeries);
+
+                    lineChartRes = linecharts("Resistivity");
+                    curves.getChildren().add(lineChartRes);
+                    lineChartRes.getData().add(ResSeries);
 
                     continue;
                 }
@@ -227,6 +228,11 @@ public class readLas {
                             if (value!=nullValue)
                                 RhobSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][depthIndex]));
                         }
+                        else  if (textInd == indexArray[ob.getResIndex()]){
+                            data[dataRowIndex][resIndex] = value;
+                            if (value!=nullValue)
+                                ResSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][depthIndex]));
+                        }
                         textindex = indexOf + 1;
                         ++textInd;
                     }
@@ -262,6 +268,9 @@ public class readLas {
             NPhiSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
             lineChartRhob.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
             RhobSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
+            lineChartRes.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+            ResSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
+
             plotVshale(startValue, stopValue, grInitial[0],grInitial[1]);
         }
         catch (Exception ex) {

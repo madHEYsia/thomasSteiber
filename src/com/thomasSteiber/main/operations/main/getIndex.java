@@ -20,7 +20,8 @@ public class getIndex {
     int grIndex = 1;
     int nPhiIndex = 2;
     int rhobIndex = 3;
-    String[] curvesRequired = {"Depth: ","GR: ","Nphi: ","Rhob: "};      //Just make changes here for curves required
+    int resIndex = 4;
+    String[] curvesRequired = {"Depth: ","GR: ","Nphi: ","Rhob: ","Resistivity: "};      //Just make changes here for curves required
 
     public int[] get(String[][] curves, int curveIndex){
         Stage stage = new Stage();
@@ -121,5 +122,9 @@ public class getIndex {
 
     public int getnPhiIndex() {
         return nPhiIndex;
+    }
+
+    public int getResIndex() {
+        return resIndex;
     }
 }
