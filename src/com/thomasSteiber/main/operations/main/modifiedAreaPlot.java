@@ -16,23 +16,24 @@ import javafx.scene.shape.PathElement;
 
 public class modifiedAreaPlot<X,Y> extends AreaChart<X,Y> {
 
-    XYChart.Series vShaleSeries;
+    XYChart.Series[] series;
 
-    public modifiedAreaPlot(Axis<X> xAxis, Axis<Y> yAxis, XYChart.Series<X,Y> series) {
+    public modifiedAreaPlot(Axis<X> xAxis, Axis<Y> yAxis, XYChart.Series<X,Y> seriesArray[]) {
         super(xAxis, yAxis);
-        vShaleSeries = series;
+        series = seriesArray;
     }
 
     @Override protected void layoutPlotChildren() {
         List<LineTo> constructedPath = new ArrayList<>(1);
+        for (int seriesIndex=0; seriesIndex < series.length; seriesIndex++) {
             double lastY = 0;
-            final ObservableList<Node> children = ((Group) vShaleSeries.getNode()).getChildren();
+            final ObservableList<Node> children = ((Group) series[seriesIndex].getNode()).getChildren();
             ObservableList<PathElement> seriesLine = ((Path) children.get(1)).getElements();
             ObservableList<PathElement> fillPath = ((Path) children.get(0)).getElements();
             seriesLine.clear();
             fillPath.clear();
             constructedPath.clear();
-            for (Iterator<Data<X, Y>> it = getDisplayedDataIterator(vShaleSeries); it.hasNext(); ) {
+            for (Iterator<Data<X, Y>> it = getDisplayedDataIterator(series[seriesIndex]); it.hasNext(); ) {
                 Data<X, Y> item = it.next();
                 double x = getXAxis().getDisplayPosition(item.getXValue());
                 double y = getYAxis().getDisplayPosition(item.getYValue());
@@ -45,7 +46,7 @@ public class modifiedAreaPlot<X,Y> extends AreaChart<X,Y> {
                 if (symbol != null) {
                     final double w = symbol.prefWidth(-1);
                     final double h = symbol.prefHeight(-1);
-                    symbol.resizeRelocate(x-(w/2), y-(h/2),w,h);
+                    symbol.resizeRelocate(x - (w / 2), y - (h / 2), w, h);
                 }
             }
 
@@ -56,9 +57,6 @@ public class modifiedAreaPlot<X,Y> extends AreaChart<X,Y> {
                 final double displayXPos = first.getX();
                 final double numericXPos = getXAxis().toNumericValue(getXAxis().getValueForDisplay(displayXPos));
 
-                // RT-34626: We can't always use getZeroPosition(), as it may be the case
-                // that the zero position of the y-axis is not visible on the chart. In these
-                // cases, we need to use the height between the point and the y-axis line.
                 final double xAxisZeroPos = getXAxis().getZeroPosition();
                 final boolean isXAxisZeroPosVisible = !Double.isNaN(xAxisZeroPos);
                 final double xAxisHeight = getXAxis().getHeight();
@@ -73,6 +71,6 @@ public class modifiedAreaPlot<X,Y> extends AreaChart<X,Y> {
                 fillPath.add(new LineTo(xFillPos, lastY));
                 fillPath.add(new ClosePath());
             }
+        }
     }
-
 }

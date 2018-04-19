@@ -7,10 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -39,7 +37,7 @@ public class readLas {
     NumberAxis yAxis = new NumberAxis();
     HBox curves = new HBox();
     double[] slidersPosition = new double[100];
-    XYChart.Series vShaleSeries= new XYChart.Series();
+    XYChart.Series[] areaSeries = new XYChart.Series[2];
 
     public double[][] readFile(File lasFile){
         BufferedReader bufferedReader;
@@ -159,15 +157,20 @@ public class readLas {
                     BorderPane borderPane = new BorderPane(lineChartGr, null, null, null, sliders);
                     curves.getChildren().add(borderPane);
 
-                    NumberAxis xVshaleAxis = new NumberAxis();
-                    modifiedAreaPlot<Number,Number> areaChartVshale = new modifiedAreaPlot<>(xVshaleAxis, yAxis, vShaleSeries);
+                    NumberAxis xVshaleAxis = new NumberAxis(0,1,0.1);
+                    for (int i=0;i<areaSeries.length;++i) {
+                        areaSeries[i] = new XYChart.Series();
+                        areaSeries[i].
+                    }
+                    modifiedAreaPlot<Number,Number> areaChartVshale = new modifiedAreaPlot<>(xVshaleAxis, yAxis, areaSeries);
                     areaChartVshale.getYAxis().setOpacity(0);
                     areaChartVshale.getYAxis().setTickLabelsVisible(false);
                     areaChartVshale.setTitle("Vshale");
                     areaChartVshale.setCreateSymbols(false);
                     areaChartVshale.setLegendVisible(false);
                     curves.getChildren().add(areaChartVshale);
-                    areaChartVshale.getData().add(vShaleSeries);
+                    for (int i=0;i<areaSeries.length;++i)
+                        areaChartVshale.getData().add(areaSeries[i]);
 
                     lineChartNphi = linecharts("Nphi");
                     curves.getChildren().add(lineChartNphi);
@@ -390,18 +393,18 @@ public class readLas {
                 continue;
             if (depthValue > endingDepth)
                 break inner;
+            if (depthValue == startingDepth)
+                areaSeries[1].getData().add(new XYChart.Data(1, startingDepth));
+            if (depthValue == endingDepth)
+                areaSeries[1].getData().add(new XYChart.Data(1, endingDepth));
             double grValue = data[i][grIndex];
             if (grValue!=nullValue){
                 double Igr = (grValue - grMin)/(grMax - grMin);
                 Igr = Igr<=0 ? 0.020 : Igr;
                 Igr = Igr>=1 ? 0.999 : Igr;
                 double vshale = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
-                vShaleSeries.getData().add(new XYChart.Data(vshale, depthValue));
+                areaSeries[0].getData().add(new XYChart.Data(vshale, depthValue));
             }
         }
-    }
-
-    public XYChart.Series getvShaleSeries() {
-        return vShaleSeries;
     }
 }
