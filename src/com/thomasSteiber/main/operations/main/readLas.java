@@ -303,6 +303,21 @@ public class readLas {
 
             plotVshale(startValue, stopValue, data[grMaxMinIndex[0]][grIndex], data[grMaxMinIndex[1]][grIndex]);
 
+            LineChart<Number, Number> lineChartphiO = new LineChart<>(new NumberAxis(), new NumberAxis());
+            lineChartphiO.setCreateSymbols(false);
+            lineChartphiO.setLegendVisible(false);
+            lineChartphiO.setAnimated(false);
+            lineChartphiO.setTitle("PHI-O");
+            lineChartphiO.setPadding(new Insets(0));
+            XYChart.Series phiOSeries = new XYChart.Series();
+            lineChartphiO.getData().add(phiOSeries);
+            lineChartphiO.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+            phiOSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
+            Stage tempStage = new Stage();
+            Scene scene = new Scene(new BorderPane(lineChartphiO));
+            tempStage.setScene(scene);
+            tempStage.show();
+
             int matrixDensityIndex = 0;
             int phiDIndex = 1;
             int phiDXIndex = 2;
@@ -316,28 +331,41 @@ public class readLas {
                 calculatedValues[i][phiDXIndex] = nullValue;
                 calculatedValues[i][phiDCIndex] = nullValue;
                 calculatedValues[i][phiNCIndex] = nullValue;
-                calculatedValues[i][phiOIndex] = calculatedValues[i][phiDXIndex];
                 if (data[i][vshaleIndex] != nullValue) {
                     calculatedValues[i][matrixDensityIndex] = data[i][vshaleIndex] * ob.values[ob.getShaleDensityIndex()] +
                             (1 - data[i][vshaleIndex]) * ob.values[ob.getSandDensityIndex()];
-                    if (isNphiPresent && data[i][nPhiIndex]!=nullValue) {
+                    if (isNphiPresent && data[i][nPhiIndex]!=nullValue)
                         calculatedValues[i][phiNCIndex] = data[i][nPhiIndex] - data[i][vshaleIndex] * data[grMaxMinIndex[1]][nPhiIndex];
-                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiNCIndex];
-                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiOIndex]<=0 ? 0.001 : calculatedValues[i][phiOIndex];
+                    if (data[i][rhobIndex]!=nullValue){
+                        calculatedValues[i][matrixDensityIndex] = calculatedValues[i][matrixDensityIndex] < data[i][rhobIndex]
+                                ? calculatedValues[i][matrixDensityIndex]+0.005 : calculatedValues[i][matrixDensityIndex];
+                        calculatedValues[i][phiDIndex] = (calculatedValues[i][matrixDensityIndex]-data[i][rhobIndex])/
+                                (calculatedValues[i][matrixDensityIndex]-ob.values[ob.getFluidDensityIndex()]);
+                        calculatedValues[i][phiDXIndex] = (calculatedValues[i][matrixDensityIndex]-data[i][rhobIndex])/
+                                (calculatedValues[i][matrixDensityIndex]-ob.values[ob.getMudFiltrateDensityIndex()]);
+                        calculatedValues[i][phiDCIndex] = calculatedValues[i][phiDXIndex] - data[i][vshaleIndex] *
+                                ((ob.values[ob.getShaleDensityIndex()]-data[i][rhobIndex])/(ob.values[ob.getShaleDensityIndex()]-1));
                     }
 
-                    if (data[i][rhobIndex]!=nullValue){
-                    calculatedValues[i][matrixDensityIndex] = calculatedValues[i][matrixDensityIndex] < data[i][rhobIndex]
-                            ? calculatedValues[i][matrixDensityIndex]+0.005 : calculatedValues[i][matrixDensityIndex];
-                    calculatedValues[i][phiDIndex] = (calculatedValues[i][matrixDensityIndex]-data[i][rhobIndex])/
-                            (calculatedValues[i][matrixDensityIndex]-ob.values[ob.getFluidDensityIndex()]);
-                    calculatedValues[i][phiDXIndex] = (calculatedValues[i][matrixDensityIndex]-data[i][rhobIndex])/
-                            (calculatedValues[i][matrixDensityIndex]-ob.values[ob.getMudFiltrateDensityIndex()]);
-                    calculatedValues[i][phiDCIndex] = calculatedValues[i][phiDXIndex] - data[i][vshaleIndex] *
-                            ((ob.values[ob.getShaleDensityIndex()]-data[i][rhobIndex])/(ob.values[ob.getShaleDensityIndex()]-1));
-                    calculatedValues[i][phiOIndex] = Math.sqrt((Math.pow(calculatedValues[i][phiDCIndex],2)+Math.pow(calculatedValues[i][phiNCIndex],2))/2);
-                    calculatedValues[i][phiOIndex] = calculatedValues[i][phiOIndex]<=0 ? 0.001 : calculatedValues[i][phiOIndex];
-                    }
+                }
+                if (!isNphiPresent)
+                    calculatedValues[i][phiOIndex] = calculatedValues[i][phiDXIndex];
+                else {
+                    if (calculatedValues[i][phiDCIndex]!=nullValue && calculatedValues[i][phiNCIndex]==nullValue)
+                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiDCIndex];
+                    else if (calculatedValues[i][phiDCIndex]==nullValue && calculatedValues[i][phiNCIndex]!=nullValue)
+                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiNCIndex];
+                    else if (calculatedValues[i][phiDCIndex]!=nullValue && calculatedValues[i][phiNCIndex]!=nullValue)
+                        calculatedValues[i][phiOIndex] = Math.sqrt((Math.pow(calculatedValues[i][phiDCIndex],2)+Math.pow(calculatedValues[i][phiNCIndex],2))/2);
+                    else
+                        calculatedValues[i][phiOIndex] = nullValue;
+                }
+                if (calculatedValues[i][phiOIndex]!=nullValue) {
+                    calculatedValues[i][phiOIndex] = calculatedValues[i][phiOIndex] <= 0 ? 0.001 : calculatedValues[i][phiOIndex];
+                    if(calculatedValues[i][phiOIndex]>1)
+                        System.out.println("More than 1-----------------------------------------------------------");
+                    System.out.println("at "+data[i][depthIndex]+" value: "+calculatedValues[i][phiOIndex]);
+                    phiOSeries.getData().add(new XYChart.Data(calculatedValues[i][phiOIndex], data[i][depthIndex]));
                 }
             }
         }

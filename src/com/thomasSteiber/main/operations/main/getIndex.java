@@ -29,7 +29,7 @@ public class getIndex {
     int mudFiltrateDensityIndex = 3;
     int fluidDensityIndex = 4;
     String[] inputRequired = {"Inital Rmf","Sand Density","Shale Density","Mud filtrate Density","Fluid Density"};
-    double[] values = {0.0,2.65,2.71,0.0,1.0};
+    double[] values = {1.09,2.65,2.71,1.5,1.0};
 
     public int[] get(String[][] curves, int curveIndex){
         Stage stage = new Stage();
@@ -68,11 +68,11 @@ public class getIndex {
             Label input = new Label(inputRequired[i]);
             grids.add(input,0,curvesRequired.length+i,2,1);
 
-            TextField value = new TextField("0");
             int finalI = i;
+            TextField value = new TextField(values[i]+"");
             value.textProperty().addListener((observable, oldValue, newValue) -> {
                 try{
-                    values[finalI -curvesRequired.length] = Double.parseDouble(newValue);
+                    values[finalI] = Double.parseDouble(newValue);
                 }
                 catch (Exception e){
                     value.setText(oldValue);
