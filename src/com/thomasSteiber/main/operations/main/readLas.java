@@ -57,77 +57,93 @@ public class readLas {
             data = new double[1][1];
             header = new String[500][4];
             curve = new String[1000][4];
-            wellIndex = 0; curveIndex = 0;
+            wellIndex = 0;
+            curveIndex = 0;
             slidersPosition = new double[100];
             curves = new HBox();
             areaSeries = new XYChart.Series[2];
             depthDiv = 10;
             isNphiPresent = true;
+            double avgShaleDensity = 0.0;
 
-            LineChartWithMarkers<Number,Number> lineChartGr = null;
+            LineChartWithMarkers<Number, Number> lineChartGr = null;
             XYChart.Series grSeries = new XYChart.Series();
 
-            LineChart<Number,Number> lineChartNphi = null;
+            LineChart<Number, Number> lineChartNphi = null;
             XYChart.Series NPhiSeries = new XYChart.Series();
 
-            LineChart<Number,Number> lineChartRhob = null;
+            LineChart<Number, Number> lineChartRhob = null;
             XYChart.Series RhobSeries = new XYChart.Series();
 
-            LineChart<Number,Number> lineChartRes = null;
+            LineChart<Number, Number> lineChartRes = null;
             XYChart.Series ResSeries = new XYChart.Series();
 
             getIndex ob = new getIndex();
 
             while ((text = bufferedReader.readLine()) != null) {
-                if (text.replaceAll("\\s", "").length()==0 || text.replaceAll("\\s", "").charAt(0)=='#')
+                if (text.replaceAll("\\s", "").length() == 0 || text.replaceAll("\\s", "").charAt(0) == '#')
                     continue;
-                if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~V")){
-                    Isversion = true; Iswell = false; Iscurve = false; Isother = false; Isdata = false;
+                if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~V")) {
+                    Isversion = true;
+                    Iswell = false;
+                    Iscurve = false;
+                    Isother = false;
+                    Isdata = false;
                     continue;
-                }
-                else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~W")){
-                    Isversion = false; Iswell = true; Iscurve = false; Isother = false; Isdata = false;
+                } else if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~W")) {
+                    Isversion = false;
+                    Iswell = true;
+                    Iscurve = false;
+                    Isother = false;
+                    Isdata = false;
                     continue;
-                }
-                else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~C")){
-                    Isversion = false; Iswell = false; Iscurve = true; Isother = false; Isdata = false;
+                } else if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~C")) {
+                    Isversion = false;
+                    Iswell = false;
+                    Iscurve = true;
+                    Isother = false;
+                    Isdata = false;
                     continue;
-                }
-                else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~A")){
-                    Isversion = false; Iswell = false; Iscurve = false; Isother = false; Isdata = true;
+                } else if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~A")) {
+                    Isversion = false;
+                    Iswell = false;
+                    Iscurve = false;
+                    Isother = false;
+                    Isdata = true;
                     indexArray = ob.get(curve, curveIndex);
-                    if (indexArray[0]==-1) {
+                    if (indexArray[0] == -1) {
                         data[0][0] = -999999;
                         break inner;
                     }
-                    if (indexArray[ob.getnPhiIndex()]==-1)
+                    if (indexArray[ob.getnPhiIndex()] == -1)
                         isNphiPresent = false;
 
-                    data = new double[(int)Math.ceil((stopValue-startValue)/stepValue)+1][totalIndexes];
-                    yAxis = new NumberAxis(stopValue, startValue,-100*stepValue);
+                    avgShaleDensity = 0.5*(ob.values[ob.getShaleDensityLowerIndex()]+ob.values[ob.getShaleDensityUpperIndex()]);
+                    data = new double[(int) Math.ceil((stopValue - startValue) / stepValue) + 1][totalIndexes];
+                    yAxis = new NumberAxis(stopValue, startValue, -100 * stepValue);
 
                     HBox depthVb = new HBox(0);
                     GridPane depthGrid = new GridPane();
                     depthGrid.setVgap(0);
-                    for (int i=0;i<=depthDiv;++i){
-                        Label depthLabel = new Label((startValue+(i/depthDiv)*(stopValue-startValue))+"");
-                        depthGrid.add(depthLabel,0,i);
+                    for (int i = 0; i <= depthDiv; ++i) {
+                        Label depthLabel = new Label((startValue + (i / depthDiv) * (stopValue - startValue)) + "");
+                        depthGrid.add(depthLabel, 0, i);
                     }
-                    depthGrid.setPrefHeight(depthVb.getHeight()-60);
+                    depthGrid.setPrefHeight(depthVb.getHeight() - 60);
 
-                    Rectangle rect = new Rectangle(2,depthVb.getHeight()-60);
+                    Rectangle rect = new Rectangle(2, depthVb.getHeight() - 60);
                     rect.setFill(Color.BLACK);
                     rect.setStrokeWidth(0);
-                    depthVb.heightProperty().addListener(e-> {
+                    depthVb.heightProperty().addListener(e -> {
                         rect.setHeight(depthVb.getHeight());
-                        depthGrid.setPrefHeight(depthVb.getHeight()-60);
+                        depthGrid.setPrefHeight(depthVb.getHeight() - 60);
                     });
 
                     depthVb.getChildren().addAll(depthGrid, rect);
-                    depthVb.setPadding(new Insets(30,0,30,5));
+                    depthVb.setPadding(new Insets(30, 0, 30, 5));
                     curves.getChildren().add(depthVb);
 
-                    lineChartGr = new LineChartWithMarkers<>(new NumberAxis(),yAxis);
+                    lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), yAxis);
                     lineChartGr.setCreateSymbols(false);
                     lineChartGr.setLegendVisible(false);
                     lineChartGr.setAnimated(false);
@@ -142,9 +158,9 @@ public class readLas {
                     final int[] sliderIndex = {-1};
                     MenuItem addSlider = new MenuItem("Add Slider");
                     LineChartWithMarkers<Number, Number> finalLineChartGr = lineChartGr;
-                    addSlider.setOnAction(e-> {
+                    addSlider.setOnAction(e -> {
                         final int currentSlider = ++sliderIndex[0];
-                        XYChart.Data<Number, Number> horizontalMarker = new XYChart.Data<>(0, 0.5*(stopValue-startValue));
+                        XYChart.Data<Number, Number> horizontalMarker = new XYChart.Data<>(0, 0.5 * (stopValue - startValue));
                         finalLineChartGr.addHorizontalValueMarker(horizontalMarker);
                         Slider horizontalMarkerSlider = new Slider(startValue, stopValue, 0);
                         horizontalMarkerSlider.setOrientation(Orientation.VERTICAL);
@@ -154,44 +170,44 @@ public class readLas {
                         horizontalMarkerSlider.setTooltip(new Tooltip("Mark boundary of regions"));
                         horizontalMarkerSlider.setRotate(180);
                         horizontalMarkerSlider.valueProperty().bindBidirectional(horizontalMarker.YValueProperty());
-                        horizontalMarkerSlider.setPadding(new Insets(30,0,30,5));
+                        horizontalMarkerSlider.setPadding(new Insets(30, 0, 30, 5));
                         sliders.getChildren().add(horizontalMarkerSlider);
                         slidersPosition[currentSlider] = (double) horizontalMarker.getYValue();
 
                         MenuItem removeSlider = new MenuItem("Remove");
-                        removeSlider.setOnAction(ee-> {
+                        removeSlider.setOnAction(ee -> {
                             sliders.getChildren().remove(horizontalMarkerSlider);
                             finalLineChartGr.removeHorizontalValueMarker(horizontalMarker);
                             slidersPosition[currentSlider] = nullValue;
                         });
                         ContextMenu sliderMenus = new ContextMenu();
                         sliderMenus.getItems().addAll(removeSlider);
-                        horizontalMarkerSlider.setOnContextMenuRequested(ee-> sliderMenus.show(horizontalMarkerSlider, ee.getScreenX(), ee.getScreenY()));
+                        horizontalMarkerSlider.setOnContextMenuRequested(ee -> sliderMenus.show(horizontalMarkerSlider, ee.getScreenX(), ee.getScreenY()));
                     });
 
                     MenuItem updateVshale = new MenuItem("Update Vshale");
-                    updateVshale.setOnAction(e-> {
+                    updateVshale.setOnAction(e -> {
                         System.out.println("Wait");
                     });
 
                     ContextMenu grMenus = new ContextMenu();
-                    grMenus.getItems().addAll(addSlider,updateVshale);
-                    lineChartGr.setOnContextMenuRequested(e-> grMenus.show(finalLineChartGr, e.getScreenX(), e.getScreenY()));
+                    grMenus.getItems().addAll(addSlider, updateVshale);
+                    lineChartGr.setOnContextMenuRequested(e -> grMenus.show(finalLineChartGr, e.getScreenX(), e.getScreenY()));
 
                     BorderPane borderPane = new BorderPane(lineChartGr, null, null, null, sliders);
                     curves.getChildren().add(borderPane);
 
-                    NumberAxis xVshaleAxis = new NumberAxis(0,1,0.1);
-                    for (int i=0;i<areaSeries.length;++i)
+                    NumberAxis xVshaleAxis = new NumberAxis(0, 1, 0.1);
+                    for (int i = 0; i < areaSeries.length; ++i)
                         areaSeries[i] = new XYChart.Series();
-                    modifiedAreaPlot<Number,Number> areaChartVshale = new modifiedAreaPlot<>(xVshaleAxis, yAxis, areaSeries);
+                    modifiedAreaPlot<Number, Number> areaChartVshale = new modifiedAreaPlot<>(xVshaleAxis, yAxis, areaSeries);
                     areaChartVshale.getYAxis().setOpacity(0);
                     areaChartVshale.getYAxis().setTickLabelsVisible(false);
                     areaChartVshale.setTitle("Vshale");
                     areaChartVshale.setCreateSymbols(false);
                     areaChartVshale.setLegendVisible(false);
                     curves.getChildren().add(areaChartVshale);
-                    for (int i=0;i<areaSeries.length;++i)
+                    for (int i = 0; i < areaSeries.length; ++i)
                         areaChartVshale.getData().add(areaSeries[i]);
 
                     lineChartNphi = linecharts("Nphi");
@@ -207,15 +223,18 @@ public class readLas {
                     lineChartRes.getData().add(ResSeries);
 
                     continue;
-                }
-                else if(text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0)=='~'){
-                    Isversion = false; Iswell = false; Iscurve = false; Isother = false; Isdata = false;
+                } else if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0) == '~') {
+                    Isversion = false;
+                    Iswell = false;
+                    Iscurve = false;
+                    Isother = false;
+                    Isdata = false;
                     continue;
                 }
 
-                if (Isversion || Isother){}
-                else if (Isdata) {
-                    if(textInd==curveIndex){
+                if (Isversion || Isother) {
+                } else if (Isdata) {
+                    if (textInd == curveIndex) {
                         textInd = 0;
                         ++dataRowIndex;
                     }
@@ -229,48 +248,42 @@ public class readLas {
                         double value = Double.parseDouble(text.substring(textindex, indexOf));
                         if (textInd == indexArray[ob.getDepthIndex()])
                             data[dataRowIndex][depthIndex] = value;
-                        else  if (textInd == indexArray[ob.getGrIndex()]){
+                        else if (textInd == indexArray[ob.getGrIndex()]) {
                             data[dataRowIndex][grIndex] = value;
-                            if (value!=nullValue) {
+                            if (value != nullValue) {
                                 grSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][depthIndex]));
-                                if(grMaxMinIndex[0] == (int)nullValue){
+                                if (grMaxMinIndex[0] == (int) nullValue) {
                                     grMaxMinIndex[0] = dataRowIndex;
                                     grMaxMinIndex[1] = dataRowIndex;
+                                } else {
+                                    grMaxMinIndex[0] = data[grMaxMinIndex[0]][grIndex] > value ? dataRowIndex : grMaxMinIndex[0];
+                                    grMaxMinIndex[1] = data[grMaxMinIndex[1]][grIndex] < value ? dataRowIndex : grMaxMinIndex[1];
                                 }
-                                else{
-                                    grMaxMinIndex[0] = data[grMaxMinIndex[0]][grIndex]>value ? dataRowIndex : grMaxMinIndex[0];
-                                    grMaxMinIndex[1] = data[grMaxMinIndex[1]][grIndex]<value ? dataRowIndex : grMaxMinIndex[1];
-                                }
-                            }
-                            else
+                            } else
                                 data[dataRowIndex][vshaleIndex] = nullValue;
-                        }
-                        else  if (textInd == indexArray[ob.getnPhiIndex()]){
+                        } else if (textInd == indexArray[ob.getnPhiIndex()]) {
                             data[dataRowIndex][nPhiIndex] = value;
-                            if (value!=nullValue)
+                            if (value != nullValue)
                                 NPhiSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][depthIndex]));
-                        }
-                        else  if (textInd == indexArray[ob.getRhobIndex()]){
+                        } else if (textInd == indexArray[ob.getRhobIndex()]) {
                             data[dataRowIndex][rhobIndex] = value;
-                            if (value!=nullValue) {
+                            if (value != nullValue) {
                                 RhobSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][depthIndex]));
-                                if(ob.values[ob.getShaleDensityIndex()]<value)
-                                    ob.values[ob.getShaleDensityIndex()] = value+0.005;
+                                if (avgShaleDensity < value)
+                                    avgShaleDensity = value + 0.005;
                             }
-                        }
-                        else  if (textInd == indexArray[ob.getResIndex()]){
+                        } else if (textInd == indexArray[ob.getResIndex()]) {
                             data[dataRowIndex][resIndex] = value;
-                            if (value!=nullValue)
+                            if (value != nullValue)
                                 ResSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][depthIndex]));
                         }
                         textindex = indexOf + 1;
                         ++textInd;
                     }
-                }
-                else if (Iswell){
-                    header[wellIndex][0] = text.substring(0,text.indexOf(".")).replaceAll("\\s", "");
-                    header[wellIndex][1] = text.substring(text.indexOf(".")+1,text.indexOf(" ", text.indexOf(".")+1));
-                    header[wellIndex][2] = text.substring(text.indexOf(" ", text.indexOf(".")+1),text.indexOf(":")).trim();
+                } else if (Iswell) {
+                    header[wellIndex][0] = text.substring(0, text.indexOf(".")).replaceAll("\\s", "");
+                    header[wellIndex][1] = text.substring(text.indexOf(".") + 1, text.indexOf(" ", text.indexOf(".") + 1));
+                    header[wellIndex][2] = text.substring(text.indexOf(" ", text.indexOf(".") + 1), text.indexOf(":")).trim();
                     if (header[wellIndex][0].equalsIgnoreCase("STRT"))
                         startValue = Double.parseDouble(header[wellIndex][2]);
                     else if (header[wellIndex][0].equalsIgnoreCase("STOP"))
@@ -282,13 +295,12 @@ public class readLas {
                         grMaxMinIndex[0] = (int) nullValue;
                         grMaxMinIndex[1] = (int) nullValue;
                     }
-                    header[wellIndex++][3] = text.substring(text.indexOf(":")+1).trim();
-                }
-                else if (Iscurve){
-                    curve[curveIndex][0] = text.substring(0,text.indexOf(".")).replaceAll("\\s", "");
-                    curve[curveIndex][1] = text.substring(text.indexOf(".")+1,text.indexOf(" ", text.indexOf(".")+1));
-                    curve[curveIndex][2] = text.substring(text.indexOf(" ", text.indexOf(".")+1), text.indexOf(":")).trim();
-                    curve[curveIndex++][3] = text.substring(text.indexOf(":")+1).trim();
+                    header[wellIndex++][3] = text.substring(text.indexOf(":") + 1).trim();
+                } else if (Iscurve) {
+                    curve[curveIndex][0] = text.substring(0, text.indexOf(".")).replaceAll("\\s", "");
+                    curve[curveIndex][1] = text.substring(text.indexOf(".") + 1, text.indexOf(" ", text.indexOf(".") + 1));
+                    curve[curveIndex][2] = text.substring(text.indexOf(" ", text.indexOf(".") + 1), text.indexOf(":")).trim();
+                    curve[curveIndex++][3] = text.substring(text.indexOf(":") + 1).trim();
                 }
             }
 
@@ -303,7 +315,7 @@ public class readLas {
 
             plotVshale(startValue, stopValue, data[grMaxMinIndex[0]][grIndex], data[grMaxMinIndex[1]][grIndex]);
 
-            LineChart<Number, Number> lineChartphiO = new LineChart<>(new NumberAxis(), new NumberAxis());
+            LineChart<Number, Number> lineChartphiO = new LineChart<>(new NumberAxis(), new NumberAxis(4200,3500,-1));
             lineChartphiO.setCreateSymbols(false);
             lineChartphiO.setLegendVisible(false);
             lineChartphiO.setAnimated(false);
@@ -325,47 +337,64 @@ public class readLas {
             int phiNCIndex = 4;
             int phiOIndex = 5;
             double[][] calculatedValues = new double[data.length][6];
-            for (int i=0;i<data.length;++i) {
-                calculatedValues[i][matrixDensityIndex] = nullValue;
-                calculatedValues[i][phiDIndex] = nullValue;
-                calculatedValues[i][phiDXIndex] = nullValue;
-                calculatedValues[i][phiDCIndex] = nullValue;
-                calculatedValues[i][phiNCIndex] = nullValue;
-                if (data[i][vshaleIndex] != nullValue) {
-                    calculatedValues[i][matrixDensityIndex] = data[i][vshaleIndex] * ob.values[ob.getShaleDensityIndex()] +
-                            (1 - data[i][vshaleIndex]) * ob.values[ob.getSandDensityIndex()];
-                    if (isNphiPresent && data[i][nPhiIndex]!=nullValue)
-                        calculatedValues[i][phiNCIndex] = data[i][nPhiIndex] - data[i][vshaleIndex] * data[grMaxMinIndex[1]][nPhiIndex];
-                    if (data[i][rhobIndex]!=nullValue){
-                        calculatedValues[i][matrixDensityIndex] = calculatedValues[i][matrixDensityIndex] < data[i][rhobIndex]
-                                ? calculatedValues[i][matrixDensityIndex]+0.005 : calculatedValues[i][matrixDensityIndex];
-                        calculatedValues[i][phiDIndex] = (calculatedValues[i][matrixDensityIndex]-data[i][rhobIndex])/
-                                (calculatedValues[i][matrixDensityIndex]-ob.values[ob.getFluidDensityIndex()]);
-                        calculatedValues[i][phiDXIndex] = (calculatedValues[i][matrixDensityIndex]-data[i][rhobIndex])/
-                                (calculatedValues[i][matrixDensityIndex]-ob.values[ob.getMudFiltrateDensityIndex()]);
-                        calculatedValues[i][phiDCIndex] = calculatedValues[i][phiDXIndex] - data[i][vshaleIndex] *
-                                ((ob.values[ob.getShaleDensityIndex()]-data[i][rhobIndex])/(ob.values[ob.getShaleDensityIndex()]-1));
+            for (int i = 0; i < data.length; ++i) {
+                double currentShaleDensity = avgShaleDensity;
+                innerWhile: while (true){
+                    calculatedValues[i][matrixDensityIndex] = nullValue;
+                    calculatedValues[i][phiDIndex] = nullValue;
+                    calculatedValues[i][phiDXIndex] = nullValue;
+                    calculatedValues[i][phiDCIndex] = nullValue;
+                    calculatedValues[i][phiNCIndex] = nullValue;
+                    if (data[i][vshaleIndex] != nullValue) {
+                        calculatedValues[i][matrixDensityIndex] = data[i][vshaleIndex] * currentShaleDensity +
+                                (1 - data[i][vshaleIndex]) * ob.values[ob.getSandDensityIndex()];
+                        if (isNphiPresent && data[i][nPhiIndex] != nullValue)
+                            calculatedValues[i][phiNCIndex] = data[i][nPhiIndex] - data[i][vshaleIndex] * data[grMaxMinIndex[1]][nPhiIndex];
+                        if (data[i][rhobIndex] != nullValue) {
+                            calculatedValues[i][matrixDensityIndex] = calculatedValues[i][matrixDensityIndex] < data[i][rhobIndex]
+                                    ? calculatedValues[i][matrixDensityIndex] + 0.005 : calculatedValues[i][matrixDensityIndex];
+                            calculatedValues[i][phiDIndex] = (calculatedValues[i][matrixDensityIndex] - data[i][rhobIndex]) /
+                                    (calculatedValues[i][matrixDensityIndex] - ob.values[ob.getFluidDensityIndex()]);
+                            calculatedValues[i][phiDXIndex] = (calculatedValues[i][matrixDensityIndex] - data[i][rhobIndex]) /
+                                    (calculatedValues[i][matrixDensityIndex] - ob.values[ob.getMudFiltrateDensityIndex()]);
+                            calculatedValues[i][phiDCIndex] = calculatedValues[i][phiDXIndex] - data[i][vshaleIndex] *
+                                    ((currentShaleDensity - data[i][rhobIndex]) / (currentShaleDensity - 1));
+                        }
                     }
-
-                }
-                if (!isNphiPresent)
-                    calculatedValues[i][phiOIndex] = calculatedValues[i][phiDXIndex];
-                else {
-                    if (calculatedValues[i][phiDCIndex]!=nullValue && calculatedValues[i][phiNCIndex]==nullValue)
-                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiDCIndex];
-                    else if (calculatedValues[i][phiDCIndex]==nullValue && calculatedValues[i][phiNCIndex]!=nullValue)
-                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiNCIndex];
-                    else if (calculatedValues[i][phiDCIndex]!=nullValue && calculatedValues[i][phiNCIndex]!=nullValue)
-                        calculatedValues[i][phiOIndex] = Math.sqrt((Math.pow(calculatedValues[i][phiDCIndex],2)+Math.pow(calculatedValues[i][phiNCIndex],2))/2);
+                    if (!isNphiPresent || data[i][nPhiIndex] == nullValue || (calculatedValues[i][phiNCIndex] != nullValue && calculatedValues[i][phiNCIndex] > 0.4))
+                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiDXIndex];
+                    if (isNphiPresent && data[i][nPhiIndex] < 0.4) {
+                        if (calculatedValues[i][phiDCIndex] != nullValue && calculatedValues[i][phiNCIndex] == nullValue)
+                            calculatedValues[i][phiOIndex] = calculatedValues[i][phiDCIndex];
+                        else if (calculatedValues[i][phiDCIndex] == nullValue || calculatedValues[i][phiDCIndex] > 0.4)
+                            calculatedValues[i][phiOIndex] = calculatedValues[i][phiNCIndex];
+                        else if (calculatedValues[i][phiDCIndex] != nullValue && calculatedValues[i][phiNCIndex] != nullValue)
+                            calculatedValues[i][phiOIndex] = Math.sqrt((Math.pow(calculatedValues[i][phiDCIndex], 2) + Math.pow(calculatedValues[i][phiNCIndex], 2)) / 2);
+                        else
+                            calculatedValues[i][phiOIndex] = nullValue;
+                    }
+                    if (calculatedValues[i][phiOIndex] != nullValue) {
+                        calculatedValues[i][phiOIndex] = calculatedValues[i][phiOIndex] <= 0 ? 0.001 : calculatedValues[i][phiOIndex];
+                        if (calculatedValues[i][phiOIndex] <= 0.47) {
+                            System.out.println("**depth: " + data[i][depthIndex] + " grMin: " + data[grMaxMinIndex[0]][grIndex] + " grMax: " + data[grMaxMinIndex[1]][grIndex] + " Vsh: " + data[i][vshaleIndex] + " matrixDenity: " + calculatedValues[i][matrixDensityIndex] + " phiDX: " + calculatedValues[i][phiDXIndex] + " phiDC: " + calculatedValues[i][phiDCIndex] + " phiNC: " + calculatedValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phio: " + calculatedValues[i][phiOIndex]);
+                            phiOSeries.getData().add(new XYChart.Data(calculatedValues[i][phiOIndex], data[i][depthIndex]));
+                            break innerWhile;
+                        }
+                        if (calculatedValues[i][phiOIndex] > 0.47)
+                            currentShaleDensity = currentShaleDensity - 0.05;
+                        if (currentShaleDensity < ob.values[ob.getShaleDensityLowerIndex()]) {
+                            System.out.println("depth: " + data[i][depthIndex] + " grMin: " + data[grMaxMinIndex[0]][grIndex] + " grMax: " + data[grMaxMinIndex[1]][grIndex] + " Vsh: " + data[i][vshaleIndex] + " matrixDenity: " + calculatedValues[i][matrixDensityIndex] + " phiDX: " + calculatedValues[i][phiDXIndex] + " phiDC: " + calculatedValues[i][phiDCIndex] + " phiNC: " + calculatedValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phio: " + calculatedValues[i][phiOIndex]);
+                            calculatedValues[i][matrixDensityIndex] = nullValue;
+                            calculatedValues[i][phiDIndex] = nullValue;
+                            calculatedValues[i][phiDXIndex] = nullValue;
+                            calculatedValues[i][phiDCIndex] = nullValue;
+                            calculatedValues[i][phiNCIndex] = nullValue;
+                            calculatedValues[i][phiOIndex] = nullValue;
+                            break innerWhile;
+                        }
+                    }
                     else
-                        calculatedValues[i][phiOIndex] = nullValue;
-                }
-                if (calculatedValues[i][phiOIndex]!=nullValue) {
-                    calculatedValues[i][phiOIndex] = calculatedValues[i][phiOIndex] <= 0 ? 0.001 : calculatedValues[i][phiOIndex];
-                    if(calculatedValues[i][phiOIndex]>1)
-                        System.out.println("More than 1-----------------------------------------------------------");
-                    System.out.println("at "+data[i][depthIndex]+" value: "+calculatedValues[i][phiOIndex]);
-                    phiOSeries.getData().add(new XYChart.Data(calculatedValues[i][phiOIndex], data[i][depthIndex]));
+                        break innerWhile;
                 }
             }
         }

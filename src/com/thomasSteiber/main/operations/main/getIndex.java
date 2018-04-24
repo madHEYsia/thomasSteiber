@@ -25,11 +25,12 @@ public class getIndex {
     String[] curvesRequired = {"Depth: ","GR: ","Nphi: ","Rhob: ","Resistivity: "};      //Just make changes here for curves required
     int initialRmfIndex = 0;
     int sandDensityIndex = 1;
-    int shaleDensityIndex = 2;
-    int mudFiltrateDensityIndex = 3;
-    int fluidDensityIndex = 4;
-    String[] inputRequired = {"Inital Rmf","Sand Density","Shale Density","Mud filtrate Density","Fluid Density"};
-    double[] values = {1.09,2.65,2.71,1.5,1.0};
+    int shaleDensityLowerIndex = 2;
+    int shaleDensityUpperIndex = 3;
+    int mudFiltrateDensityIndex = 4;
+    int fluidDensityIndex = 5;
+    String[] inputRequired = {"Inital Rmf","Sand Density","Shale Density lower limit","Shale Density Upper limit","Mud filtrate Density","Fluid Density"};
+    double[] values = {1.09,2.65,2.1,2.89,1.5,1.0};
 
     public int[] get(String[][] curves, int curveIndex){
         Stage stage = new Stage();
@@ -66,19 +67,18 @@ public class getIndex {
         }
         for (int i=0;i<inputRequired.length;++i){
             Label input = new Label(inputRequired[i]);
-            grids.add(input,0,curvesRequired.length+i,2,1);
+            grids.add(input, 0, curvesRequired.length + i, 2, 1);
 
             int finalI = i;
-            TextField value = new TextField(values[i]+"");
+            TextField value = new TextField(values[i] + "");
             value.textProperty().addListener((observable, oldValue, newValue) -> {
-                try{
+                try {
                     values[finalI] = Double.parseDouble(newValue);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     value.setText(oldValue);
                 }
             });
-            grids.add(value,2,curvesRequired.length+i,5,1);
+            grids.add(value, 2, curvesRequired.length + i, 5, 1);
         }
 
         Label error = new Label("");
@@ -168,9 +168,11 @@ public class getIndex {
         return sandDensityIndex;
     }
 
-    public int getShaleDensityIndex() {
-        return shaleDensityIndex;
+    public int getShaleDensityLowerIndex() {
+        return shaleDensityLowerIndex;
     }
+
+    public int getShaleDensityUpperIndex()  { return shaleDensityUpperIndex; }
 
     public int getMudFiltrateDensityIndex() {
         return mudFiltrateDensityIndex;
