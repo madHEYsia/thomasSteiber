@@ -2,6 +2,7 @@ package com.thomasSteiber.main.operations.devagya;
 
 import com.thomasSteiber.main.operations.main.main;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -37,8 +38,11 @@ public class newHome extends Application {
         saturationModule.setFont(Font.font("Arial", FontWeight.BOLD, 13));
         saturationModule.setOnAction(e-> new saturationCalculation().module());
 
-        BorderPane layout = new BorderPane(new HBox(dbmlModule, VshModule, porosityModule, saturationModule));
-        layout.setMinHeight(400);
+        HBox buttons = new HBox(5, dbmlModule, VshModule, porosityModule, saturationModule);
+        buttons.setAlignment(Pos.CENTER);
+
+        BorderPane layout = new BorderPane(buttons);
+        layout.setMinHeight(200);
 
         Scene scene = new Scene(layout);
         scene.getStylesheets().add(main.class.getResource("../../resources/css/main.css").toExternalForm());

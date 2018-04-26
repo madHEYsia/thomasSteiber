@@ -13,7 +13,7 @@ public class vshaleCalculation {
         Scene scene = new Scene(layout);
 
         Stage stage = new Stage();
-        stage.setTitle("DBML Calculation");
+        stage.setTitle("Vshale Calculation");
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
         stage.show();
