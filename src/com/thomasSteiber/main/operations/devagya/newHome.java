@@ -23,18 +23,23 @@ public class newHome extends Application {
 
         Button dbmlModule = new Button("DBML Calculation");
         dbmlModule.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+        dbmlModule.setOnAction(e-> new dbmlCalculation().module());
 
         Button VshModule = new Button("Vshale Calculation");
         VshModule.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+        VshModule.setOnAction(e-> new vshaleCalculation().module());
 
         Button porosityModule = new Button("Porosity Calculation");
         porosityModule.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+        porosityModule.setOnAction(e-> new porosityCalculation().module());
 
         Button saturationModule = new Button("Saturation Calculation");
         saturationModule.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+        saturationModule.setOnAction(e-> new saturationCalculation().module());
 
         BorderPane layout = new BorderPane(new HBox(dbmlModule, VshModule, porosityModule, saturationModule));
         layout.setMinHeight(400);
+
         Scene scene = new Scene(layout);
         scene.getStylesheets().add(main.class.getResource("../../resources/css/main.css").toExternalForm());
 
