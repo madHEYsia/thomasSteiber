@@ -46,10 +46,11 @@
       <file leaf-file-name="vshaleCalculation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="72" column="20" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+            <state relative-caret-position="306">
+              <caret line="214" lean-forward="true" selection-start-line="214" selection-end-line="214" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
               </folding>
             </state>
           </provider>
@@ -58,11 +59,12 @@
       <file leaf-file-name="readLas.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="160">
+              <caret line="305" lean-forward="true" selection-start-line="305" selection-end-line="307" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#losLoad#0;class#readLas#0" />
+                <element signature="method#linecharts#0;class#readLas#0" />
                 <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
                 <element signature="method#plotVshale#0;class#readLas#0" />
               </folding>
@@ -94,7 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Reu</find>
       <find>LineChartSample</find>
       <find>Context</find>
       <find>areac</find>
@@ -124,6 +125,7 @@
       <find>avgShaleDensity</find>
       <find>phiOIndex</find>
       <find>listener</find>
+      <find>sort</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -176,6 +178,7 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/saturationCalculation.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/dbmlCalculation.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/modifiedAreaPlot.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java" />
       </list>
     </option>
@@ -268,11 +271,14 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.thomasSteiber.main.operations.main" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\submi\Desktop\thomasSteiber\src\com\thomasSteiber\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.thomasSteiber.main.operations.devagya" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.thomasSteiber.main.operations.main" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -538,7 +544,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157710000" />
+    <option name="totallyTimeSpent" value="162725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -558,7 +564,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3289689" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16565809" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16565809" />
       <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24962178" />
@@ -644,7 +650,7 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="67" />
+      <option name="time" value="69" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -652,7 +658,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/themes/maintheme1.css" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/function/errorPopup.java" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
@@ -757,13 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/control/Button.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="186" selection-start-line="186" selection-end-line="186" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/Scene.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -774,13 +772,6 @@
             <element signature="e#66617#66618#0" expanded="true" />
             <element signature="e#66663#66664#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="198" selection-start-line="198" selection-end-line="198" />
         </state>
       </provider>
     </entry>
@@ -816,13 +807,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="383" column="62" lean-forward="true" selection-start-line="383" selection-start-column="62" selection-end-line="383" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -949,6 +933,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="45" column="82" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="82" />
+          <folding>
+            <element signature="method#errorPopup#0;class#home#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -979,6 +966,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/modifiedAreaPlot.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -989,13 +979,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="198" selection-start-line="198" selection-end-line="198" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="8413" selection-start-line="8413" selection-end-line="8413" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/control/Button.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="160">
+          <caret line="305" lean-forward="true" selection-start-line="305" selection-end-line="307" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#losLoad#0;class#readLas#0" />
+            <element signature="method#linecharts#0;class#readLas#0" />
             <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
             <element signature="method#plotVshale#0;class#readLas#0" />
           </folding>
@@ -1004,10 +1016,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="72" column="20" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+        <state relative-caret-position="306">
+          <caret line="214" lean-forward="true" selection-start-line="214" selection-end-line="214" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
           </folding>
         </state>
       </provider>
