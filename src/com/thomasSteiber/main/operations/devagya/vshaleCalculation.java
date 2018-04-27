@@ -125,30 +125,11 @@ public class vshaleCalculation {
             curveIndex = 0;
 
             XYChart.Series grSeries = new XYChart.Series();
-            LineChartWithMarkers<Number, Number> lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue));
-            lineChartGr.setCreateSymbols(false);
-            lineChartGr.setLegendVisible(false);
-            lineChartGr.setAnimated(false);
-            lineChartGr.setTitle("GR plot");
-            lineChartGr.getYAxis().setTickLabelsVisible(false);
-            lineChartGr.getYAxis().setOpacity(0);
-            lineChartGr.setPadding(new Insets(0));
-            lineChartGr.getData().add(grSeries);
+            LineChartWithMarkers<Number, Number> lineChartGr = null;
 
             String[] titles = {"Linear", "Larionov Tertiary Rocks", "Steiber", "Clavier","Larionov Older Rocks"};
             areaSeries = new XYChart.Series[titles.length];
             modifiedAreaPlot<Number, Number>[] vshale = new modifiedAreaPlot[titles.length];
-            for (int i = 0; i < titles.length; ++i) {
-                areaSeries[i] = new XYChart.Series();
-                XYChart.Series[] tempSeries = {areaSeries[i]};
-                vshale[i] =  new modifiedAreaPlot<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue), tempSeries);
-                vshale[i].getYAxis().setOpacity(0);
-                vshale[i].getYAxis().setTickLabelsVisible(false);
-                vshale[i].setTitle(titles[i]);
-                vshale[i].setCreateSymbols(false);
-                vshale[i].setLegendVisible(false);
-                vshale[i].getData().add(areaSeries[i]);
-            }
 
             while ((text = bufferedReader.readLine()) != null) {
                 if (text.replaceAll("\\s", "").length() == 0 || text.replaceAll("\\s", "").charAt(0) == '#')
@@ -188,6 +169,27 @@ public class vshaleCalculation {
                     }
 
                     data = new double[(int) Math.ceil((stopValue - startValue) / stepValue) + 1][2];
+
+                    lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue));
+                    lineChartGr.setCreateSymbols(false);
+                    lineChartGr.setLegendVisible(false);
+                    lineChartGr.setAnimated(false);
+                    lineChartGr.setTitle("GR plot");
+                    lineChartGr.getYAxis().setTickLabelsVisible(false);
+                    lineChartGr.getYAxis().setOpacity(0);
+                    lineChartGr.setPadding(new Insets(0));
+                    lineChartGr.getData().add(grSeries);
+
+                    for (int i = 0; i < titles.length; ++i) {
+                        areaSeries[i] = new XYChart.Series();
+                        vshale[i] =  new modifiedAreaPlot<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue), areaSeries[i]);
+                        vshale[i].getYAxis().setOpacity(0);
+                        vshale[i].getYAxis().setTickLabelsVisible(false);
+                        vshale[i].setTitle(titles[i]);
+                        vshale[i].setCreateSymbols(false);
+                        vshale[i].setLegendVisible(false);
+                        vshale[i].getData().add(areaSeries[i]);
+                    }
 
                     continue;
                 } else if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0) == '~') {
@@ -259,8 +261,8 @@ public class vshaleCalculation {
 
             hb.getChildren().clear();
             hb.getChildren().addAll(lineChartGr);
-//            updateVshale(0, (int) Math.ceil((stopValue - startValue) / stepValue) + 1, grInterval[0][2], grInterval[0][3]);
-//            hb.getChildren().addAll(vshale);
+            updateVshale(0, (int) Math.ceil((stopValue - startValue) / stepValue) + 1, grInterval[0][2], grInterval[0][3]);
+            hb.getChildren().addAll(vshale);
         }
         catch (Exception ex) {
             ex.printStackTrace();
