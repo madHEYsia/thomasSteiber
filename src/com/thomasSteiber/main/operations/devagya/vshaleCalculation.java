@@ -30,14 +30,30 @@ public class vshaleCalculation {
     Stage stage = new Stage();
     double[][] data;
     String[][] curve;
-    int curveIndex, grIndex;
+    double grInterval[][];
+    int curveIndex, grIndex, intervalIndex = 1;
     double startValue, stopValue, stepValue, nullValue;
     Label error = new Label("");
     HBox hb = new HBox(10);
+    XYChart.Series[] areaSeries;
+    CheckBox linear = new CheckBox("Linear");
+    CheckBox larionovTer = new CheckBox("Larionov Tertiary Rocks");
+    CheckBox Steiber = new CheckBox("Steiber");
+    CheckBox clavier = new CheckBox("Clavier");
+    CheckBox larionovOld = new CheckBox("Larionov Older Rocks");
 
     public void module(){
 
-        BorderPane layout = new BorderPane(hb, lasLoadButton(), null, null, null);
+        linear.setSelected(true);
+        larionovTer.setSelected(true);
+        Steiber.setSelected(true);
+        clavier.setSelected(true);
+        larionovOld.setSelected(true);
+
+        HBox checkboxes = new HBox(5, linear, larionovTer, Steiber, clavier, larionovOld);
+        BorderPane header = new BorderPane(null, null,checkboxes, null,lasLoadButton());
+
+        BorderPane layout = new BorderPane(hb, header, null, null, null);
         Scene scene = new Scene(layout, 250, 200);
 
         stage.setTitle("Vshale Calculation");
@@ -105,10 +121,34 @@ public class vshaleCalculation {
             int textInd = 0, dataRowIndex = 0;
             data = new double[1][1];
             curve = new String[1000][4];
+            grInterval = new double[20][4];
             curveIndex = 0;
 
-            LineChartWithMarkers<Number, Number> lineChartGr = null;
             XYChart.Series grSeries = new XYChart.Series();
+            LineChartWithMarkers<Number, Number> lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue));
+            lineChartGr.setCreateSymbols(false);
+            lineChartGr.setLegendVisible(false);
+            lineChartGr.setAnimated(false);
+            lineChartGr.setTitle("GR plot");
+            lineChartGr.getYAxis().setTickLabelsVisible(false);
+            lineChartGr.getYAxis().setOpacity(0);
+            lineChartGr.setPadding(new Insets(0));
+            lineChartGr.getData().add(grSeries);
+
+            String[] titles = {"Linear", "Larionov Tertiary Rocks", "Steiber", "Clavier","Larionov Older Rocks"};
+            areaSeries = new XYChart.Series[titles.length];
+            modifiedAreaPlot<Number, Number>[] vshale = new modifiedAreaPlot[titles.length];
+            for (int i = 0; i < titles.length; ++i) {
+                areaSeries[i] = new XYChart.Series();
+                XYChart.Series[] tempSeries = {areaSeries[i]};
+                vshale[i] =  new modifiedAreaPlot<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue), tempSeries);
+                vshale[i].getYAxis().setOpacity(0);
+                vshale[i].getYAxis().setTickLabelsVisible(false);
+                vshale[i].setTitle(titles[i]);
+                vshale[i].setCreateSymbols(false);
+                vshale[i].setLegendVisible(false);
+                vshale[i].getData().add(areaSeries[i]);
+            }
 
             while ((text = bufferedReader.readLine()) != null) {
                 if (text.replaceAll("\\s", "").length() == 0 || text.replaceAll("\\s", "").charAt(0) == '#')
@@ -141,23 +181,13 @@ public class vshaleCalculation {
                     Isother = false;
                     Isdata = true;
 
-                    grIndex = getGRIndex(curve, curveIndex);
+                    grIndex = getGRIndex(curve);
                     if (grIndex == -1) {
                         data[0][0] = -999999;
                         break inner;
                     }
 
                     data = new double[(int) Math.ceil((stopValue - startValue) / stepValue) + 1][2];
-
-                    lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue));
-                    lineChartGr.setCreateSymbols(false);
-                    lineChartGr.setLegendVisible(false);
-                    lineChartGr.setAnimated(false);
-                    lineChartGr.setTitle("GR");
-                    lineChartGr.getYAxis().setTickLabelsVisible(false);
-                    lineChartGr.getYAxis().setOpacity(0);
-                    lineChartGr.setPadding(new Insets(0));
-                    lineChartGr.getData().add(grSeries);
 
                     continue;
                 } else if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0) == '~') {
@@ -187,8 +217,17 @@ public class vshaleCalculation {
                             data[dataRowIndex][0] = value;
                         else if (textInd == grIndex) {
                             data[dataRowIndex][1] = value;
-                            if (value!=nullValue)
+                            if (value!=nullValue) {
                                 grSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][0]));
+                                if (grInterval[0][2]==nullValue){
+                                    grInterval[0][2] = value;
+                                    grInterval[0][3] = value;
+                                }
+                                else {
+                                    grInterval[0][2] = Math.min(grInterval[0][2], value);
+                                    grInterval[0][3] = Math.max(grInterval[0][3], value);
+                                }
+                            }
                         }
                         textindex = indexOf + 1;
                         ++textInd;
@@ -204,6 +243,8 @@ public class vshaleCalculation {
                         stepValue = Double.parseDouble(wellValue);
                     else if (wellTitle.equalsIgnoreCase("NULL")) {
                         nullValue = Double.parseDouble(wellValue);
+                        grInterval[0][2] = nullValue;
+                        grInterval[0][3] = nullValue;
                     }
                 } else if (Iscurve) {
                     curve[curveIndex][0] = text.substring(0, text.indexOf(".")).replaceAll("\\s", "");
@@ -218,6 +259,8 @@ public class vshaleCalculation {
 
             hb.getChildren().clear();
             hb.getChildren().addAll(lineChartGr);
+//            updateVshale(0, (int) Math.ceil((stopValue - startValue) / stepValue) + 1, grInterval[0][2], grInterval[0][3]);
+//            hb.getChildren().addAll(vshale);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -225,13 +268,13 @@ public class vshaleCalculation {
         }
     }
 
-    public int getGRIndex(String curve[][], int curveIndex){
+    public int getGRIndex(String curve[][]){
         Stage stage = new Stage();
-        stage.setHeight(200);
+        stage.setHeight(150);
         stage.setResizable(false);
 
         BorderPane layout = new BorderPane();
-        layout.setPadding(new Insets(10));
+        layout.setPadding(new Insets(15));
 
         final int[] grIndex = {0};
         String[] index = new String[curveIndex];
@@ -270,6 +313,25 @@ public class vshaleCalculation {
 
         return grIndex[0];
     }
+
+    public void updateVshale(int startIndex, int endIndex, double grMin, double grMax){
+        for (int i=startIndex; i<endIndex; ++i){
+            double Igr = (data[i][1] - grMin)/(grMax - grMin);
+            Igr = Igr<=0 ? 0.020 : Igr;
+            Igr = Igr>=1 ? 0.999 : Igr;
+            double linearVshale = Igr;
+            areaSeries[0].getData().add(new XYChart.Data(linearVshale, data[i][0]));
+            double larionovTerVshale = 0.083*(Math.pow(2,3.7*Igr) -1);
+            areaSeries[1].getData().add(new XYChart.Data(larionovTerVshale, data[i][0]));
+            double steiberVshale = Igr/(3-2*Igr);
+            areaSeries[2].getData().add(new XYChart.Data(steiberVshale, data[i][0]));
+            double clavierVshale = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
+            areaSeries[3].getData().add(new XYChart.Data(clavierVshale, data[i][0]));
+            double larionovOldVshale = 0.33*(Math.pow(2,2*Igr) -1);
+            areaSeries[4].getData().add(new XYChart.Data(larionovOldVshale, data[i][0]));
+        }
+    }
+
     private class LineChartWithMarkers<X,Y> extends LineChart {
 
         private ObservableList<Data<X, Y>> horizontalMarkers;
