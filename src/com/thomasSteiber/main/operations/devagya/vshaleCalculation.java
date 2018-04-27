@@ -1,5 +1,6 @@
 package com.thomasSteiber.main.operations.devagya;
 
+import com.thomasSteiber.main.operations.main.main;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -47,21 +48,18 @@ public class vshaleCalculation {
     public void module(){
 
         linear.setSelected(true);
-        linear.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(1).setVisible(new_val));
         larionovTer.setSelected(true);
-        larionovTer.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(2).setVisible(new_val));
         Steiber.setSelected(true);
-        Steiber.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(3).setVisible(new_val));
         clavier.setSelected(true);
-        clavier.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(4).setVisible(new_val));
         larionovOld.setSelected(true);
-        larionovOld.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(5).setVisible(new_val));
 
         HBox checkboxes = new HBox(5, linear, larionovTer, Steiber, clavier, larionovOld);
+        checkboxes.setPadding(new Insets(5));
         BorderPane header = new BorderPane(null, null,checkboxes, null,lasLoadButton());
 
         BorderPane layout = new BorderPane(hb, header, null, null, null);
-        Scene scene = new Scene(layout, 250, 200);
+        Scene scene = new Scene(layout);
+        scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/main.css").toExternalForm());
 
         stage.setTitle("Vshale Calculation");
         stage.setScene(scene);
@@ -75,7 +73,7 @@ public class vshaleCalculation {
         loadLas.setPadding(new Insets(5));
 
         error.setFont(new Font("Arial", 11));
-        error.setStyle("-fx-text-fill: red;");
+        error.setStyle("-fx-text-fill: #6ab25f;");
         Task<Void> sleeper = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -184,7 +182,6 @@ public class vshaleCalculation {
                     lineChartGr.setTitle("GR plot");
                     lineChartGr.getYAxis().setTickLabelsVisible(false);
                     lineChartGr.getYAxis().setOpacity(0);
-                    lineChartGr.setPadding(new Insets(0));
                     lineChartGr.getData().add(grSeries);
 
                     for (int i = 0; i < titles.length; ++i) {
@@ -264,12 +261,20 @@ public class vshaleCalculation {
             }
 
             lineChartGr.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
-            grSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
+            grSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #8bcad9;");
 
             hb.getChildren().clear();
             hb.getChildren().addAll(lineChartGr);
             updateVshale(0, (int) Math.ceil((stopValue - startValue) / stepValue) + 1, grInterval[0][2], grInterval[0][3]);
             hb.getChildren().addAll(vshale);
+
+            linear.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(1).setVisible(new_val));
+            larionovTer.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(2).setVisible(new_val));
+            Steiber.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(3).setVisible(new_val));
+            clavier.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(4).setVisible(new_val));
+            larionovOld.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(5).setVisible(new_val));
+
+            stage.setFullScreen(true);
         }
         catch (Exception ex) {
             ex.printStackTrace();
