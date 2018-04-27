@@ -2,6 +2,8 @@ package com.thomasSteiber.main.operations.devagya;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -45,10 +47,15 @@ public class vshaleCalculation {
     public void module(){
 
         linear.setSelected(true);
+        linear.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(1).setVisible(new_val));
         larionovTer.setSelected(true);
+        larionovTer.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(2).setVisible(new_val));
         Steiber.setSelected(true);
+        Steiber.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(3).setVisible(new_val));
         clavier.setSelected(true);
+        clavier.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(4).setVisible(new_val));
         larionovOld.setSelected(true);
+        larionovOld.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(5).setVisible(new_val));
 
         HBox checkboxes = new HBox(5, linear, larionovTer, Steiber, clavier, larionovOld);
         BorderPane header = new BorderPane(null, null,checkboxes, null,lasLoadButton());
