@@ -32,7 +32,7 @@ public class newHome extends Application {
 
         Button porosityModule = new Button("Porosity Calculation");
         porosityModule.setFont(Font.font("Arial", FontWeight.BOLD, 13));
-        porosityModule.setOnAction(e-> new porosityCalculation().module());
+        porosityModule.setOnAction(e-> new porosityCalculation().module("Clavier")); // {"Linear", "Larionov Tertiary Rocks", "Steiber", "Clavier","Larionov Older Rocks"};
 
         Button saturationModule = new Button("Saturation Calculation");
         saturationModule.setFont(Font.font("Arial", FontWeight.BOLD, 13));

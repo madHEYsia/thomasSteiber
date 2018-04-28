@@ -14,8 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -26,7 +24,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Objects;
-import java.util.Random;
 
 public class vshaleCalculation {
 
@@ -58,7 +55,7 @@ public class vshaleCalculation {
 
         BorderPane layout = new BorderPane(hb, header, null, null, null);
         Scene scene = new Scene(layout);
-        scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/main.css").toExternalForm());
+        scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
 
         stage.setTitle("Vshale Calculation");
         stage.setScene(scene);
