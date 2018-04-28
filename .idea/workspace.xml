@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/main.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,63 +36,54 @@
       <file leaf-file-name="readLas.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1231">
-              <caret line="399" column="9" lean-forward="true" selection-start-line="399" selection-start-column="9" selection-end-line="399" selection-end-column="9" />
+            <state relative-caret-position="204">
+              <caret line="316" lean-forward="true" selection-start-line="316" selection-end-line="398" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vshaleCalculation.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java">
+      <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="433" column="33" lean-forward="true" selection-start-line="433" selection-start-column="33" selection-end-line="433" selection-end-column="33" />
+            <state relative-caret-position="204">
+              <caret line="427" column="15" lean-forward="true" selection-start-line="427" selection-start-column="15" selection-end-line="427" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#lasLoadButton#0;class#porosityCalculation#0" />
+                <element signature="e#2176#2494#0" expanded="true" />
+                <element signature="e#2493#2494#0" expanded="true" />
+                <element signature="e#7900#8222#0" />
+                <element signature="e#8267#9366#0" />
+                <element signature="e#9558#9975#0" />
+                <element signature="method#getGRRange#0;class#porosityCalculation#0" />
+                <element signature="method#updateVshale#0;class#porosityCalculation#0" />
                 <element signature="class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
                 <element signature="method#LineChartWithMarkers#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
                 <element signature="method#addHorizontalValueMarker#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
                 <element signature="method#removeHorizontalValueMarker#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
                 <element signature="method#layoutPlotChildren#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
+                <element signature="method#linecharts#0;class#porosityCalculation#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dbmlCalculation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/dbmlCalculation.java">
+      <file leaf-file-name="indexes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="77" column="19" lean-forward="true" selection-start-line="62" selection-start-column="16" selection-end-line="77" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-629">
-              <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
-              <folding>
-                <element signature="method#errorPopup#0;class#home#0" />
-              </folding>
+            <state relative-caret-position="68">
+              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="getIndex.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1215">
-              <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getIndex.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -106,7 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getDataSize</find>
       <find>chart</find>
       <find>resIndex</find>
       <find>data.length</find>
@@ -136,6 +127,7 @@
       <find>grIndex</find>
       <find>cancel</find>
       <find>error</find>
+      <find>grLogIndex</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -180,6 +172,9 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/main.css" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getIndex.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" />
       </list>
     </option>
   </component>
@@ -280,14 +275,14 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\submi\Desktop\thomasSteiber\src\com\thomasSteiber\main\resources" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.thomasSteiber.main.operations.main" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.thomasSteiber.main.operations.devagya" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.thomasSteiber.main.operations.main" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\submi\Desktop\thomasSteiber\src\com\thomasSteiber\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -545,12 +540,12 @@
       <workItem from="1523984024509" duration="27123000" />
       <workItem from="1524050815090" duration="15815000" />
       <workItem from="1524111443678" duration="38672000" />
-      <workItem from="1524846712670" duration="23490000" />
+      <workItem from="1524846712670" duration="28799000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198688000" />
+    <option name="totallyTimeSpent" value="203997000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1386" height="788" extended-state="0" />
@@ -566,11 +561,11 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2646154" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2646154" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="1" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="9" visible="true" weight="0.20135747" />
+      <window_info active="true" content_ui="combo" id="Project" order="9" visible="true" weight="0.20135747" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
@@ -614,7 +609,7 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="67" />
+      <option name="time" value="68" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -622,38 +617,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" column="60" selection-start-line="62" selection-start-column="8" selection-end-line="87" selection-end-column="60" />
-          <folding>
-            <element signature="method#errorPopup#0;class#home#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" />
-            <element signature="method#lineGraph#0;class#graphUI#0" />
-            <element signature="method#parameter#0;class#graphUI#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="87" column="60" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="87" selection-end-column="60" />
-          <folding>
-            <element signature="method#errorPopup#0;class#home#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/themes/maintheme1.css" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/function/errorPopup.java" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
@@ -710,13 +673,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/chart/AreaChart.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/areaPlot.css" />
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/indexes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -750,16 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
-          <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/modifiedAreaPlot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -774,6 +720,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/dbmlCalculation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="77" column="19" lean-forward="true" selection-start-line="62" selection-start-column="16" selection-end-line="77" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-629">
@@ -784,34 +737,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/saturationCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1231">
-          <caret line="399" column="9" lean-forward="true" selection-start-line="399" selection-start-column="9" selection-end-line="399" selection-end-column="9" />
+        <state relative-caret-position="34">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/dbmlCalculation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="77" column="19" lean-forward="true" selection-start-line="62" selection-start-column="16" selection-end-line="77" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="433" column="33" lean-forward="true" selection-start-line="433" selection-start-column="33" selection-end-line="433" selection-end-column="33" />
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
             <element signature="method#LineChartWithMarkers#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
             <element signature="method#addHorizontalValueMarker#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
             <element signature="method#removeHorizontalValueMarker#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
             <element signature="method#layoutPlotChildren#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/indexes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/getIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1938">
+          <caret line="117" column="29" lean-forward="true" selection-start-line="117" selection-start-column="29" selection-end-line="117" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getIndex.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="316" lean-forward="true" selection-start-line="316" selection-end-line="398" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="427" column="15" lean-forward="true" selection-start-line="427" selection-start-column="15" selection-end-line="427" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#lasLoadButton#0;class#porosityCalculation#0" />
+            <element signature="e#2176#2494#0" expanded="true" />
+            <element signature="e#2493#2494#0" expanded="true" />
+            <element signature="e#7900#8222#0" />
+            <element signature="e#8267#9366#0" />
+            <element signature="e#9558#9975#0" />
+            <element signature="method#getGRRange#0;class#porosityCalculation#0" />
+            <element signature="method#updateVshale#0;class#porosityCalculation#0" />
+            <element signature="class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
+            <element signature="method#LineChartWithMarkers#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
+            <element signature="method#addHorizontalValueMarker#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
+            <element signature="method#removeHorizontalValueMarker#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
+            <element signature="method#layoutPlotChildren#0;class#LineChartWithMarkers#0;class#vshaleCalculation#0" />
+            <element signature="method#linecharts#0;class#porosityCalculation#0" />
           </folding>
         </state>
       </provider>
