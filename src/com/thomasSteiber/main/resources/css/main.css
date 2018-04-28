@@ -8,19 +8,14 @@
    -fx-AreaPlotColor: #8bcad9;
 }
 
-
 .root{
     -fx-background-color: -fx-mainWindowBackgroundColor;
     -fx-cell-focus-inner-border: grey;
 }
-.label {
-    -fx-text-fill: -fx-WhiteColor;
-    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
-}
 
 .default-color0.chart-area-symbol {
     -fx-background-color: black, black;
-    }
+}
 
 .default-color0.chart-series-area-line {
     -fx-stroke: black;
@@ -46,4 +41,17 @@
     -fx-font-size: 14;
     -fx-font-weight: bold;
     -fx-text-fill: -fx-WhiteColor;
+}
+
+.menu-bar, .menu-bar .label,.context-menu, .menu-button{
+    -fx-background-color: -fx-menubarBackgroundColor;
+    -fx-text-fill: -fx-WhiteColor;
+}
+
+.menu-bar,.context-menu{
+    -fx-padding: 0;
+}
+
+.menu:focused, .menu-item:hover, .menu-item:hover .label, .menu-item:focused, .menu-item:focused .label{
+    -fx-background-color: -fx-menubarHoverColor;
 }

@@ -1,22 +1,21 @@
 package com.thomasSteiber.main.operations.devagya;
 
-import com.thomasSteiber.main.operations.main.main;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -27,15 +26,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Objects;
+import java.util.Random;
 
 public class vshaleCalculation {
 
     Stage stage = new Stage();
     double[][] data;
     String[][] curve;
-    double grInterval[][];
-    int curveIndex, grIndex, intervalIndex = 1;
-    double startValue, stopValue, stepValue, nullValue;
+    int curveIndex, grIndex, dataSize;
+    double grMin, grMax, startValue, stopValue, stepValue, nullValue;
     Label error = new Label("");
     HBox hb = new HBox(10);
     XYChart.Series[] areaSeries;
@@ -126,7 +125,6 @@ public class vshaleCalculation {
             int textInd = 0, dataRowIndex = 0;
             data = new double[1][1];
             curve = new String[1000][4];
-            grInterval = new double[20][4];
             curveIndex = 0;
 
             XYChart.Series grSeries = new XYChart.Series();
@@ -172,8 +170,8 @@ public class vshaleCalculation {
                         data[0][0] = -999999;
                         break inner;
                     }
-
-                    data = new double[(int) Math.ceil((stopValue - startValue) / stepValue) + 1][2];
+                    dataSize = (int) Math.ceil((stopValue - startValue) / stepValue) + 1;
+                    data = new double[dataSize][2];
 
                     lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue));
                     lineChartGr.setCreateSymbols(false);
@@ -183,6 +181,48 @@ public class vshaleCalculation {
                     lineChartGr.getYAxis().setTickLabelsVisible(false);
                     lineChartGr.getYAxis().setOpacity(0);
                     lineChartGr.getData().add(grSeries);
+
+                    final double[] yValue = {0.0, 0.0};
+                    MenuItem startDepth = new MenuItem("Add start of range");
+                    MenuItem endDepth = new MenuItem("Add end of range");
+                    endDepth.setDisable(true);
+                    LineChartWithMarkers<Number, Number> finalLineChartGr = lineChartGr;
+
+                    startDepth.setOnAction(e->{
+                        startDepth.setDisable(true);
+                        endDepth.setDisable(false);
+                        XYChart.Data<Number, Number> horizontalMarker = new XYChart.Data<>(0, yValue[0]);
+                        finalLineChartGr.addHorizontalValueMarker(horizontalMarker);
+                    });
+
+                    endDepth.setOnAction(e-> {
+                        startDepth.setDisable(false);
+                        endDepth.setDisable(true);
+                        XYChart.Data<Number, Number> horizontalMarker = new XYChart.Data<>(0, yValue[1]);
+                        finalLineChartGr.addHorizontalValueMarker(horizontalMarker);
+                        double results[] = getGRRange(yValue);
+                        int startIndex = Integer.parseInt(((int)results[0])+""), endIndex = Integer.parseInt(((int)results[1])+"");
+                        double grMin = results[2], grMax = results[3];
+                        if (startIndex!=-1) {
+                            error.setStyle("-fx-text-fill: blue;");
+                            error.setText("Updating Vshale from "+results[0]+" to "+results[1]);
+                            updateVshale(startIndex, endIndex, grMin, grMax);
+                        }
+                        else {
+                            error.setStyle("-fx-text-fill: red;");
+                            error.setText("Error in updating Vshale");
+                        }
+                    });
+
+                    ContextMenu grMenus = new ContextMenu();
+                    grMenus.getItems().addAll(startDepth, endDepth);
+                    lineChartGr.setOnContextMenuRequested(e -> {
+                        grMenus.show(finalLineChartGr, e.getScreenX(), e.getScreenY());
+                        if (startDepth.isDisable())
+                            yValue[1] = (double) finalLineChartGr.getYAxis().getValueForDisplay(e.getY()-38);
+                        else
+                            yValue[0] = (double) finalLineChartGr.getYAxis().getValueForDisplay(e.getY()-38);
+                    });
 
                     for (int i = 0; i < titles.length; ++i) {
                         areaSeries[i] = new XYChart.Series();
@@ -225,13 +265,13 @@ public class vshaleCalculation {
                             data[dataRowIndex][1] = value;
                             if (value!=nullValue) {
                                 grSeries.getData().add(new XYChart.Data(value, data[dataRowIndex][0]));
-                                if (grInterval[0][2]==nullValue){
-                                    grInterval[0][2] = value;
-                                    grInterval[0][3] = value;
+                                if (grMin==nullValue){
+                                    grMin = value;
+                                    grMax = value;
                                 }
                                 else {
-                                    grInterval[0][2] = Math.min(grInterval[0][2], value);
-                                    grInterval[0][3] = Math.max(grInterval[0][3], value);
+                                    grMin = Math.min(grMin, value);
+                                    grMax = Math.max(grMax, value);
                                 }
                             }
                         }
@@ -249,8 +289,8 @@ public class vshaleCalculation {
                         stepValue = Double.parseDouble(wellValue);
                     else if (wellTitle.equalsIgnoreCase("NULL")) {
                         nullValue = Double.parseDouble(wellValue);
-                        grInterval[0][2] = nullValue;
-                        grInterval[0][3] = nullValue;
+                        grMin = nullValue;
+                        grMax = nullValue;
                     }
                 } else if (Iscurve) {
                     curve[curveIndex][0] = text.substring(0, text.indexOf(".")).replaceAll("\\s", "");
@@ -261,20 +301,21 @@ public class vshaleCalculation {
             }
 
             lineChartGr.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
-            grSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #8bcad9;");
+            grSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #6ab25f;");
 
             hb.getChildren().clear();
             hb.getChildren().addAll(lineChartGr);
-            updateVshale(0, (int) Math.ceil((stopValue - startValue) / stepValue) + 1, grInterval[0][2], grInterval[0][3]);
-            hb.getChildren().addAll(vshale);
+            stage.setMaximized(true);
+            Platform.runLater(() ->{
+                updateVshale(0, dataSize, grMin, grMax);
+                hb.getChildren().addAll(vshale);
+                linear.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(1).setVisible(new_val));
+                larionovTer.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(2).setVisible(new_val));
+                Steiber.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(3).setVisible(new_val));
+                clavier.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(4).setVisible(new_val));
+                larionovOld.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(5).setVisible(new_val));
+            });
 
-            linear.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(1).setVisible(new_val));
-            larionovTer.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(2).setVisible(new_val));
-            Steiber.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(3).setVisible(new_val));
-            clavier.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(4).setVisible(new_val));
-            larionovOld.selectedProperty().addListener((ov, old_val, new_val) -> hb.getChildren().get(5).setVisible(new_val));
-
-            stage.setFullScreen(true);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -326,6 +367,84 @@ public class vshaleCalculation {
         stage.showAndWait();
 
         return grIndex[0];
+    }
+
+    public double[] getGRRange(double depth[]){
+        double[] results = new double[4];
+
+        Stage vrStage = new Stage();
+
+        int numberOfGroups = 100;
+        int GRUpperLimit = 400;
+        int group[] = new int[numberOfGroups];
+        inner: for(int i=0; i<dataSize; i++){
+            if(data[i][0]<depth[0])
+                results[0] = i;
+            else if (data[i][0]<depth[1])
+                results[1] = i;
+            if(data[i][0]>=depth[0] && data[i][0]<=depth[1])
+                group[(int)(data[i][1]/(GRUpperLimit/numberOfGroups))-1]++;
+            else if(data[i][0]>depth[1])
+                break inner;
+        }
+
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final BarChart<String,Number> barChart = new BarChart<>(xAxis,yAxis);
+        barChart.setLegendVisible(false);
+        barChart.setAnimated(false);
+        xAxis.setLabel(curve[grIndex][3]+" ("+curve[grIndex][1]+")");
+        yAxis.setLabel("frequency");
+        barChart.setCategoryGap(0);
+        barChart.setBarGap(0);
+
+        XYChart.Series series1 = new XYChart.Series();
+        for (int i=0;i<numberOfGroups;++i)
+            series1.getData().add(new XYChart.Data(i*GRUpperLimit/numberOfGroups+"-"+(i+1)*GRUpperLimit/numberOfGroups, group[i]));
+
+        barChart.getData().addAll(series1);
+
+        Label grMinLabel = new Label("Gr Min: ");
+        TextField grMinValue = new TextField();
+
+        Label grMaxLabel = new Label("Gr Max: ");
+        TextField grMaxValue = new TextField();
+
+        Button ok = new Button("Ok");
+        ok.setOnAction(e-> {
+            try{
+                results[2] = Double.parseDouble(grMinValue.getText());
+                results[3] = Double.parseDouble(grMaxValue.getText());
+            }
+            catch (Exception exp){
+                results[0] = -1;
+            }
+            vrStage.close();
+        });
+
+        Button cancel = new Button("Cancel");
+        cancel.setOnAction(e-> {
+            results[0] = -1;
+            vrStage.close();
+        });
+
+        BorderPane layout = new BorderPane(barChart);
+        layout.setPadding(new Insets(10));
+        HBox hbb = new HBox(20,
+                        new HBox(10,grMinLabel, grMinValue),
+                        new HBox(10,grMaxLabel, grMaxValue),
+                        new HBox(10,ok, cancel));
+        hbb.setAlignment(Pos.CENTER);
+        layout.setBottom(hbb);
+        Scene scene = new Scene(layout, 800, 450);
+
+        vrStage.setTitle("GR Max-Min picking");
+        vrStage.setScene(scene);
+        vrStage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        vrStage.initModality(Modality.APPLICATION_MODAL);
+        vrStage.showAndWait();
+
+        return results;
     }
 
     public void updateVshale(int startIndex, int endIndex, double grMin, double grMax){
