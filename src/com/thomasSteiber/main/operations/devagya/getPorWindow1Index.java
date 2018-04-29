@@ -56,16 +56,16 @@ public class getPorWindow1Index {
             {"Mud", "Water based mud", "Oil based mud"},
     };
     String[][] inputRequired = {
-            {"KB from surface(MSL) [FEET]","25"},
-            {"Water Depth plus KB [FEET]","0"},
-            {"Tempertaure Gradient [DEGF/100FT]","1"},
+            {"KB from surface(MSL) (log-unit)","25"},
+            {"Water Depth plus KB (log-unit) ","132"},
+            {"Tempertaure Gradient [DEGF/100(log-unit)]","1"},
             {"Sea Floor Temp [DEGF]","70"},
-            {"Formation Temp [DEGF]","270"},
-            {"Depth at formation Temperature [FEET]","12000"},
-            {"Temperature Rw [DEGF]","24"},
-            {"Temperature Rmudf [DEGF]","16"},
-            {"Water Resistivity [OHMM]","77"},
-            {"Mudfiltrate Resistivity [OHMM]","1.09"},
+            {"Formation Temp [DEGF]","0"},
+            {"Depth at formation Temperature (log-unit)","0"},
+            {"Temperature Rw [DEGF]","75.2"},
+            {"Temperature Rmudf [DEGF]","60.8"},
+            {"Water Resistivity [OHMM]","0.7"},
+            {"Mudfiltrate Resistivity [OHMM]","0.16"},
     };
     String[] output = new String[curvesRequired.length+flags.length+inputRequired.length];
 

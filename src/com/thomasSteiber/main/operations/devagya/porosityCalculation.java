@@ -419,6 +419,11 @@ public class porosityCalculation {
 
                             }
 
+                            lineChartphi[0].getData().clear();
+                            lineChartphi[0].getData().addAll(phiESeries, phiTSeries);
+                            lineChartSw[0].getData().clear();
+                            lineChartSw[0].getData().add(sWSeries);
+
                             lineChartphi[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
                             phiESeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
                             phiTSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: black;");
@@ -523,29 +528,37 @@ public class porosityCalculation {
                     double tvd = data[dataRowIndex][Integer.parseInt(dbmlObject.output[dbmlObject.tvdIndex])];
                     double kb = Double.parseDouble(dbmlObject.output[dbmlObject.KBIndex]);
                     double wd = Double.parseDouble(dbmlObject.output[dbmlObject.WDIndex]);
-                    if (tvd!=nullValue) {
-                        dbml[dataRowIndex] = loacFlag.equals("1") ? tvd - kb - wd : tvd - kb;
+                    dbml[dataRowIndex] = loacFlag.equals("1") ? tvd - kb - wd : tvd - kb;
 
-                        double tGrad = Double.parseDouble(dbmlObject.output[dbmlObject.TGRADIndex]);
-                        double tS = Double.parseDouble(dbmlObject.output[dbmlObject.TSIndex]);
-                        double tFor = Double.parseDouble(dbmlObject.output[dbmlObject.TFORIndex]);
-                        double dbmlTFor = Double.parseDouble(dbmlObject.output[dbmlObject.DBMLTFORIndex]);
-                        fTemp[dataRowIndex] = tGrad == 0 ? tS + dbml[dataRowIndex] * (tFor - tS) / dbmlTFor : tS + dbml[dataRowIndex] * tGrad / 100;
+                    String tempFlag = dbmlObject.output[dbmlObject.flagTempIndex];
+                    double tGrad = Double.parseDouble(dbmlObject.output[dbmlObject.TGRADIndex]);
+                    double tS = Double.parseDouble(dbmlObject.output[dbmlObject.TSIndex]);
+                    double tFor = Double.parseDouble(dbmlObject.output[dbmlObject.TFORIndex]);
+                    double dbmlTFor = Double.parseDouble(dbmlObject.output[dbmlObject.DBMLTFORIndex]);
+                    if (tempFlag.equals("Celsius")){
+                        tGrad = faren2Cel(tGrad);
+                        tS = faren2Cel(tS);
+                        tFor = faren2Cel(tFor);
+                        dbmlTFor = faren2Cel(dbmlTFor);
+                    }
+                    fTemp[dataRowIndex] = tGrad == 0 ? tS + dbml[dataRowIndex] * (tFor - tS) / dbmlTFor : tS + dbml[dataRowIndex] * tGrad / 100;
 
-                        String mudFlag = dbmlObject.output[dbmlObject.flagMudIndex];
-                        if (mudFlag.equals("Water based mud")) {
-                            String tempFlag = dbmlObject.output[dbmlObject.flagTempIndex];
-                            double Rw = Double.parseDouble(dbmlObject.output[dbmlObject.RwIndex]);
-                            double tempRw = Double.parseDouble(dbmlObject.output[dbmlObject.TempRwIndex]);
-                            double Rmf = Double.parseDouble(dbmlObject.output[dbmlObject.RmfIndex]);
-                            double tempRmf = Double.parseDouble(dbmlObject.output[dbmlObject.TempRmfIndex]);
-
-                            Rwfor[dataRowIndex] = tempFlag.equals("Fahrenheit") ? Rw*(tempRw+6.77)/(fTemp[dataRowIndex]+6.77): Rw*(tempRw+21.5)/(fTemp[dataRowIndex]+21.5);
-                            Rwxo[dataRowIndex] = tempFlag.equals("Fahrenheit") ? Rmf*(tempRmf+6.77)/(fTemp[dataRowIndex]+6.77): Rmf*(tempRmf+21.5)/(fTemp[dataRowIndex]+21.5);
-                        } else{
-                            data[dataRowIndex][rxoIndex] = isSRESHpresent ?  data[dataRowIndex][sRESHIndex] : data[dataRowIndex][mRESHIndex];
-                            Rwfor[dataRowIndex] =  Rwxo[dataRowIndex] = data[dataRowIndex][rxoIndex];
+                    String mudFlag = dbmlObject.output[dbmlObject.flagMudIndex];
+                    if (mudFlag.equals("Water based mud")) {
+                        double Rw = Double.parseDouble(dbmlObject.output[dbmlObject.RwIndex]);
+                        double tempRw = Double.parseDouble(dbmlObject.output[dbmlObject.TempRwIndex]);
+                        double Rmf = Double.parseDouble(dbmlObject.output[dbmlObject.RmfIndex]);
+                        double tempRmf = Double.parseDouble(dbmlObject.output[dbmlObject.TempRmfIndex]);
+                        if (tempFlag.equals("Celsius")){
+                            tempRw = faren2Cel(tempRw);
+                            tempRmf = faren2Cel(tempRmf);
                         }
+
+                        Rwfor[dataRowIndex] = tempFlag.equals("Fahrenheit") ? Rw*(tempRw+6.77)/(fTemp[dataRowIndex]+6.77): Rw*(tempRw+21.5)/(fTemp[dataRowIndex]+21.5);
+                        Rwxo[dataRowIndex] = tempFlag.equals("Fahrenheit") ? Rmf*(tempRmf+6.77)/(fTemp[dataRowIndex]+6.77): Rmf*(tempRmf+21.5)/(fTemp[dataRowIndex]+21.5);
+                    } else{
+                        data[dataRowIndex][rxoIndex] = isSRESHpresent ?  data[dataRowIndex][sRESHIndex] : data[dataRowIndex][mRESHIndex];
+                        Rwfor[dataRowIndex] =  Rwxo[dataRowIndex] = data[dataRowIndex][rxoIndex];
                     }
                 } else if (Iswell) {
                     String wellTitle = text.substring(0, text.indexOf(".")).replaceAll("\\s", "");
@@ -730,5 +743,9 @@ public class porosityCalculation {
         lineChart.getYAxis().setOpacity(0);
         lineChart.setPadding(new Insets(0));
         return lineChart;
+    }
+
+    public double faren2Cel(double degreeC){
+        return (degreeC - 32)*0.5556;
     }
 }
