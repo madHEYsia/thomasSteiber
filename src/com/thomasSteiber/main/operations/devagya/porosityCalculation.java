@@ -335,12 +335,12 @@ public class porosityCalculation {
                                         if (intervalValues[i][phiOIndex] > 0.47)
                                             currentShaleDensity = currentShaleDensity - 0.05;
                                         if (currentShaleDensity < Double.parseDouble(porObject.output[porObject.shaleDensityLowerIndex])) {
-//                                            intervalValues[i][matrixDensityIndex] = nullValue;
-//                                            intervalValues[i][phiDIndex] = nullValue;
-//                                            intervalValues[i][phiDXIndex] = nullValue;
-//                                            intervalValues[i][phiDCIndex] = nullValue;
-//                                            intervalValues[i][phiNCIndex] = nullValue;
-//                                            intervalValues[i][phiOIndex] = nullValue;
+                                            intervalValues[i][matrixDensityIndex] = nullValue;
+                                            intervalValues[i][phiDIndex] = nullValue;
+                                            intervalValues[i][phiDXIndex] = nullValue;
+                                            intervalValues[i][phiDCIndex] = nullValue;
+                                            intervalValues[i][phiNCIndex] = nullValue;
+                                            intervalValues[i][phiOIndex] = nullValue;
                                             break innerWhile;
                                         }
                                     }

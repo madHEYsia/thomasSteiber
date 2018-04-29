@@ -38,7 +38,7 @@ public class getPorWindow2Index {
     };
     String[][] inputRequired = {
             {"Sand Density [V/V]","2.65"},
-            {"Shale Density lower limit [V/V]","2.1"},
+            {"Shale Density lower limit [V/V]","2.89"},
             {"Shale Density Upper limit [V/V]","2.89"},
             {"Mud filtrate Density [G/C3]","1.1"},
             {"Reservoir HC Density ","0.88"},

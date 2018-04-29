@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -43,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="641" column="17" selection-start-line="641" selection-start-column="17" selection-end-line="641" selection-end-column="17" />
+            <state relative-caret-position="50">
+              <caret line="334" column="92" selection-start-line="334" selection-start-column="92" selection-end-line="334" selection-end-column="92" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#LineChartWithMarkers#0;class#porosityCalculation#0" />
@@ -70,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getPorWindow2Index.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="getPorWindow2Index.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="45" column="43" lean-forward="true" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+            <state relative-caret-position="408">
+              <caret line="42" column="50" lean-forward="true" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -105,7 +106,6 @@
       <find>isNphiPresent</find>
       <find>data[i][vshaleIndex]</find>
       <find>double vshale</find>
-      <find>currentShaleDensity</find>
       <find>Double.parseDouble(porObject.output[porObject.sandDensityIndex])</find>
       <find>Double.parseDouble(porObject.output[porObject.fluidDensityIndex]))</find>
       <find>Double.parseDouble(porObject.output[porObject.mudFiltrateDensityIndex])</find>
@@ -121,6 +121,7 @@
       <find>grMin</find>
       <find>data[i][rxoIndex]</find>
       <find>0.001</find>
+      <find>currentShaleDensity</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -181,8 +182,8 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/dbmlCalculation.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/plot.css" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow1Index.java" />
-        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java" />
       </list>
     </option>
   </component>
@@ -563,12 +564,12 @@
       <workItem from="1524111443678" duration="38672000" />
       <workItem from="1524846712670" duration="39402000" />
       <workItem from="1524919437710" duration="42571000" />
-      <workItem from="1525003503991" duration="20329000" />
+      <workItem from="1525003503991" duration="23101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277500000" />
+    <option name="totallyTimeSpent" value="280272000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
@@ -596,7 +597,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="7" side_tool="true" weight="0.3295626" />
-      <window_info active="true" anchor="bottom" id="Debug" order="2" visible="true" weight="0.39884394" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39884394" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info id="MaxCompute Job Explorer" order="3" />
@@ -669,15 +670,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java</url>
-          <line>630</line>
+          <line>632</line>
           <properties />
           <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java</url>
-          <line>413</line>
-          <properties />
-          <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="91" />
@@ -877,13 +872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="45" column="43" lean-forward="true" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow1Index.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-986">
@@ -903,14 +891,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="641" column="17" selection-start-line="641" selection-start-column="17" selection-end-line="641" selection-end-column="17" />
+        <state relative-caret-position="50">
+          <caret line="334" column="92" selection-start-line="334" selection-start-column="92" selection-end-line="334" selection-end-column="92" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#LineChartWithMarkers#0;class#porosityCalculation#0" />
             <element signature="e#43055#43056#0" expanded="true" />
             <element signature="e#43099#43100#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="42" column="50" lean-forward="true" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
         </state>
       </provider>
     </entry>
