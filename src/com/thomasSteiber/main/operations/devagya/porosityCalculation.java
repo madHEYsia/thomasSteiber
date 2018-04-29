@@ -233,7 +233,6 @@ public class porosityCalculation {
                     lineChartSw[0] = linecharts("Saturation");
                     lineChartSw[0].getData().add(sWSeries);
 
-                    double finalAvgShaleDensity = avgShaleDensity[0];
                     double[] finalRwxo = Rwxo;
                     double[] finalRwfor = Rwfor;
                     endDepth.setOnAction(e-> {
@@ -250,6 +249,9 @@ public class porosityCalculation {
                             error.setStyle("-fx-text-fill: blue;");
                             error.setText("Updated Vshale from "+results[0]+" to "+results[1]);
 
+                            grMin = data[grMinIndex][grIndex];
+                            grMax = data[grMaxIndex][grIndex];
+
                             porObject.get(curve, curveIndex);
 
                             avgShaleDensity[0] = 0.5*(Double.parseDouble(porObject.output[porObject.shaleDensityLowerIndex])+Double.parseDouble(porObject.output[porObject.shaleDensityUpperIndex]));
@@ -261,8 +263,9 @@ public class porosityCalculation {
                             int phiDCIndex = 4;
                             int phiNCIndex = 5;
                             int phiOIndex = 6;
-                            int phiTIndex = 7;
-                            double[][] intervalValues = new double[data.length][8];
+                            int phiEIndex = 7;
+                            int phiTIndex = 8;
+                            double[][] intervalValues = new double[data.length][9];
                             String fluidFlag = porObject.output[porObject.flagFluidIndex];
                             double sandDensity = Double.parseDouble(porObject.output[porObject.sandDensityIndex]);
                             double mudFlitrateDensity = Double.parseDouble(porObject.output[porObject.mudFiltrateDensityIndex]);
@@ -288,7 +291,7 @@ public class porosityCalculation {
                                     data[i][vshaleIndex] = 0.33*(Math.pow(2,2*Igr) -1);
                                 areaSeries.getData().add(new Data(data[i][vshaleIndex], data[i][depthIndex]));
 
-                                double currentShaleDensity = finalAvgShaleDensity;
+                                double currentShaleDensity = avgShaleDensity[0];
                                 innerWhile: while (true){
                                     intervalValues[i][matrixDensityIndex] = nullValue;
                                     intervalValues[i][phiDIndex] = nullValue;
@@ -327,14 +330,11 @@ public class porosityCalculation {
                                     }
                                     if (intervalValues[i][phiOIndex] != nullValue) {
                                         intervalValues[i][phiOIndex] = intervalValues[i][phiOIndex] <= 0 ? 0.001 : intervalValues[i][phiOIndex];
-                                        if (intervalValues[i][phiOIndex] <= 0.47) {
-                                            System.out.println("**depth: " + data[i][depthIndex] + " grMin: " + data[grMinIndex][grIndex] + " grMax: " + data[grMaxIndex][grIndex] + " Vsh: " + data[i][vshaleIndex] + " matrixDenity: " + intervalValues[i][matrixDensityIndex] + " phiDX: " + intervalValues[i][phiDXIndex] + " phiDC: " + intervalValues[i][phiDCIndex] + " phiNC: " + intervalValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phio: " + intervalValues[i][phiOIndex]);
+                                        if (intervalValues[i][phiOIndex] <= 0.47)
                                             break innerWhile;
-                                        }
                                         if (intervalValues[i][phiOIndex] > 0.47)
                                             currentShaleDensity = currentShaleDensity - 0.05;
                                         if (currentShaleDensity < Double.parseDouble(porObject.output[porObject.shaleDensityLowerIndex])) {
-                                            System.out.println("depth: " + data[i][depthIndex] + " grMin: " + data[grMinIndex][grIndex] + " grMax: " + data[grMaxIndex][grIndex] + " Vsh: " + data[i][vshaleIndex] + " matrixDenity: " + intervalValues[i][matrixDensityIndex] + " phiDX: " + intervalValues[i][phiDXIndex] + " phiDC: " + intervalValues[i][phiDCIndex] + " phiNC: " + intervalValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phio: " + intervalValues[i][phiOIndex]);
 //                                            intervalValues[i][matrixDensityIndex] = nullValue;
 //                                            intervalValues[i][phiDIndex] = nullValue;
 //                                            intervalValues[i][phiDXIndex] = nullValue;
@@ -399,15 +399,20 @@ public class porosityCalculation {
 
                                 intervalValues[i][phiTIndex] = data[i][vshaleIndex]>0.55 || (guessPorosity!=nullValue && guessPorosity<=0) ?
                                         (data[i][rhobIndex]!=nullValue ? (currentShaleDensity-data[i][rhobIndex])/(currentShaleDensity-1.0) : nullValue) : guessPorosity ;
-                                intervalValues[i][phiOIndex] = (intervalValues[i][phiTIndex]!=nullValue && data[i][vshaleIndex]!=nullValue)
+
+                                intervalValues[i][phiEIndex] = (intervalValues[i][phiTIndex]!=nullValue && data[i][vshaleIndex]!=nullValue)
                                         ? intervalValues[i][phiTIndex] - shalePorsity*data[i][vshaleIndex] : nullValue;
-                                intervalValues[i][phiOIndex] = intervalValues[i][phiOIndex]!=nullValue && intervalValues[i][phiOIndex]<=0
-                                        ? 0.001 : intervalValues[i][phiOIndex];
+                                intervalValues[i][phiEIndex] = intervalValues[i][phiEIndex]!=nullValue && intervalValues[i][phiEIndex]<=0
+                                        ? 0.001 : intervalValues[i][phiEIndex];
 
                                 if (intervalValues[i][phiOIndex]!=nullValue)
-                                    phiESeries.getData().add(new Data(intervalValues[i][phiOIndex], intervalValues[i][intervalDepthIndex]));
+                                    phiESeries.getData().add(new Data(intervalValues[i][phiEIndex], intervalValues[i][intervalDepthIndex]));
                                 if (intervalValues[i][phiTIndex]!=nullValue)
                                     phiTSeries.getData().add(new Data(intervalValues[i][phiTIndex], intervalValues[i][intervalDepthIndex]));
+
+                                if (intervalValues[i][phiEIndex]>1 || intervalValues[i][phiTIndex]>1)
+                                    System.out.println("depth: " + data[i][depthIndex] + " grMin: " + data[grMinIndex][grIndex] + " grMax: " + data[grMaxIndex][grIndex] + " Vsh: " + data[i][vshaleIndex] + " matrixDenity: " + intervalValues[i][matrixDensityIndex] + " phiDX: " + intervalValues[i][phiDXIndex] + " phiDC: " + intervalValues[i][phiDCIndex] + " phiNC: " + intervalValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phiE: " + intervalValues[i][phiEIndex] + " phiT: " + intervalValues[i][phiTIndex]);
+
 
 //                                -------------------------------------Start of Thoomas Steiebr--------------------------------------------
 
@@ -512,7 +517,9 @@ public class porosityCalculation {
                                 if (avgShaleDensity[0] < value)
                                     avgShaleDensity[0] = value + 0.005;
                             }
-                        } else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.SRESHIndex]))
+                        } else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.rxoIndex]))
+                            data[dataRowIndex][rxoIndex] = value;
+                        else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.SRESHIndex]))
                             data[dataRowIndex][sRESHIndex] = value;
                         else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.MRESHIndex]))
                             data[dataRowIndex][mRESHIndex] = value;
@@ -618,15 +625,20 @@ public class porosityCalculation {
             else if (data[i][depthIndex]<depth[1])
                 results[1] = i;
             if(data[i][depthIndex]>=depth[0] && data[i][depthIndex]<=depth[1]) {
-                int groupNumber = (int) (data[i][grIndex] / (GRUpperLimit / numberOfGroups)) - 1;
-                group[groupNumber]++;
-                if (grMinMax[groupNumber][1]>data[i][grIndex]){
-                    grMinMax[groupNumber][0] = i;
-                    grMinMax[groupNumber][1] = data[i][grIndex];
-                }
-                if (grMinMax[groupNumber][3]<data[i][grIndex]){
-                    grMinMax[groupNumber][2] = i;
-                    grMinMax[groupNumber][3] = data[i][grIndex];
+                if (data[i][grIndex]!=nullValue) {
+                    int groupNumber = (int) (data[i][grIndex] / (GRUpperLimit / numberOfGroups)) - 1;
+                    if (groupNumber < 0) {
+                        System.out.println("rukkkkkkkkkkk");
+                    }
+                    group[groupNumber]++;
+                    if (grMinMax[groupNumber][1] > data[i][grIndex]) {
+                        grMinMax[groupNumber][0] = i;
+                        grMinMax[groupNumber][1] = data[i][grIndex];
+                    }
+                    if (grMinMax[groupNumber][3] < data[i][grIndex]) {
+                        grMinMax[groupNumber][2] = i;
+                        grMinMax[groupNumber][3] = data[i][grIndex];
+                    }
                 }
             }
             else if(data[i][depthIndex]>depth[1])
@@ -645,7 +657,7 @@ public class porosityCalculation {
 
         XYChart.Series series1 = new XYChart.Series();
         for (int i=0;i<numberOfGroups;++i)
-            series1.getData().add(new Data(i*GRUpperLimit/numberOfGroups+"-"+(i+1)*GRUpperLimit/numberOfGroups, group[i]));
+            series1.getData().add(new Data(i*GRUpperLimit/numberOfGroups+"-"+(i+1)*~GRUpperLimit/numberOfGroups, group[i]));
 
         barChart.getData().addAll(series1);
         final boolean[] firstSelected = {false};
@@ -663,10 +675,11 @@ public class porosityCalculation {
                     int groupNumber = (int) (Double.parseDouble(range[0])*numberOfGroups/GRUpperLimit);
                     n.setStyle("-fx-bar-fill: red");
                     if (!firstSelected[0]){
-                        firstSelected[0] = true;
+                        firstSelected[0] = !firstSelected[0];
                         results[2] = grMinMax[groupNumber][0];
                     }
                     else{
+                        firstSelected[0] = !firstSelected[0];
                         results[3] = grMinMax[groupNumber][2];
                         vrStage.close();
                     }
