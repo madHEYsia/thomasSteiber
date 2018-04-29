@@ -56,15 +56,15 @@ public class getDBMLIndex {
             {"Mud", "Water based mud", "Oil based mud"},
     };
     String[][] inputRequired = {
-            {"KB from surface(MSL) [FEET]","0"},
+            {"KB from surface(MSL) [FEET]","5"},
             {"Water Depth plus KB [FEET]","0"},
-            {"Tempertaure Gradient [DEGF/100FT]","0"},
-            {"Sea Floor Temp [DEGF]","70"},
-            {"Formation Temp [DEGF]","0"},
-            {"Depth at formation Temperature [FEET]","0"},
+            {"Tempertaure Gradient [DEGF/100FT]","1"},
+            {"Sea Floor Temp [DEGF]","40"},
+            {"Formation Temp [DEGF]","270"},
+            {"Depth at formation Temperature [FEET]","12000"},
             {"Temperature Rw [DEGF]","24"},
             {"Temperature Rmudf [DEGF]","24"},
-            {"Water Resistivity [OHMM]","0"},
+            {"Water Resistivity [OHMM]","77"},
             {"Mudfiltrate Resistivity [OHMM]","1.09"},
     };
     String[] output = new String[curvesRequired.length+flags.length+inputRequired.length];

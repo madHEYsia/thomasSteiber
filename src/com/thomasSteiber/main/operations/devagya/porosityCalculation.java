@@ -137,11 +137,11 @@ public class porosityCalculation {
             LineChart<Number, Number> lineChartRhob = null;
             XYChart.Series RhobSeries = new XYChart.Series();
 
-            LineChart<Number, Number> lineChartphi = null;
+            LineChart<Number, Number>[] lineChartphi = new LineChart[1];
             XYChart.Series phiESeries = new XYChart.Series();
             XYChart.Series phiTSeries = new XYChart.Series();
 
-            LineChart<Number, Number> lineChartSw = null;
+            LineChart<Number, Number>[] lineChartSw = new LineChart[1];
             XYChart.Series sWSeries = new XYChart.Series();
 
             getPorIndex porObject = new getPorIndex();
@@ -226,8 +226,13 @@ public class porosityCalculation {
                         finalLineChartGr.addHorizontalValueMarker(horizontalMarker);
                     });
 
-                    LineChart<Number, Number> finalLineChartSw = lineChartSw;
-                    LineChart<Number, Number> finalLineChartphi = lineChartphi;
+
+                    lineChartphi[0] = linecharts("PhiE and PhiT");
+                    lineChartphi[0].getData().addAll(phiESeries, phiTSeries);
+
+                    lineChartSw[0] = linecharts("Saturation");
+                    lineChartSw[0].getData().add(sWSeries);
+
                     double finalAvgShaleDensity = avgShaleDensity[0];
                     double[] finalRwxo = Rwxo;
                     double[] finalRwfor = Rwfor;
@@ -405,10 +410,10 @@ public class porosityCalculation {
                                     phiTSeries.getData().add(new Data(intervalValues[i][phiTIndex], intervalValues[i][intervalDepthIndex]));
                             }
 
-                            finalLineChartphi.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+                            lineChartphi[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
                             phiESeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
                             phiTSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: black;");
-                            finalLineChartSw.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+                            lineChartSw[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
                             sWSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: pink;");
                         }
                         else {
@@ -441,12 +446,6 @@ public class porosityCalculation {
 
                     lineChartRhob = linecharts("Rhob");
                     lineChartRhob.getData().add(RhobSeries);
-
-                    lineChartphi = linecharts("PhiE and PhiT");
-                    lineChartphi.getData().addAll(phiESeries, phiTSeries);
-
-                    lineChartSw = linecharts("Saturation");
-                    lineChartSw.getData().add(sWSeries);
 
                     continue;
                 } else if (text.replaceAll("\\s", "").substring(0, 2).equalsIgnoreCase("~P") || text.replaceAll("\\s", "").charAt(0) == '~') {
@@ -570,7 +569,7 @@ public class porosityCalculation {
 
             stage.setMaximized(true);
             hb.getChildren().clear();
-            hb.getChildren().addAll(lineChartGr, areaChartVshale, lineChartNphi, lineChartRhob, lineChartphi, lineChartSw);
+            hb.getChildren().addAll(lineChartGr, areaChartVshale, lineChartNphi, lineChartRhob, lineChartphi[0], lineChartSw[0]);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -656,7 +655,6 @@ public class porosityCalculation {
                 });
             }
         }
-        barChart.getData().addAll(series1);
 
         BorderPane layout = new BorderPane(barChart);
         Scene scene = new Scene(layout, 800, 450);

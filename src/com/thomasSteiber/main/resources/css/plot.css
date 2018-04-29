@@ -9,7 +9,7 @@
 }
 
 .default-color0.chart-area-symbol {
-    -fx-background-color: black, black;
+    -fx-background-color: transparent, transparent;
 }
 
 .default-color0.chart-series-area-line {

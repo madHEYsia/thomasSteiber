@@ -41,12 +41,12 @@ public class getPorIndex {
             {"Shale Density lower limit [V/V]","2.1"},
             {"Shale Density Upper limit [V/V]","2.89"},
             {"Mud filtrate Density [G/C3]","1.5"},
-            {"Reservoir HC Density ","1.5"},
+            {"Reservoir HC Density ","0.88"},
             {"Fluid Density [G/C3]","1"},
-            {"Shale Porosity Density [G/C3]","1"},
+            {"Shale Porosity [V/V]","0.3"},
             {"Tortuosity factory","1"},
-            {"Archie Cementation exponent","0"},
-            {"Archie Stauration exponent","0"},
+            {"Archie Cementation exponent","2"},
+            {"Archie Saturation exponent","2"},
     };
     String[] output = new String[curvesRequired.length+flags.length+inputRequired.length];
 
