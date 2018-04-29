@@ -12,41 +12,60 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class getPorIndex {
+public class getPorWindow1Index {
 
-    int flagFluidIndex = 0;
-    int sandDensityIndex = 1;
-    int shaleDensityLowerIndex = 2;
-    int shaleDensityUpperIndex = 3;
-    int mudFiltrateDensityIndex = 4;
-    int reservoirHCDensityIndex = 5;
-    int fluidDensityIndex = 6;
-    int ShalePorosityIndex = 7;
-    int tortuosityIndex = 8;
-    int archieCementationIndex = 9;
-    int archieSaturationIndex = 10;
+    int tvdIndex = 0;
+    int grIndex = 1;
+    int nPhiIndex = 2;
+    int rhobIndex = 3;
+    int rxoIndex = 4;
+    int MRESHIndex = 5;
+    int SRESHIndex = 6;
+    int DRESHIndex = 7;
+    int flaglocationIndex = 8;
+    int flagTempIndex = 9;
+    int flagMudIndex = 10;
+    int KBIndex = 11;
+    int WDIndex = 12;
+    int TGRADIndex = 13;
+    int TSIndex = 14;
+    int TFORIndex = 15;
+    int DBMLTFORIndex = 16;
+    int TempRwIndex = 17;
+    int TempRmfIndex = 18;
+    int RwIndex = 19;
+    int RmfIndex = 20;
 
     String[] curvesRequired = {
+            "True Vertical Depth:",
+            "GR: ",
+            "Nphi: ",
+            "Rhob: ",
+            "Rxo: ",
+            "MRESH: ",
+            "SRESH : ",
+            "DRESH: ",
     };
     String[][] flags ={
-            {"Formation fluid ","Liquid","Gas"}
+            {"Default Offshore","1","Other"},
+            {"Temperature in ","Fahrenheit","Celsius"},
+            {"Mud", "Water based mud", "Oil based mud"},
     };
     String[][] inputRequired = {
-            {"Sand Density [V/V]","2.65"},
-            {"Shale Density lower limit [V/V]","2.1"},
-            {"Shale Density Upper limit [V/V]","2.89"},
-            {"Mud filtrate Density [G/C3]","1.5"},
-            {"Reservoir HC Density ","0.88"},
-            {"Fluid Density [G/C3]","1"},
-            {"Shale Porosity [V/V]","0.3"},
-            {"Tortuosity factory","1"},
-            {"Archie Cementation exponent","2"},
-            {"Archie Saturation exponent","2"},
+            {"KB from surface(MSL) [FEET]","25"},
+            {"Water Depth plus KB [FEET]","0"},
+            {"Tempertaure Gradient [DEGF/100FT]","1"},
+            {"Sea Floor Temp [DEGF]","70"},
+            {"Formation Temp [DEGF]","270"},
+            {"Depth at formation Temperature [FEET]","12000"},
+            {"Temperature Rw [DEGF]","24"},
+            {"Temperature Rmudf [DEGF]","16"},
+            {"Water Resistivity [OHMM]","77"},
+            {"Mudfiltrate Resistivity [OHMM]","1.09"},
     };
     String[] output = new String[curvesRequired.length+flags.length+inputRequired.length];
 
@@ -98,7 +117,7 @@ public class getPorIndex {
                 output[i] = inputRequired[TextI][1];
                 TextField value = new TextField(inputRequired[TextI][1] + "");
                 value.setMaxWidth(200);
-                value.textProperty().addListener((observable, oldValue, newValue) ->  output[finalI] = newValue );
+                value.textProperty().addListener((observable, oldValue, newValue) -> output[finalI] = newValue);
                 grids.add(new HBox(5, inputLabel, value), columnIndex, rowIndex, 5, 1);
             }
             columnIndex+=5;
@@ -128,7 +147,12 @@ public class getPorIndex {
             boolean errorFound = false;
             inner: for(int i=0;i<curvesRequired.length+flags.length+inputRequired.length;++i) {
                 if (i < curvesRequired.length) {
-                    if (output[i] == null || output[i] == "0") {
+                    if ((output[i] == null || output[i].equals("0")) &&
+                            i != nPhiIndex &&
+                            (i != SRESHIndex || output[MRESHIndex].equals("0")) &&
+                            (i != MRESHIndex || output[SRESHIndex].equals("0")) &&
+                            i != DRESHIndex &&
+                            (i != rxoIndex || output[flagMudIndex].equals("Water based mud"))) {
                         errorFound = true;
                         error.setText("Please select parameter " + curvesRequired[i]);
                         sleeper.setOnSucceeded(event -> error.setText(""));
@@ -171,7 +195,7 @@ public class getPorIndex {
 
         layout.getChildren().addAll(grids, error, bottomButton);
 
-        Scene scene = new Scene(layout, 1000,200);
+        Scene scene = new Scene(layout, 1000,300);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);

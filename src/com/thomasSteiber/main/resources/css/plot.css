@@ -37,3 +37,7 @@
     -fx-font-weight: bold;
     -fx-text-fill: -fx-WhiteColor;
 }
+.chart-symbol{
+    -fx-stroke: #a9e200;
+    -fx-shape: "M0,4 L2,4 L4,8 L7,0 L9,0 L4,11 Z";
+}

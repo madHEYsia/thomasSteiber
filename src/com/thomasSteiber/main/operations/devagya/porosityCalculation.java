@@ -144,8 +144,8 @@ public class porosityCalculation {
             LineChart<Number, Number>[] lineChartSw = new LineChart[1];
             XYChart.Series sWSeries = new XYChart.Series();
 
-            getPorIndex porObject = new getPorIndex();
-            getDBMLIndex dbmlObject = new getDBMLIndex();
+            getPorWindow2Index porObject = new getPorWindow2Index();
+            getPorWindow1Index dbmlObject = new getPorWindow1Index();
 
             while ((text = bufferedReader.readLine()) != null) {
                 if (text.replaceAll("\\s", "").length() == 0 || text.replaceAll("\\s", "").charAt(0) == '#')
@@ -408,6 +408,15 @@ public class porosityCalculation {
                                     phiESeries.getData().add(new Data(intervalValues[i][phiOIndex], intervalValues[i][intervalDepthIndex]));
                                 if (intervalValues[i][phiTIndex]!=nullValue)
                                     phiTSeries.getData().add(new Data(intervalValues[i][phiTIndex], intervalValues[i][intervalDepthIndex]));
+
+//                                -------------------------------------Start of Thoomas Steiebr--------------------------------------------
+
+
+
+
+
+//                                -------------------------------------End of Thoomas Steiebr----------------------------------------------
+
                             }
 
                             lineChartphi[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
