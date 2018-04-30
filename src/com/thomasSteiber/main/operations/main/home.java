@@ -70,7 +70,7 @@ public class home {
         submit.setOnAction(e-> {
             boolean check = true;
             for (int i=0;i<5;++i){
-                if (values[i]==-999999){
+                if (values[i]==-999){
                     errorPopup("Numeric Values for "+ labelTitle[i]+"required");
                     check = false;
                     break;

@@ -257,27 +257,28 @@ public class porosityCalculation {
                             avgShaleDensity[0] = 0.5*(Double.parseDouble(porObject.output[porObject.shaleDensityLowerIndex])+Double.parseDouble(porObject.output[porObject.shaleDensityUpperIndex]));
 
                             int intervalDepthIndex = 0;
-                            int matrixDensityIndex = 1;
-                            int phiDIndex = 2;
-                            int phiDXIndex = 3;
-                            int phiDCIndex = 4;
-                            int phiNCIndex = 5;
-                            int phiOIndex = 6;
-                            int phiEIndex = 7;
-                            int phiTIndex = 8;
-                            int phiDispIndex = 9;
-                            int phiMinIndex = 10;
-                            int GRmaxdIndex = 11;
-                            int phiDisSHIndex = 12;
-                            int phiLamIndex = 13;
-                            int phiStrIndex = 14;
-                            int VLamIndex = 15;
-                            int SandFractionIndex = 16;
-                            int phiTSDIndex = 17;
-                            int VDispIndex = 18;
-                            int VDispSDIndex = 19;
-                            int phieSDIndex = 20;
-                            double[][] intervalValues = new double[data.length][21];
+                            int vShaleIndex = 1;
+                            int matrixDensityIndex = 2;
+                            int phiDIndex = 3;
+                            int phiDXIndex = 4;
+                            int phiDCIndex = 5;
+                            int phiNCIndex = 6;
+                            int phiOIndex = 7;
+                            int phiEIndex = 8;
+                            int phiTIndex = 9;
+                            int phiDispIndex = 10;
+                            int phiMinIndex = 11;
+                            int GRmaxdIndex = 12;
+                            int phiDisSHIndex = 13;
+                            int phiLamIndex = 14;
+                            int phiStrIndex = 15;
+                            int VLamIndex = 16;
+                            int SandFractionIndex = 17;
+                            int phiTSDIndex = 18;
+                            int VDispIndex = 19;
+                            int VDispSDIndex = 20;
+                            int phieSDIndex = 21;
+                            double[][] intervalValues = new double[data.length][22];
 
                             String fluidFlag = porObject.output[porObject.flagFluidIndex];
                             double sandDensity = Double.parseDouble(porObject.output[porObject.sandDensityIndex]);
@@ -291,21 +292,21 @@ public class porosityCalculation {
                             for (int i = startIndex; i < endIndex; ++i) {
                                 intervalValues[i][intervalDepthIndex] = data[i][depthIndex];
                                 if (data[i][grIndex]==nullValue)
-                                    data[i][vshaleIndex] = nullValue;
+                                    intervalValues[i][vShaleIndex] = nullValue;
                                 else{
                                     double Igr = (data[i][grIndex] - grMin)/(grMax - grMin);
                                     Igr = Igr<=0 ? 0.020 : Igr;
                                     Igr = Igr>=1 ? 0.999 : Igr;
-                                    data[i][vshaleIndex] = Igr;
+                                    intervalValues[i][vShaleIndex] = Igr;
                                     if (title.equals("Larionov Tertiary Rocks"))
-                                        data[i][vshaleIndex] = 0.083*(Math.pow(2,3.7*Igr) -1);
+                                        intervalValues[i][vShaleIndex] = 0.083*(Math.pow(2,3.7*Igr) -1);
                                     else if (title.equals("Steiber"))
-                                        data[i][vshaleIndex] = Igr/(3-2*Igr);
+                                        intervalValues[i][vShaleIndex] = Igr/(3-2*Igr);
                                     else if (title.equals("Clavier"))
-                                        data[i][vshaleIndex] = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
+                                        intervalValues[i][vShaleIndex] = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
                                     else if (title.equals("Larionov Older Rocks"))
-                                        data[i][vshaleIndex] = 0.33*(Math.pow(2,2*Igr) -1);
-                                    areaSeries.getData().add(new Data(data[i][vshaleIndex], data[i][depthIndex]));
+                                        intervalValues[i][vShaleIndex] = 0.33*(Math.pow(2,2*Igr) -1);
+                                    areaSeries.getData().add(new Data(intervalValues[i][vShaleIndex], data[i][depthIndex]));
                                 }
 
                                 double currentShaleDensity = avgShaleDensity[0];
@@ -315,11 +316,11 @@ public class porosityCalculation {
                                     intervalValues[i][phiDXIndex] = nullValue;
                                     intervalValues[i][phiDCIndex] = nullValue;
                                     intervalValues[i][phiNCIndex] = nullValue;
-                                    if (data[i][vshaleIndex] != nullValue) {
-                                        intervalValues[i][matrixDensityIndex] = data[i][vshaleIndex] * currentShaleDensity +
-                                                (1 - data[i][vshaleIndex]) * sandDensity;
+                                    if (intervalValues[i][vShaleIndex] != nullValue) {
+                                        intervalValues[i][matrixDensityIndex] = intervalValues[i][vShaleIndex] * currentShaleDensity +
+                                                (1 - intervalValues[i][vShaleIndex]) * sandDensity;
                                         if (isNphiPresent && data[i][nPhiIndex] != nullValue)
-                                            intervalValues[i][phiNCIndex] = data[i][nPhiIndex] - data[i][vshaleIndex] * data[grMaxIndex][nPhiIndex];
+                                            intervalValues[i][phiNCIndex] = data[i][nPhiIndex] - intervalValues[i][vShaleIndex] * data[grMaxIndex][nPhiIndex];
                                         if (data[i][rhobIndex] != nullValue) {
                                             intervalValues[i][matrixDensityIndex] = intervalValues[i][matrixDensityIndex] < data[i][rhobIndex]
                                                     ? intervalValues[i][matrixDensityIndex] + 0.005 : intervalValues[i][matrixDensityIndex];
@@ -327,7 +328,7 @@ public class porosityCalculation {
                                                     (intervalValues[i][matrixDensityIndex] - fluidDensity);
                                             intervalValues[i][phiDXIndex] = (intervalValues[i][matrixDensityIndex] - data[i][rhobIndex]) /
                                                     (intervalValues[i][matrixDensityIndex] - mudFlitrateDensity);
-                                            intervalValues[i][phiDCIndex] = intervalValues[i][phiDXIndex] - data[i][vshaleIndex] *
+                                            intervalValues[i][phiDCIndex] = intervalValues[i][phiDXIndex] - intervalValues[i][vShaleIndex] *
                                                     ((currentShaleDensity - data[i][rhobIndex]) / (currentShaleDensity - 1));
                                         }
                                     }
@@ -398,15 +399,15 @@ public class porosityCalculation {
                                     ++count;
                                     guessPorosity = intervalValues[i][phiDXIndex];
 
-                                    double porFunction = Ia!=nullValue && guessPorosity!=nullValue && intervalValues[i][matrixDensityIndex]!=nullValue && data[i][vshaleIndex]!=nullValue && data[i][rhobIndex]!=nullValue
+                                    double porFunction = Ia!=nullValue && guessPorosity!=nullValue && intervalValues[i][matrixDensityIndex]!=nullValue && intervalValues[i][vShaleIndex]!=nullValue && data[i][rhobIndex]!=nullValue
                                         ? (mudFlitrateDensity-reservorHCDensity)*Ia*(Math.pow(guessPorosity,(1-cementArchie/satArchie)))
-                                            + ((reservorHCDensity-intervalValues[i][matrixDensityIndex]) - (currentShaleDensity-intervalValues[i][matrixDensityIndex])*data[i][vshaleIndex])*guessPorosity
-                                            + intervalValues[i][matrixDensityIndex] +(currentShaleDensity - intervalValues[i][matrixDensityIndex])*data[i][vshaleIndex] - data[i][rhobIndex]
+                                            + ((reservorHCDensity-intervalValues[i][matrixDensityIndex]) - (currentShaleDensity-intervalValues[i][matrixDensityIndex])*intervalValues[i][vShaleIndex])*guessPorosity
+                                            + intervalValues[i][matrixDensityIndex] +(currentShaleDensity - intervalValues[i][matrixDensityIndex])*intervalValues[i][vShaleIndex] - data[i][rhobIndex]
                                         : nullValue;
 
-                                    double porFunctionDerivative = Ia!=nullValue && guessPorosity!=nullValue && intervalValues[i][matrixDensityIndex]!=nullValue && data[i][vshaleIndex]!=nullValue
+                                    double porFunctionDerivative = Ia!=nullValue && guessPorosity!=nullValue && intervalValues[i][matrixDensityIndex]!=nullValue && intervalValues[i][vShaleIndex]!=nullValue
                                         ? (mudFlitrateDensity-reservorHCDensity)*Ia*(1-cementArchie/satArchie)*Math.pow(guessPorosity, -cementArchie/satArchie)
-                                            +(reservorHCDensity-intervalValues[i][matrixDensityIndex]) - (currentShaleDensity-intervalValues[i][matrixDensityIndex])*data[i][vshaleIndex]
+                                            +(reservorHCDensity-intervalValues[i][matrixDensityIndex]) - (currentShaleDensity-intervalValues[i][matrixDensityIndex])*intervalValues[i][vShaleIndex]
                                         : nullValue;
 
                                     guessPorosity = porFunction!=nullValue && porFunctionDerivative!=nullValue ? guessPorosity - porFunction/porFunctionDerivative : nullValue;
@@ -414,11 +415,11 @@ public class porosityCalculation {
                                         break innerWhile;
                                 }
 
-                                intervalValues[i][phiTIndex] = data[i][vshaleIndex]>0.55 || (guessPorosity!=nullValue && guessPorosity<=0) ?
+                                intervalValues[i][phiTIndex] = intervalValues[i][vShaleIndex]>0.55 || (guessPorosity!=nullValue && guessPorosity<=0) ?
                                         (data[i][rhobIndex]!=nullValue ? (currentShaleDensity-data[i][rhobIndex])/(currentShaleDensity-1.0) : nullValue) : guessPorosity ;
 
-                                intervalValues[i][phiEIndex] = (intervalValues[i][phiTIndex]!=nullValue && data[i][vshaleIndex]!=nullValue)
-                                        ? intervalValues[i][phiTIndex] - shalePorsity*data[i][vshaleIndex] : nullValue;
+                                intervalValues[i][phiEIndex] = (intervalValues[i][phiTIndex]!=nullValue && intervalValues[i][vShaleIndex]!=nullValue)
+                                        ? intervalValues[i][phiTIndex] - shalePorsity*intervalValues[i][vShaleIndex] : nullValue;
                                 intervalValues[i][phiEIndex] = intervalValues[i][phiEIndex]!=nullValue && intervalValues[i][phiEIndex]<=0
                                         ? 0.001 : intervalValues[i][phiEIndex];
 
@@ -428,56 +429,52 @@ public class porosityCalculation {
                                     phiTSeries.getData().add(new Data(intervalValues[i][phiTIndex], intervalValues[i][intervalDepthIndex]));
 
                                 if (intervalValues[i][phiEIndex]>1 || intervalValues[i][phiTIndex]>1)
-                                    System.out.println("depth: " + data[i][depthIndex] + " grMin: " + data[grMinIndex][grIndex] + " grMax: " + data[grMaxIndex][grIndex] + " Vsh: " + data[i][vshaleIndex] + " matrixDenity: " + intervalValues[i][matrixDensityIndex] + " phiDX: " + intervalValues[i][phiDXIndex] + " phiDC: " + intervalValues[i][phiDCIndex] + " phiNC: " + intervalValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phiE: " + intervalValues[i][phiEIndex] + " phiT: " + intervalValues[i][phiTIndex]);
+                                    System.out.println("depth: " + data[i][depthIndex] + " grMin: " + data[grMinIndex][grIndex] + " grMax: " + data[grMaxIndex][grIndex] + " Vsh: " + intervalValues[i][vShaleIndex] + " matrixDenity: " + intervalValues[i][matrixDensityIndex] + " phiDX: " + intervalValues[i][phiDXIndex] + " phiDC: " + intervalValues[i][phiDCIndex] + " phiNC: " + intervalValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phiE: " + intervalValues[i][phiEIndex] + " phiT: " + intervalValues[i][phiTIndex]);
                             }
 
-//                                -------------------------------------Start of Thoomas Steiebr--------------------------------------------
-
-                                double zeta = grMax/(grMax-grMin);
-                                double phiSD = intervalValues[grMinIndex][phiTIndex];
-                                double phiSH = intervalValues[grMaxIndex][phiEIndex];
-                                for (int i = startIndex; i < endIndex; ++i) {
-                                    double Igr = data[i][grIndex]!=nullValue ? (data[i][grIndex] - grMin)/(grMax - grMin) : nullValue;
-                                    intervalValues[i][phiDispIndex] = Igr!=nullValue ? phiSD - ((1-Igr)*(1-phiSH)/zeta) : nullValue;
-                                    intervalValues[i][phiMinIndex] = phiSD*phiSH;
-                                    intervalValues[i][GRmaxdIndex] = grMin + phiSD*grMax;
-                                    intervalValues[i][phiDisSHIndex] = Igr!=nullValue ? phiSH*(1-Igr) : nullValue;
-                                    intervalValues[i][phiDispIndex] = intervalValues[i][phiDispIndex]<=intervalValues[i][phiMinIndex] ?
-                                            nullValue: intervalValues[i][phiDispIndex];
-                                    intervalValues[i][phiDisSHIndex] = intervalValues[i][phiDisSHIndex]<=intervalValues[i][phiMinIndex] ?
-                                            nullValue: intervalValues[i][phiDisSHIndex];
-                                    intervalValues[i][phiLamIndex] = Igr!=nullValue ?  Igr*phiSD + (1-Igr)*phiSH : nullValue;
-                                    intervalValues[i][phiStrIndex] = Igr!=nullValue ? phiSD + (1-Igr)*phiSH : nullValue;
-                                    intervalValues[i][VLamIndex] = (Igr!=nullValue && intervalValues[i][phiTIndex]!=nullValue) ? (intervalValues[i][phiTIndex]-phiSD+data[i][vshaleIndex]*(1-phiSH))/(1-phiSD) : nullValue;
-                                    if (intervalValues[i][VLamIndex]!=nullValue){
-                                        intervalValues[i][VLamIndex] = intervalValues[i][VLamIndex]<=0 ? 0.001 : intervalValues[i][VLamIndex];
-                                        intervalValues[i][VLamIndex] = intervalValues[i][VLamIndex]>=1 ? 0.999 : intervalValues[i][VLamIndex];
-                                    }
-                                    intervalValues[i][SandFractionIndex] = intervalValues[i][VLamIndex]!=nullValue ? 1- intervalValues[i][VLamIndex] : nullValue;
-                                    intervalValues[i][phiTSDIndex] = intervalValues[i][phiTIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
-                                            ? (intervalValues[i][VLamIndex]>=0.65 || intervalValues[i][phiTIndex]<0 || intervalValues[i][phiTIndex]>0.45)
-                                                ? intervalValues[i][phiTIndex]
-                                                : (intervalValues[i][phiTIndex] - intervalValues[i][VLamIndex]*phiSH)/(1-intervalValues[i][VLamIndex])
-                                            : nullValue;
-                                    intervalValues[i][VDispIndex] = data[i][vshaleIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
-                                            ? data[i][vshaleIndex] - intervalValues[i][VLamIndex] : nullValue;
-                                    intervalValues[i][VDispSDIndex] = intervalValues[i][VDispIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
-                                            ? intervalValues[i][VDispIndex]/(1 - intervalValues[i][VLamIndex]) : nullValue;
-                                    if (intervalValues[i][VDispIndex]!=nullValue){
-                                        intervalValues[i][VDispIndex] = intervalValues[i][VDispIndex]<=0 ? 0.001 : intervalValues[i][VDispIndex];
-                                        intervalValues[i][VDispIndex] = intervalValues[i][VDispIndex]>=1 ? 0.999 : intervalValues[i][VDispIndex];
-                                    }
-                                    if (intervalValues[i][VDispSDIndex]!=nullValue){
-                                        intervalValues[i][VDispSDIndex] = intervalValues[i][VDispSDIndex]<=0 ? 0.001 : intervalValues[i][VDispSDIndex];
-                                        intervalValues[i][VDispSDIndex] = intervalValues[i][VDispSDIndex]>=1 ? 0.999 : intervalValues[i][VDispSDIndex];
-                                    }
-                                    intervalValues[i][phieSDIndex] = intervalValues[i][phiTSDIndex]!=nullValue && intervalValues[i][VDispSDIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
-                                        ? intervalValues[i][phiTSDIndex] - intervalValues[i][VDispSDIndex]*phiSH*(1-intervalValues[i][VLamIndex])
-                                        : nullValue;
-                                    intervalValues[i][phieSDIndex] = (intervalValues[i][phieSDIndex]!=nullValue && intervalValues[i][phieSDIndex]<=0) ? 0.001 : intervalValues[i][phieSDIndex];
+                            double zeta = grMax/(grMax-grMin);
+                            double phiSD = intervalValues[grMinIndex][phiTIndex];
+                            double phiSH = intervalValues[grMaxIndex][phiEIndex];
+                            for (int i = startIndex; i < endIndex; ++i) {
+                                double Igr = data[i][grIndex]!=nullValue ? (data[i][grIndex] - grMin)/(grMax - grMin) : nullValue;
+                                intervalValues[i][phiDispIndex] = Igr!=nullValue ? phiSD - ((1-Igr)*(1-phiSH)/zeta) : nullValue;
+                                intervalValues[i][phiMinIndex] = phiSD*phiSH;
+                                intervalValues[i][GRmaxdIndex] = grMin + phiSD*grMax;
+                                intervalValues[i][phiDisSHIndex] = Igr!=nullValue ? phiSH*(1-Igr) : nullValue;
+                                intervalValues[i][phiDispIndex] = intervalValues[i][phiDispIndex]<=intervalValues[i][phiMinIndex] ?
+                                        nullValue: intervalValues[i][phiDispIndex];
+                                intervalValues[i][phiDisSHIndex] = intervalValues[i][phiDisSHIndex]<=intervalValues[i][phiMinIndex] ?
+                                        nullValue: intervalValues[i][phiDisSHIndex];
+                                intervalValues[i][phiLamIndex] = Igr!=nullValue ?  Igr*phiSD + (1-Igr)*phiSH : nullValue;
+                                intervalValues[i][phiStrIndex] = Igr!=nullValue ? phiSD + (1-Igr)*phiSH : nullValue;
+                                intervalValues[i][VLamIndex] = (Igr!=nullValue && intervalValues[i][phiTIndex]!=nullValue) ? (intervalValues[i][phiTIndex]-phiSD+intervalValues[i][vShaleIndex]*(1-phiSH))/(1-phiSD) : nullValue;
+                                if (intervalValues[i][VLamIndex]!=nullValue){
+                                    intervalValues[i][VLamIndex] = intervalValues[i][VLamIndex]<=0 ? 0.001 : intervalValues[i][VLamIndex];
+                                    intervalValues[i][VLamIndex] = intervalValues[i][VLamIndex]>=1 ? 0.999 : intervalValues[i][VLamIndex];
                                 }
-//                                -------------------------------------End of Thoomas Steiebr----------------------------------------------
-
+                                intervalValues[i][SandFractionIndex] = intervalValues[i][VLamIndex]!=nullValue ? 1- intervalValues[i][VLamIndex] : nullValue;
+                                intervalValues[i][phiTSDIndex] = intervalValues[i][phiTIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
+                                        ? (intervalValues[i][VLamIndex]>=0.65 || intervalValues[i][phiTIndex]<0 || intervalValues[i][phiTIndex]>0.45)
+                                            ? intervalValues[i][phiTIndex]
+                                            : (intervalValues[i][phiTIndex] - intervalValues[i][VLamIndex]*phiSH)/(1-intervalValues[i][VLamIndex])
+                                        : nullValue;
+                                intervalValues[i][VDispIndex] = intervalValues[i][vShaleIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
+                                        ? intervalValues[i][vShaleIndex] - intervalValues[i][VLamIndex] : nullValue;
+                                intervalValues[i][VDispSDIndex] = intervalValues[i][VDispIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
+                                        ? intervalValues[i][VDispIndex]/(1 - intervalValues[i][VLamIndex]) : nullValue;
+                                if (intervalValues[i][VDispIndex]!=nullValue){
+                                    intervalValues[i][VDispIndex] = intervalValues[i][VDispIndex]<=0 ? 0.001 : intervalValues[i][VDispIndex];
+                                    intervalValues[i][VDispIndex] = intervalValues[i][VDispIndex]>=1 ? 0.999 : intervalValues[i][VDispIndex];
+                                }
+                                if (intervalValues[i][VDispSDIndex]!=nullValue){
+                                    intervalValues[i][VDispSDIndex] = intervalValues[i][VDispSDIndex]<=0 ? 0.001 : intervalValues[i][VDispSDIndex];
+                                    intervalValues[i][VDispSDIndex] = intervalValues[i][VDispSDIndex]>=1 ? 0.999 : intervalValues[i][VDispSDIndex];
+                                }
+                                intervalValues[i][phieSDIndex] = intervalValues[i][phiTSDIndex]!=nullValue && intervalValues[i][VDispSDIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
+                                    ? intervalValues[i][phiTSDIndex] - intervalValues[i][VDispSDIndex]*phiSH*(1-intervalValues[i][VLamIndex])
+                                    : nullValue;
+                                intervalValues[i][phieSDIndex] = (intervalValues[i][phieSDIndex]!=nullValue && intervalValues[i][phieSDIndex]<=0) ? 0.001 : intervalValues[i][phieSDIndex];
+                            }
 
                             lineChartphi[0].getData().clear();
                             lineChartphi[0].getData().addAll(phiESeries, phiTSeries);
@@ -489,6 +486,9 @@ public class porosityCalculation {
                             phiTSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: black;");
                             lineChartSw[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
                             sWSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: pink;");
+
+                            graphUI ob = new graphUI();
+                            ob.plot(startIndex, endIndex, intervalValues, phiTIndex, vShaleIndex, nullValue);
                         }
                         else {
                             error.setStyle("-fx-text-fill: red;");
@@ -559,8 +559,7 @@ public class porosityCalculation {
                                     grMin = Math.min(grMin, value);
                                     grMax = Math.max(grMax, value);
                                 }
-                            } else
-                                data[dataRowIndex][vshaleIndex] = nullValue;
+                            }
                         } else if (isNphiPresent &&  textInd == Double.parseDouble(dbmlObject.output[dbmlObject.nPhiIndex])) {
                             data[dataRowIndex][nPhiIndex] = value;
                             if (value != nullValue)

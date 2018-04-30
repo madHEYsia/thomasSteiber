@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,17 +40,17 @@
       <file leaf-file-name="indexes.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+            <state relative-caret-position="68">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="474" selection-start-line="474" selection-end-line="474" />
+            <state relative-caret-position="214">
+              <caret line="490" column="107" selection-start-line="490" selection-start-column="107" selection-end-line="490" selection-end-column="107" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#LineChartWithMarkers#0;class#porosityCalculation#0" />
@@ -58,13 +61,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
+      <file leaf-file-name="graphUI.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/graphUI.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="30" column="39" lean-forward="true" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+            <state relative-caret-position="153">
+              <caret line="9" column="78" selection-start-line="9" selection-start-column="78" selection-end-line="9" selection-end-column="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphUI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/graphUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="199" column="27" selection-start-line="199" selection-start-column="27" selection-end-line="199" selection-end-column="27" />
               <folding>
-                <element signature="method#errorPopup#0;class#home#0" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,25 +87,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>css</find>
-      <find>indexA</find>
-      <find>indexArray</find>
-      <find>ob.</find>
-      <find>porObject</find>
-      <find>&quot;-1&quot;</find>
-      <find>calculatedValues</find>
-      <find>output</find>
-      <find>Presen</find>
-      <find>Math.sq</find>
-      <find>isNphiPresent</find>
-      <find>data[i][vshaleIndex]</find>
       <find>double vshale</find>
       <find>Double.parseDouble(porObject.output[porObject.sandDensityIndex])</find>
       <find>Double.parseDouble(porObject.output[porObject.fluidDensityIndex]))</find>
@@ -112,6 +112,18 @@
       <find>0.001</find>
       <find>currentShaleDensity</find>
       <find>for (int i = startIndex</find>
+      <find>Line A</find>
+      <find>values[0]</find>
+      <find>values[1]</find>
+      <find>values[2]</find>
+      <find>values[3]</find>
+      <find>values[4]</find>
+      <find>values[5]</find>
+      <find>values[6]</find>
+      <find>values[7]</find>
+      <find>data[i][vshaleIndex]</find>
+      <find>red</find>
+      <find>series2</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -128,6 +140,15 @@
       <replace>satArchie</replace>
       <replace>cementArchie</replace>
       <replace>scatterChart</replace>
+      <replace>0.33</replace>
+      <replace>porA</replace>
+      <replace>porB</replace>
+      <replace>Ra</replace>
+      <replace>Rb</replace>
+      <replace>Xa</replace>
+      <replace>Ymax</replace>
+      <replace>Ymin</replace>
+      <replace>intervalValues[i][vShaleIndex]</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -148,9 +169,7 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/testing.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/mnemonics.java" />
-        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java" />
-        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/ScatterXChart.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/LineChartSample.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/modiifiedAreaChart.java" />
@@ -166,14 +185,18 @@
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/a.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getIndex.java" />
-        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorIndex.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getDBMLIndex.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/dbmlCalculation.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/plot.css" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow1Index.java" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/graphUI.css" />
         <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" />
+        <option value="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/graphUI.java" />
       </list>
     </option>
   </component>
@@ -183,7 +206,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1386" />
@@ -240,6 +263,21 @@
               <item name="operations" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="thomasSteiber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thomasSteiber" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thomasSteiber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thomasSteiber" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -290,17 +328,6 @@
     <configuration default="true" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.thomasSteiber.main.operations.main.main" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-    </configuration>
-    <configuration name="a" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.thomasSteiber.main.operations.main.a" />
-      <module name="thomasSteiber" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.thomasSteiber.main.operations.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
     </configuration>
     <configuration name="main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.thomasSteiber.main.operations.main.main" />
@@ -511,12 +538,10 @@
     <list>
       <item itemvalue="Application.main" />
       <item itemvalue="Application.newHome" />
-      <item itemvalue="Application.a" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.newHome" />
-        <item itemvalue="Application.a" />
       </list>
     </recent_temporary>
   </component>
@@ -539,15 +564,15 @@
       <workItem from="1524111443678" duration="38672000" />
       <workItem from="1524846712670" duration="39402000" />
       <workItem from="1524919437710" duration="42571000" />
-      <workItem from="1525003503991" duration="30525000" />
+      <workItem from="1525003503991" duration="40393000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="287696000" />
+    <option name="totallyTimeSpent" value="297564000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="768" extended-state="0" />
+    <frame x="0" y="0" width="1366" height="768" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -560,8 +585,8 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Run" order="13" weight="0.42196533" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32947975" />
+      <window_info anchor="bottom" id="Run" order="13" weight="0.3034682" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32803467" />
       <window_info id="Capture Tool" order="1" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="9" visible="true" weight="0.16490166" />
@@ -644,7 +669,7 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="91" />
+      <option name="time" value="92" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -652,8 +677,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/lang/ClassLoader.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/lasAreaPlot.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/LineChartSample.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/RotationTransformExample.java.txt" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/event/EventHandler.java" />
@@ -735,13 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/newHome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="40" column="56" lean-forward="true" selection-start-line="40" selection-start-column="56" selection-end-line="40" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -770,28 +786,6 @@
           <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="242" column="12" selection-start-line="242" selection-start-column="12" selection-end-line="242" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="61" column="36" lean-forward="true" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
-          <folding>
-            <element signature="method#lineGraph#0;class#graphUI#0" />
-            <element signature="method#parameter#0;class#graphUI#0" />
           </folding>
         </state>
       </provider>
@@ -841,17 +835,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/readLas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="464" column="5" lean-forward="true" selection-start-line="464" selection-start-column="5" selection-end-line="464" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#LineChartWithMarkers#0;class#readLas#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/graphUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="24" column="2" lean-forward="true" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="27" column="41" lean-forward="true" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+        <state relative-caret-position="272">
+          <caret line="23" column="49" lean-forward="true" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/newHome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="47" selection-start-line="47" selection-end-line="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/main/home.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="30" column="39" lean-forward="true" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+        <state relative-caret-position="68">
+          <caret line="4" column="27" lean-forward="true" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
           <folding>
             <element signature="method#errorPopup#0;class#home#0" />
           </folding>
@@ -860,20 +879,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/indexes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+        <state relative-caret-position="68">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/graphUI.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="78" selection-start-line="9" selection-start-column="78" selection-end-line="9" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="474" selection-start-line="474" selection-end-line="474" />
+        <state relative-caret-position="214">
+          <caret line="490" column="107" selection-start-line="490" selection-start-column="107" selection-end-line="490" selection-end-column="107" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#LineChartWithMarkers#0;class#porosityCalculation#0" />
             <element signature="e#45711#45712#0" expanded="true" />
             <element signature="e#45755#45756#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/graphUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="199" column="27" selection-start-line="199" selection-start-column="27" selection-end-line="199" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
