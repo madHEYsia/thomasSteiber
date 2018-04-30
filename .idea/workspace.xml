@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/graphUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/graphUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/graphUI.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/graphUI.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,8 +47,8 @@
       <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="470" column="73" selection-start-line="470" selection-start-column="73" selection-end-line="470" selection-end-column="73" />
+            <state relative-caret-position="613">
+              <caret line="860" lean-forward="true" selection-start-line="860" selection-end-line="860" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#LineChartWithMarkers#0;class#porosityCalculation#0" />
@@ -563,12 +562,12 @@
       <workItem from="1524111443678" duration="38672000" />
       <workItem from="1524846712670" duration="39402000" />
       <workItem from="1524919437710" duration="42571000" />
-      <workItem from="1525003503991" duration="48324000" />
+      <workItem from="1525003503991" duration="49522000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="305495000" />
+    <option name="totallyTimeSpent" value="306693000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="6" />
@@ -668,7 +667,7 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="96" />
+      <option name="time" value="97" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -902,8 +901,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="470" column="73" selection-start-line="470" selection-start-column="73" selection-end-line="470" selection-end-column="73" />
+        <state relative-caret-position="613">
+          <caret line="860" lean-forward="true" selection-start-line="860" selection-end-line="860" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#LineChartWithMarkers#0;class#porosityCalculation#0" />

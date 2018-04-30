@@ -244,19 +244,19 @@ public class porosityCalculation {
                         finalLineChartGr.addHorizontalValueMarker(horizontalMarker);
                     });
 
-                    lineChartphi[0] = linecharts("Phi_E - Phi_T");
+                    lineChartphi[0] = linecharts(new NumberAxis(0,1,0.1),"Phi_E - Phi_T");
                     lineChartphi[0].getData().addAll(phiESeries, phiTSeries);
 
-                    lineChartPhis[0] = linecharts("Phi(Lam-Disp-Str)");
+                    lineChartPhis[0] = linecharts(new NumberAxis(-1,1,0.1),"Phi(Lam-Disp-Str)");
                     lineChartPhis[0].getData().addAll(phiLamSeries, phiDispSeries, phiStrSeries);
 
-                    lineChartThomasSteiber[0] = linecharts("V(Lam-Disp)-Phi(TSD)");
+                    lineChartThomasSteiber[0] = linecharts(new NumberAxis(0,1,0.1),"V(Lam-Disp)-Phi(TSD)");
                     lineChartThomasSteiber[0].getData().addAll(vLamSeries, vDispSeries, phiTSDSeries);
 
-                    lineChartSf[0] = linecharts("Sand Facture");
+                    lineChartSf[0] = linecharts(new NumberAxis(0,1,0.1),"Sand Facture");
                     lineChartSf[0].getData().add(sFSeries);
 
-                    lineChartSw[0] = linecharts("Saturation");
+                    lineChartSw[0] = linecharts(new NumberAxis(0,1,0.1),"Saturation");
                     lineChartSw[0].getData().add(sWSeries);
 
                     double[] finalRwxo = Rwxo;
@@ -582,10 +582,10 @@ public class porosityCalculation {
                     areaChartVshale.setPadding(new Insets(0));
                     areaChartVshale.getData().add(areaSeries);
 
-                    lineChartNphi = linecharts("Nphi");
+                    lineChartNphi = linecharts(new NumberAxis(),"Nphi");
                     lineChartNphi.getData().add(NPhiSeries);
 
-                    lineChartRhob = linecharts("Rhob");
+                    lineChartRhob = linecharts(new NumberAxis(),"Rhob");
                     lineChartRhob.getData().add(RhobSeries);
 
                     continue;
@@ -859,8 +859,7 @@ public class porosityCalculation {
         }
     }
 
-    public LineChart<Number, Number> linecharts(String plotName){
-        NumberAxis xAxis = new NumberAxis();
+    public LineChart<Number, Number> linecharts(NumberAxis xAxis, String plotName){
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);
         lineChart.setLegendVisible(false);
