@@ -18,10 +18,10 @@ public class graphUI {
     LineChart<Number,Number> lineChart = null;
     Stage window;
 
-    public void plot(int startIndex,int endIndex, double intervalVal[][], int phiTindex, int vShaleIndex, double nullValue){
+    public void plot(double sandPorosity, double shalePorosity, double grMin, double grMax, int startIndex,int endIndex, double intervalVal[][], int phiTindex, int vShaleIndex, double nullValue){
         window = new Stage();
 
-        getCoordinates();
+        getCoordinates(sandPorosity, shalePorosity, grMin, grMax);
 
         Scene scene = new Scene(lineGraph(),500,500);
         scene.getStylesheets().add(graphUI.class.getResource("../../resources/css/graphUI.css").toExternalForm());
@@ -35,12 +35,12 @@ public class graphUI {
         window.showAndWait();
     }
 
-    public void getCoordinates(){
+    public void getCoordinates(double sandPorosity, double shalePorosity, double grMin, double grMax){
 
-        double porA = 0.33;
-        double porB = 0.15;
-        double Ra = 20;
-        double Rb = 100;
+        double porA = sandPorosity;
+        double porB = shalePorosity;
+        double Ra = grMin;
+        double Rb = grMax;
         double Xa = -999;
         double Ymax = 1;
         double Ymin = 0;
@@ -70,7 +70,7 @@ public class graphUI {
 
     public BorderPane lineGraph(){
 
-        NumberAxis xAxis = new NumberAxis(1,0,-0.1);
+        NumberAxis xAxis = new NumberAxis(0,1,0.1);
         NumberAxis yAxis = new NumberAxis(0,1,0.1);
         xAxis.setLabel("Vshale ");
         yAxis.setLabel("Porosity Φ");
@@ -186,19 +186,19 @@ public class graphUI {
         series6.setName("0.5-0.25");
         XYChart.Series<Number, Number> series7 = new XYChart.Series();
         series7.setName("0.25-0");
-        lineChart.getData().addAll(series4, series5,series6, series7);
         for (int i=startIndex;i<endIndex;++i){
             double vshale = intervalVal[i][vShaleIndex];
             if (intervalVal[i][phiTindex]!=nullValue && vshale!=nullValue && intervalVal[i][phiTindex]<=1){
-                if (vshale>=1 && vshale<=0.75)
+                if (vshale<=1 && vshale>=0.75)
                     series4.getData().add(new XYChart.Data(intervalVal[i][vShaleIndex], intervalVal[i][phiTindex]));
-                else if (vshale>=0.75 && vshale<=0.5)
+                else if (vshale<=0.75 && vshale>=0.5)
                     series5.getData().add(new XYChart.Data(intervalVal[i][vShaleIndex], intervalVal[i][phiTindex]));
-                else if (vshale>=0.5 && vshale<=0.25)
+                else if (vshale<=0.5 && vshale>=0.25)
                     series6.getData().add(new XYChart.Data(intervalVal[i][vShaleIndex], intervalVal[i][phiTindex]));
-                else if (vshale>=0.25 && vshale<=0)
+                else if (vshale<=0.25 && vshale>=0)
                     series7.getData().add(new XYChart.Data(intervalVal[i][vShaleIndex], intervalVal[i][phiTindex]));
             }
         }
+        lineChart.getData().addAll(series4, series5,series6, series7);
     }
 }
