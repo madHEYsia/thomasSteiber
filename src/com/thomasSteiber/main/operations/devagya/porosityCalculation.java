@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -352,12 +350,15 @@ public class porosityCalculation {
                             double fluidDensity = Double.parseDouble(porObject.output[porObject.fluidDensityIndex]);
                             double shalePorsity = Double.parseDouble(porObject.output[porObject.ShalePorosityIndex]);
                             double tortousityFactor = Double.parseDouble(porObject.output[porObject.tortuosityIndex]);
-                            double satArchie = Double.parseDouble(porObject.output[porObject.archieSaturationIndex]);
                             double cementArchie = Double.parseDouble(porObject.output[porObject.archieCementationIndex]);
+                            double satArchie = Double.parseDouble(porObject.output[porObject.archieSaturationIndex]);
 
                             double vShaleMin = Double.MAX_VALUE;
                             double vShaleMax = Double.MIN_VALUE;
                             for (int i = startIndex; i < endIndex; ++i) {
+                                if (i==grMaxIndex || i==grMinIndex){
+                                    System.out.println("rukk MC");
+                                }
                                 intervalValues[i][intervalDepthIndex] = data[i][depthIndex];
                                 if (data[i][grIndex]==nullValue)
                                     intervalValues[i][vShaleIndex] = nullValue;
@@ -505,8 +506,8 @@ public class porosityCalculation {
                                 if (intervalValues[i][phiTIndex]!=nullValue)
                                     phiTSeries.getData().add(new Data(intervalValues[i][phiTIndex], intervalValues[i][intervalDepthIndex]));
 
-                                if (intervalValues[i][phiEIndex]>1 || intervalValues[i][phiTIndex]>1)
-                                    System.out.println("depth: " + data[i][depthIndex] + " grMin: " + data[grMinIndex][grIndex] + " grMax: " + data[grMaxIndex][grIndex] + " Vsh: " + intervalValues[i][vShaleIndex] + " matrixDenity: " + intervalValues[i][matrixDensityIndex] + " phiDX: " + intervalValues[i][phiDXIndex] + " phiDC: " + intervalValues[i][phiDCIndex] + " phiNC: " + intervalValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phiE: " + intervalValues[i][phiEIndex] + " phiT: " + intervalValues[i][phiTIndex]);
+//                                if (intervalValues[i][phiEIndex]>1 || intervalValues[i][phiTIndex]>1)
+                                System.out.println("depth: " + data[i][depthIndex] + " grMin: " + data[grMinIndex][grIndex] + " grMax: " + data[grMaxIndex][grIndex] + " Vsh: " + intervalValues[i][vShaleIndex] + " matrixDenity: " + intervalValues[i][matrixDensityIndex] + " phiDX: " + intervalValues[i][phiDXIndex] + " phiDC: " + intervalValues[i][phiDCIndex] + " phiNC: " + intervalValues[i][phiNCIndex] + " ShaleDensity: " + currentShaleDensity + " phiE: " + intervalValues[i][phiEIndex] + " phiT: " + intervalValues[i][phiTIndex]);
                             }
 
                             double zeta = grMax/(grMax-grMin);
@@ -561,6 +562,8 @@ public class porosityCalculation {
                                     intervalValues[i][VDispSDIndex] = intervalValues[i][VDispSDIndex]<=0 ? 0.001 : intervalValues[i][VDispSDIndex];
                                     intervalValues[i][VDispSDIndex] = intervalValues[i][VDispSDIndex]>=1 ? 0.999 : intervalValues[i][VDispSDIndex];
                                 }
+                                if (intervalValues[i][VDispIndex]!=nullValue)
+                                    vDispSeries.getData().add(new Data(intervalValues[i][VDispIndex], intervalValues[i][intervalDepthIndex]));
 
                                 intervalValues[i][phieSDIndex] = intervalValues[i][phiTSDIndex]!=nullValue && intervalValues[i][VDispSDIndex]!=nullValue && intervalValues[i][VLamIndex]!=nullValue
                                     ? intervalValues[i][phiTSDIndex] - intervalValues[i][VDispSDIndex]*phiSH*(1-intervalValues[i][VLamIndex])
@@ -606,16 +609,16 @@ public class porosityCalculation {
                             graphUI ob = new graphUI();
 
                             double coordinates[][] = new double[4][2];
-                            coordinates[0][0] = vShaleMin;
+                            coordinates[0][0] = 0;
                             coordinates[0][1] = phiSH;
 
                             coordinates[1][0] = 1-phiSD;
                             coordinates[1][1] = phiSD+phiSH;
 
-                            coordinates[2][0] = vShaleMax;
+                            coordinates[2][0] = 1;
                             coordinates[2][1] = phiSD;
 
-                            coordinates[3][0] = 1-((phiSD*phiSH - phiSD)*zeta)/(1-phiSH);
+                            coordinates[3]8[0] = 1-((phiSD-phiSD*phiSH)*zeta)/(1-phiSH);
                             coordinates[3][0] = coordinates[3][0]>1 ? 1 : coordinates[3][0];
                             coordinates[3][1] = phiSD*phiSH;
 
@@ -782,7 +785,7 @@ public class porosityCalculation {
             curves.getItems().clear();
             HBox hb = new HBox(0, depthVb, lineChartGr);
             hb.setPadding(new Insets(0));
-            curves.getItems().addAll(hb, areaChartVshale, lineChartRhob, lineChartphi[0],lineChartPhiNCNphi[0], lineChartPhiDCDX[0], lineChartThomasSteiber[0], lineChartSf[0], lineChartSw[0]);
+            curves.getItems().addAll(hb, areaChartVshale, lineChartRhob, lineChartPhiDCDX[0], lineChartPhiNCNphi[0], lineChartphi[0], lineChartThomasSteiber[0], lineChartSf[0], lineChartSw[0]);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -795,8 +798,8 @@ public class porosityCalculation {
 
         Stage vrStage = new Stage();
 
-        int numberOfGroups = 100;
-        int GRUpperLimit = 400;
+        int numberOfGroups = 200;
+        int GRUpperLimit = 200;
         int group[] = new int[numberOfGroups];
         double[][] grMinMax = new double[numberOfGroups][4];
         for (int i=0;i<numberOfGroups;++i) {
@@ -810,7 +813,7 @@ public class porosityCalculation {
                 results[1] = i;
             if(data[i][depthIndex]>=depth[0] && data[i][depthIndex]<=depth[1]) {
                 if (data[i][grIndex]!=nullValue) {
-                    int groupNumber = (int) (data[i][grIndex] / (GRUpperLimit / numberOfGroups)) - 1;
+                    int groupNumber = (int) (data[i][grIndex] / (GRUpperLimit / numberOfGroups));
                     group[groupNumber]++;
                     if (grMinMax[groupNumber][1] > data[i][grIndex]) {
                         grMinMax[groupNumber][0] = i;

@@ -37,13 +37,13 @@ public class getPorWindow2Index {
             {"Formation fluid ","Liquid","Gas"}
     };
     String[][] inputRequired = {
-            {"Sand Density [V/V]","2.65"},
+            {"Sand Density [V/V]","2.79"},
             {"Shale Density lower limit [V/V]","2.89"},
             {"Shale Density Upper limit [V/V]","2.89"},
             {"Mud filtrate Density [G/C3]","1.1"},
             {"Reservoir HC Density ","0.88"},
             {"Fluid Density [G/C3]","1"},
-            {"Shale Porosity [V/V]","0.3"},
+            {"Shale Porosity [V/V]","0.12"},
             {"Tortuosity factory","0.62"},
             {"Archie Cementation exponent","1.8"},
             {"Archie Saturation exponent","2"},
