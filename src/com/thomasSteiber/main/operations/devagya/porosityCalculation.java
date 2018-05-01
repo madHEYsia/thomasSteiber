@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,8 +16,12 @@ import javafx.scene.control.*;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -42,6 +47,7 @@ public class porosityCalculation {
     XYChart.Series areaSeries ;
     NumberAxis yAxis = new NumberAxis();
     String title = "";
+    int depthDiv = 10;
 
     public void module(String vshale){
         title = vshale;
@@ -53,9 +59,9 @@ public class porosityCalculation {
             curves.setPrefHeight(stage.getHeight()-100);
         });
         stage.widthProperty().addListener(e-> {
-            curves.setMinWidth(1.2*stage.getWidth());
-            curves.setMaxWidth(1.2*stage.getWidth());
-            curves.setPrefWidth(1.2*stage.getWidth());
+            curves.setMinWidth(1.5*stage.getWidth());
+            curves.setMaxWidth(1.5*stage.getWidth());
+            curves.setPrefWidth(1.5*stage.getWidth());
         });
         Scene scene = new Scene(layout,600,400);
         scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
@@ -130,6 +136,9 @@ public class porosityCalculation {
             isNphiPresent = true; isRxoPresent= true; isDRESHpresent = true; isMRESHpresent = true; isSRESHpresent = true;
             final double[] avgShaleDensity = {0.0};
 
+            VBox[] depthVB = new VBox[1];
+            Rectangle[] rect = new Rectangle[1];
+            HBox depthVb =  new HBox(0);
             XYChart.Series grSeries = new XYChart.Series();
             LineChartWithMarkers<Number, Number> lineChartGr = null;
 
@@ -221,6 +230,29 @@ public class porosityCalculation {
                     Rwxo = new double[dataSize];
                     yAxis = new NumberAxis(stopValue, startValue, -100 * stepValue);
 
+                    depthVB[0] = new VBox();
+                    Label[] depthLabel = new Label[depthDiv+1];
+                    double interval = (stopValue - startValue)/depthDiv;
+                    for (int i = 0; i <= depthDiv; ++i) {
+                        double value = startValue + i*interval;
+                        depthLabel[i] = new Label(((int)value) + "");
+                        depthVB[0].getChildren().add(depthLabel[i]);
+                    }
+                    rect[0] = new Rectangle(2, curves.getHeight() - 60);
+                    rect[0].setFill(Color.BLACK);
+                    rect[0].setStrokeWidth(0);
+                    curves.heightProperty().addListener(e -> {
+                        final double height = curves.getHeight()-60;
+                        rect[0].setHeight(height);
+                        depthVB[0].setSpacing((height-(depthDiv+1)*16.2)/depthDiv);
+                    });
+                    depthVb.getChildren().clear();
+                    depthVb.getChildren().addAll(depthVB[0], rect[0]);
+                    depthVb.setPadding(new Insets(30, 0, 30, 5));
+                    depthVb.setMinWidth(50);
+                    depthVb.setMaxWidth(50);
+                    depthVb.setPrefWidth(50);
+
                     lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), yAxis);
                     lineChartGr.setCreateSymbols(false);
                     lineChartGr.setLegendVisible(false);
@@ -228,7 +260,6 @@ public class porosityCalculation {
                     lineChartGr.setTitle("GR plot");
                     lineChartGr.getYAxis().setTickLabelsVisible(false);
                     lineChartGr.getYAxis().setOpacity(0);
-                    lineChartGr.setPadding(new Insets(0));
                     lineChartGr.getData().add(grSeries);
 
                     final double[] yValue = {0.0, 0.0};
@@ -638,13 +669,13 @@ public class porosityCalculation {
                                 if (avgShaleDensity[0] < value)
                                     avgShaleDensity[0] = value + 0.005;
                             }
-                        } else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.rxoIndex]))
+                        } else if (isRxoPresent && textInd == Double.parseDouble(dbmlObject.output[dbmlObject.rxoIndex]))
                             data[dataRowIndex][rxoIndex] = value;
-                        else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.SRESHIndex]))
+                        else if (isSRESHpresent && textInd == Double.parseDouble(dbmlObject.output[dbmlObject.SRESHIndex]))
                             data[dataRowIndex][sRESHIndex] = value;
-                        else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.MRESHIndex]))
+                        else if (isMRESHpresent && textInd == Double.parseDouble(dbmlObject.output[dbmlObject.MRESHIndex]))
                             data[dataRowIndex][mRESHIndex] = value;
-                        else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.DRESHIndex]))
+                        else if (isDRESHpresent && textInd == Double.parseDouble(dbmlObject.output[dbmlObject.DRESHIndex]))
                             data[dataRowIndex][dRESHIndex] = value;
                         textindex = indexOf + 1;
                         ++textInd;
@@ -719,7 +750,9 @@ public class porosityCalculation {
 
             stage.setMaximized(true);
             curves.getItems().clear();
-            curves.getItems().addAll(lineChartGr, areaChartVshale, lineChartNphi, lineChartRhob, lineChartphi[0],lineChartPhis[0], lineChartThomasSteiber[0], lineChartSf[0], lineChartSw[0]);
+            HBox hb = new HBox(0, depthVb, lineChartGr);
+            hb.setPadding(new Insets(0));
+            curves.getItems().addAll(hb, areaChartVshale, lineChartNphi, lineChartRhob, lineChartphi[0],lineChartPhis[0], lineChartThomasSteiber[0], lineChartSf[0], lineChartSw[0]);
         }
         catch (Exception ex) {
             ex.printStackTrace();
