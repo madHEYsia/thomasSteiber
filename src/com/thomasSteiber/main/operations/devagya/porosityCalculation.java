@@ -618,7 +618,7 @@ public class porosityCalculation {
                             coordinates[2][0] = 1;
                             coordinates[2][1] = phiSD;
 
-                            coordinates[3]8[0] = 1-((phiSD-phiSD*phiSH)*zeta)/(1-phiSH);
+                            coordinates[3][0] = 1-((phiSD-phiSD*phiSH)*zeta)/(1-phiSH);
                             coordinates[3][0] = coordinates[3][0]>1 ? 1 : coordinates[3][0];
                             coordinates[3][1] = phiSD*phiSH;
 
