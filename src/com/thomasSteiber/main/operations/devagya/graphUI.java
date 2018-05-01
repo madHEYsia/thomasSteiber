@@ -18,14 +18,22 @@ public class graphUI {
     LineChart<Number,Number> lineChart = null;
     Stage window;
 
-    public void plot(double sandPorosity, double shalePorosity, double grMin, double grMax, int startIndex,int endIndex, double intervalVal[][], int phiTindex, int vShaleIndex, double nullValue){
+    public void plot(double newCord[][], int startIndex,int endIndex, double intervalVal[][], int phiTindex, int vShaleIndex, double nullValue){
         window = new Stage();
 
-        getCoordinates(sandPorosity, shalePorosity, grMin, grMax);
+        coordinates = newCord;
 
+        NumberAxis xAxis = new NumberAxis(-0.1,1.1,0.1);
+        NumberAxis yAxis = new NumberAxis(-0.1,1.1,0.1);
+        xAxis.setLabel("Vshale ");
+        yAxis.setLabel("Porosity Φ");
+        lineChart = new LineChart<>(xAxis,yAxis);
+        lineChart.setTitle("Plot of Vshale Vs Porosity");
+        lineChart.setAnimated(false);
+
+        displayValues(startIndex, endIndex, intervalVal, phiTindex, vShaleIndex, nullValue);
         Scene scene = new Scene(lineGraph(),500,500);
         scene.getStylesheets().add(graphUI.class.getResource("../../resources/css/graphUI.css").toExternalForm());
-        displayValues(startIndex, endIndex, intervalVal, phiTindex, vShaleIndex, nullValue);
 
         window.setTitle("Graphical representation");
         window.setScene(scene);
@@ -35,48 +43,7 @@ public class graphUI {
         window.showAndWait();
     }
 
-    public void getCoordinates(double sandPorosity, double shalePorosity, double grMin, double grMax){
-
-        double porA = sandPorosity;
-        double porB = shalePorosity;
-        double Ra = grMin;
-        double Rb = grMax;
-        double Xa = -999;
-        double Ymax = 1;
-        double Ymin = 0;
-        
-        // Y_min
-        coordinates[0][0] = Ymin;
-        // Y_max
-        coordinates[2][0] = Ymax;
-
-        //line A both Porosity index   Φ_lam = Y*Φ_a + (1-Y)*Φ_b
-        coordinates[0][1] = Ymin*porA + (1-Ymin)*porB;  // Φ_min at Y_min
-        coordinates[2][1] = Ymax*porA + (1-Ymax)*porB;  // Φ_max at Y_max
-
-        //line B for lower index
-        coordinates[3][1] = porA*porB;  // Φ_min = Φ_a * Φ_b
-        if (Xa==-999 || Xa < porA)  // X_a == null || X_a < Φ_a
-            coordinates[3][0] = 1 - (porA-porA*porB)/((1-porB)*(1- Ra/Rb));  // Y_min
-        else
-            coordinates[3][0] = 1- porA;
-
-        //line D for upper index
-        coordinates[1][0] = 1- porA;  // Y_min
-        coordinates[1][1] = porA + (1-Ymin)*porB;  // Φ_min = Φ_a + (1-Y)*Φ_b
-
-        for (int i=0;i<4;++i) System.out.println(coordinates[i][0]+", "+coordinates[i][1]);
-    }
-
     public BorderPane lineGraph(){
-
-        NumberAxis xAxis = new NumberAxis(0,1,0.1);
-        NumberAxis yAxis = new NumberAxis(0,1,0.1);
-        xAxis.setLabel("Vshale ");
-        yAxis.setLabel("Porosity Φ");
-        lineChart = new LineChart<>(xAxis,yAxis);
-        lineChart.setTitle("Plot of Vshale Vs Porosity");
-        lineChart.setAnimated(false);
 
         XYChart.Series<Number, Number> series0 = new XYChart.Series();
         series0.setName("Laminated");
@@ -111,10 +78,10 @@ public class graphUI {
         cleanShale.setCursor(Cursor.HAND);
         cleanShale.setOnMouseDragged(e -> {
             Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
-            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
-            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
-            Number x = xAxis.getValueForDisplay(xAxisLoc);
-            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            double xAxisLoc = lineChart.getXAxis().sceneToLocal(pointInScene).getX();
+            double yAxisLoc = lineChart.getYAxis().sceneToLocal(pointInScene).getY();
+            Number x = lineChart.getXAxis().getValueForDisplay(xAxisLoc);
+            Number y = lineChart.getYAxis().getValueForDisplay(yAxisLoc);
 //            System.out.println("---->  "+x+"  "+x.intValue()+"   "+x.doubleValue()+);
             if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
                 l32.setXValue(x);
@@ -128,10 +95,10 @@ public class graphUI {
         phiMin.setCursor(Cursor.HAND);
         phiMin.setOnMouseDragged(e -> {
             Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
-            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
-            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
-            Number x = xAxis.getValueForDisplay(xAxisLoc);
-            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            double xAxisLoc = lineChart.getXAxis().sceneToLocal(pointInScene).getX();
+            double yAxisLoc = lineChart.getYAxis().sceneToLocal(pointInScene).getY();
+            Number x = lineChart.getXAxis().getValueForDisplay(xAxisLoc);
+            Number y = lineChart.getYAxis().getValueForDisplay(yAxisLoc);
             if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
                 l31.setXValue(x);
                 l22.setXValue(x);
@@ -144,10 +111,10 @@ public class graphUI {
         cleanSand.setCursor(Cursor.HAND);
         cleanSand.setOnMouseDragged(e -> {
             Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
-            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
-            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
-            Number x = xAxis.getValueForDisplay(xAxisLoc);
-            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            double xAxisLoc = lineChart.getXAxis().sceneToLocal(pointInScene).getX();
+            double yAxisLoc = lineChart.getYAxis().sceneToLocal(pointInScene).getY();
+            Number x = lineChart.getXAxis().getValueForDisplay(xAxisLoc);
+            Number y = lineChart.getYAxis().getValueForDisplay(yAxisLoc);
             if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
                 l42.setXValue(x);
                 l12.setXValue(x);
@@ -162,10 +129,10 @@ public class graphUI {
         satPorosity.setCursor(Cursor.HAND);
         satPorosity.setOnMouseDragged(e -> {
             Point2D pointInScene = new Point2D(e.getSceneX(), e.getSceneY());
-            double xAxisLoc = xAxis.sceneToLocal(pointInScene).getX();
-            double yAxisLoc = yAxis.sceneToLocal(pointInScene).getY();
-            Number x = xAxis.getValueForDisplay(xAxisLoc);
-            Number y = yAxis.getValueForDisplay(yAxisLoc);
+            double xAxisLoc = lineChart.getXAxis().sceneToLocal(pointInScene).getX();
+            double yAxisLoc = lineChart.getYAxis().sceneToLocal(pointInScene).getY();
+            Number x = lineChart.getXAxis().getValueForDisplay(xAxisLoc);
+            Number y = lineChart.getYAxis().getValueForDisplay(yAxisLoc);
             if(x.doubleValue()>=0 && x.doubleValue()<=1 && y.doubleValue()>=0 && y.doubleValue()<=1) {
                 l41.setXValue(x);
                 l41.setYValue(y);

@@ -145,9 +145,6 @@ public class porosityCalculation {
             areaSeries = new XYChart.Series();
             modifiedAreaPlot<Number, Number> areaChartVshale = null;
 
-            LineChart<Number, Number> lineChartNphi = null;
-            XYChart.Series NPhiSeries = new XYChart.Series();
-
             LineChart<Number, Number> lineChartRhob = null;
             XYChart.Series RhobSeries = new XYChart.Series();
 
@@ -155,10 +152,13 @@ public class porosityCalculation {
             XYChart.Series phiESeries = new XYChart.Series();
             XYChart.Series phiTSeries = new XYChart.Series();
 
-            LineChart<Number, Number>[] lineChartPhis = new LineChart[1];
-            XYChart.Series phiLamSeries = new XYChart.Series();
-            XYChart.Series phiDispSeries = new XYChart.Series();
-            XYChart.Series phiStrSeries = new XYChart.Series();
+            LineChart<Number, Number>[] lineChartPhiNCNphi = new LineChart[1];
+            XYChart.Series phiNCSeries = new XYChart.Series();
+            XYChart.Series NphiSeries = new XYChart.Series();
+
+            LineChart<Number, Number>[] lineChartPhiDCDX = new LineChart[1];
+            XYChart.Series phiDCSeries = new XYChart.Series();
+            XYChart.Series phiDxSeries = new XYChart.Series();
 
             LineChart<Number, Number>[] lineChartThomasSteiber = new LineChart[1];
             XYChart.Series vLamSeries = new XYChart.Series();
@@ -244,7 +244,7 @@ public class porosityCalculation {
                     curves.heightProperty().addListener(e -> {
                         final double height = curves.getHeight()-60;
                         rect[0].setHeight(height);
-                        depthVB[0].setSpacing((height-(depthDiv+1)*16.2)/depthDiv);
+                        depthVB[0].setSpacing((height-(depthDiv+1)*16.4)/depthDiv);
                     });
                     depthVb.getChildren().clear();
                     depthVb.getChildren().addAll(depthVB[0], rect[0]);
@@ -278,8 +278,11 @@ public class porosityCalculation {
                     lineChartphi[0] = linecharts(new NumberAxis(0,1,0.1),"Phi_E - Phi_T");
                     lineChartphi[0].getData().addAll(phiESeries, phiTSeries);
 
-                    lineChartPhis[0] = linecharts(new NumberAxis(-1,1,0.1),"Phi(Lam-Disp-Str)");
-                    lineChartPhis[0].getData().addAll(phiLamSeries, phiDispSeries, phiStrSeries);
+                    lineChartPhiNCNphi[0] = linecharts(new NumberAxis(0,1,0.1),"Phi_NC - Nphi");
+                    lineChartPhiNCNphi[0].getData().addAll(phiNCSeries, NphiSeries);
+
+                    lineChartPhiDCDX[0] = linecharts(new NumberAxis(0,1,0.1),"Phi_DC - Phi_DX");
+                    lineChartPhiDCDX[0].getData().addAll(phiDCSeries, phiDxSeries);
 
                     lineChartThomasSteiber[0] = linecharts(new NumberAxis(0,1,0.1),"V(Lam-Disp)-Phi(TSD)");
                     lineChartThomasSteiber[0].getData().addAll(vLamSeries, vDispSeries, phiTSDSeries);
@@ -308,6 +311,11 @@ public class porosityCalculation {
 
                             grMin = data[grMinIndex][grIndex];
                             grMax = data[grMaxIndex][grIndex];
+
+                            Data<Number, Number> grMinMarker = new Data<>(grMin,0);
+                            finalLineChartGr.addVerticalValueMarker(grMinMarker);
+                            Data<Number, Number> grMaxMarker = new Data<>(grMax, 0);
+                            finalLineChartGr.addVerticalValueMarker(grMaxMarker);
 
                             porObject.get(curve, curveIndex);
 
@@ -346,6 +354,9 @@ public class porosityCalculation {
                             double tortousityFactor = Double.parseDouble(porObject.output[porObject.tortuosityIndex]);
                             double satArchie = Double.parseDouble(porObject.output[porObject.archieSaturationIndex]);
                             double cementArchie = Double.parseDouble(porObject.output[porObject.archieCementationIndex]);
+
+                            double vShaleMin = Double.MAX_VALUE;
+                            double vShaleMax = Double.MIN_VALUE;
                             for (int i = startIndex; i < endIndex; ++i) {
                                 intervalValues[i][intervalDepthIndex] = data[i][depthIndex];
                                 if (data[i][grIndex]==nullValue)
@@ -363,6 +374,8 @@ public class porosityCalculation {
                                         intervalValues[i][vShaleIndex] = 1.7 - Math.sqrt(3.38 - Math.pow((Igr + 0.7),2));
                                     else if (title.equals("Larionov Older Rocks"))
                                         intervalValues[i][vShaleIndex] = 0.33*(Math.pow(2,2*Igr) -1);
+                                    vShaleMin = Math.min(vShaleMin, intervalValues[i][vShaleIndex]);
+                                    vShaleMax = Math.max(vShaleMax, intervalValues[i][vShaleIndex]);
                                     areaSeries.getData().add(new Data(intervalValues[i][vShaleIndex], data[i][depthIndex]));
                                 }
 
@@ -422,6 +435,13 @@ public class porosityCalculation {
                                     else
                                         break innerWhile;
                                 }
+
+                                if (intervalValues[i][phiNCIndex]!=nullValue)
+                                    phiNCSeries.getData().add(new Data(intervalValues[i][phiNCIndex], data[i][depthIndex]));
+                                if (intervalValues[i][phiDCIndex]!=nullValue)
+                                    phiDCSeries.getData().add(new Data(intervalValues[i][phiDCIndex], data[i][depthIndex]));
+                                if (intervalValues[i][phiDXIndex]!=nullValue)
+                                    phiDxSeries.getData().add(new Data(intervalValues[i][phiDXIndex], data[i][depthIndex]));
 
                                 double Ia = 0.0;
                                 if(!isRxoPresent){
@@ -493,28 +513,22 @@ public class porosityCalculation {
                             double phiSD = intervalValues[grMinIndex][phiTIndex];
                             double phiSH = intervalValues[grMaxIndex][phiEIndex];
                             for (int i = startIndex; i < endIndex; ++i) {
-                                double Igr = data[i][grIndex]!=nullValue ? (data[i][grIndex] - grMin)/(grMax - grMin) : nullValue;
 
-                                intervalValues[i][phiDispIndex] = Igr!=nullValue ? phiSD - ((1-Igr)*(1-phiSH)/zeta) : nullValue;
-                                if (intervalValues[i][phiDispIndex]!=nullValue)
-                                    phiDispSeries.getData().add(new Data(intervalValues[i][phiDispIndex], intervalValues[i][intervalDepthIndex]));
+                                double vshaleVal = intervalValues[i][vShaleIndex];
+                                intervalValues[i][phiDispIndex] = vshaleVal!=nullValue ? phiSD - ((vShaleMax-vshaleVal)*(1-phiSH)/zeta) : nullValue;
                                 intervalValues[i][phiMinIndex] = phiSD*phiSH;
                                 intervalValues[i][GRmaxdIndex] = grMin + phiSD*grMax;
-                                intervalValues[i][phiDisSHIndex] = Igr!=nullValue ? phiSH*(1-Igr) : nullValue;
+                                intervalValues[i][phiDisSHIndex] = vshaleVal!=nullValue ? phiSH*(vShaleMax-vshaleVal) : nullValue;
                                 intervalValues[i][phiDispIndex] = intervalValues[i][phiDispIndex]<=intervalValues[i][phiMinIndex] ?
                                         nullValue: intervalValues[i][phiDispIndex];
                                 intervalValues[i][phiDisSHIndex] = intervalValues[i][phiDisSHIndex]<=intervalValues[i][phiMinIndex] ?
                                         nullValue: intervalValues[i][phiDisSHIndex];
 
-                                intervalValues[i][phiLamIndex] = Igr!=nullValue ?  Igr*phiSD + (1-Igr)*phiSH : nullValue;
-                                if (intervalValues[i][phiLamIndex]!=nullValue)
-                                    phiLamSeries.getData().add(new Data(intervalValues[i][phiLamIndex], intervalValues[i][intervalDepthIndex]));
+                                intervalValues[i][phiLamIndex] = vshaleVal!=nullValue ?  vshaleVal*phiSD + (vShaleMax-vshaleVal)*phiSH : nullValue;
 
-                                intervalValues[i][phiStrIndex] = Igr!=nullValue ? phiSD + (1-Igr)*phiSH : nullValue;
-                                if (intervalValues[i][phiStrIndex]!=nullValue)
-                                    phiStrSeries.getData().add(new Data(intervalValues[i][phiStrIndex], intervalValues[i][intervalDepthIndex]));
+                                intervalValues[i][phiStrIndex] = vshaleVal!=nullValue ? phiSD + (vShaleMax-vshaleVal)*phiSH : nullValue;
 
-                                intervalValues[i][VLamIndex] = (Igr!=nullValue && intervalValues[i][phiTIndex]!=nullValue) ? (intervalValues[i][phiTIndex]-phiSD+intervalValues[i][vShaleIndex]*(1-phiSH))/(1-phiSD) : nullValue;
+                                intervalValues[i][VLamIndex] = (vshaleVal!=nullValue && intervalValues[i][phiTIndex]!=nullValue) ? (intervalValues[i][phiTIndex]-phiSD+intervalValues[i][vShaleIndex]*(1-phiSH))/(1-phiSD) : nullValue;
                                 if (intervalValues[i][VLamIndex]!=nullValue){
                                     intervalValues[i][VLamIndex] = intervalValues[i][VLamIndex]<=0 ? 0.001 : intervalValues[i][VLamIndex];
                                     intervalValues[i][VLamIndex] = intervalValues[i][VLamIndex]>=1 ? 0.999 : intervalValues[i][VLamIndex];
@@ -556,8 +570,10 @@ public class porosityCalculation {
 
                             lineChartphi[0].getData().clear();
                             lineChartphi[0].getData().addAll(phiESeries, phiTSeries);
-                            lineChartPhis[0].getData().clear();
-                            lineChartPhis[0].getData().addAll(phiLamSeries, phiDispSeries, phiStrSeries);
+                            lineChartPhiNCNphi[0].getData().clear();
+                            lineChartPhiNCNphi[0].getData().addAll(phiNCSeries, NphiSeries);
+                            lineChartPhiDCDX[0].getData().clear();
+                            lineChartPhiDCDX[0].getData().addAll(phiDCSeries, phiDxSeries);
                             lineChartThomasSteiber[0].getData().clear();
                             lineChartThomasSteiber[0].getData().addAll(vLamSeries, vDispSeries, phiTSDSeries);
                             lineChartSw[0].getData().clear();
@@ -569,10 +585,12 @@ public class porosityCalculation {
                             phiESeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
                             phiTSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: black;");
 
-                            lineChartPhis[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
-                            phiLamSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #8e8e8a;");
-                            phiDispSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #e0f558;");
-                            phiStrSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #586ef5;");
+                            lineChartPhiNCNphi[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+                            phiNCSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #8e8e8a;");
+
+                            lineChartPhiDCDX[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+                            phiDCSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: green;");
+                            phiDxSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: yellow;");
 
                             lineChartThomasSteiber[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
                             vLamSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #898a90;");
@@ -586,7 +604,22 @@ public class porosityCalculation {
                             sWSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: pink;");
 
                             graphUI ob = new graphUI();
-                            ob.plot(phiSD, phiSH, grMin, grMax, startIndex, endIndex, intervalValues, phiTIndex, vShaleIndex, nullValue);
+
+                            double coordinates[][] = new double[4][2];
+                            coordinates[0][0] = vShaleMin;
+                            coordinates[0][1] = phiSH;
+
+                            coordinates[1][0] = 1-phiSD;
+                            coordinates[1][1] = phiSD+phiSH;
+
+                            coordinates[2][0] = vShaleMax;
+                            coordinates[2][1] = phiSD;
+
+                            coordinates[3][0] = 1-((phiSD*phiSH - phiSD)*zeta)/(1-phiSH);
+                            coordinates[3][0] = coordinates[3][0]>1 ? 1 : coordinates[3][0];
+                            coordinates[3][1] = phiSD*phiSH;
+
+                            ob.plot(coordinates, startIndex, endIndex, intervalValues, phiTIndex, vShaleIndex, nullValue);
                         }
                         else {
                             error.setStyle("-fx-text-fill: red;");
@@ -612,9 +645,6 @@ public class porosityCalculation {
                     areaChartVshale.setLegendVisible(false);
                     areaChartVshale.setPadding(new Insets(0));
                     areaChartVshale.getData().add(areaSeries);
-
-                    lineChartNphi = linecharts(new NumberAxis(),"Nphi");
-                    lineChartNphi.getData().add(NPhiSeries);
 
                     lineChartRhob = linecharts(new NumberAxis(),"Rhob");
                     lineChartRhob.getData().add(RhobSeries);
@@ -661,7 +691,7 @@ public class porosityCalculation {
                         } else if (isNphiPresent &&  textInd == Double.parseDouble(dbmlObject.output[dbmlObject.nPhiIndex])) {
                             data[dataRowIndex][nPhiIndex] = value;
                             if (value != nullValue)
-                                NPhiSeries.getData().add(new Data(value, data[dataRowIndex][depthIndex]));
+                                NphiSeries.getData().add(new Data(value, data[dataRowIndex][depthIndex]));
                         } else if (textInd == Double.parseDouble(dbmlObject.output[dbmlObject.rhobIndex])) {
                             data[dataRowIndex][rhobIndex] = value;
                             if (value != nullValue) {
@@ -743,16 +773,16 @@ public class porosityCalculation {
 
             lineChartGr.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
             grSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #6ab25f;");
-            lineChartNphi.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
-            NPhiSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: red;");
             lineChartRhob.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
             RhobSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: blue;");
+            lineChartPhiNCNphi[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+            NphiSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #e0f558;");
 
             stage.setMaximized(true);
             curves.getItems().clear();
             HBox hb = new HBox(0, depthVb, lineChartGr);
             hb.setPadding(new Insets(0));
-            curves.getItems().addAll(hb, areaChartVshale, lineChartNphi, lineChartRhob, lineChartphi[0],lineChartPhis[0], lineChartThomasSteiber[0], lineChartSf[0], lineChartSw[0]);
+            curves.getItems().addAll(hb, areaChartVshale, lineChartRhob, lineChartphi[0],lineChartPhiNCNphi[0], lineChartPhiDCDX[0], lineChartThomasSteiber[0], lineChartSf[0], lineChartSw[0]);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -853,11 +883,14 @@ public class porosityCalculation {
     private class LineChartWithMarkers<X,Y> extends LineChart {
 
         private ObservableList<Data<X, Y>> horizontalMarkers;
+        private ObservableList<Data<X, Y>> verticalMarkers;
 
         public LineChartWithMarkers(NumberAxis xAxis, NumberAxis yAxis) {
             super(xAxis, yAxis);
             horizontalMarkers = FXCollections.observableArrayList(data -> new Observable[] {data.YValueProperty()});
             horizontalMarkers.addListener((InvalidationListener) observable -> layoutPlotChildren());
+            verticalMarkers = FXCollections.observableArrayList(data -> new Observable[] {data.XValueProperty()});
+            verticalMarkers.addListener((InvalidationListener) observable -> layoutPlotChildren());
         }
 
         public void addHorizontalValueMarker(Data<X, Y> marker) {
@@ -869,13 +902,13 @@ public class porosityCalculation {
             horizontalMarkers.add(marker);
         }
 
-        public void removeHorizontalValueMarker(Data<X, Y> marker) {
+        public void addVerticalValueMarker(Data<X, Y> marker) {
             Objects.requireNonNull(marker, "the marker must not be null");
-            if (marker.getNode() != null) {
-                getPlotChildren().remove(marker.getNode());
-                marker.setNode(null);
-            }
-            horizontalMarkers.remove(marker);
+            if (verticalMarkers.contains(marker)) return;
+            Line line = new Line();
+            marker.setNode(line );
+            getPlotChildren().add(line);
+            verticalMarkers.add(marker);
         }
 
         @Override
@@ -887,6 +920,14 @@ public class porosityCalculation {
                 line.setEndX(getBoundsInLocal().getWidth());
                 line.setStartY(getYAxis().getDisplayPosition(horizontalMarker.getYValue()) + 0.5); // 0.5 for crispness
                 line.setEndY(line.getStartY());
+                line.toFront();
+            }
+            for (Data<X, Y> verticalMarker : verticalMarkers) {
+                Line line = (Line) verticalMarker.getNode();
+                line.setStartX(getXAxis().getDisplayPosition(verticalMarker.getXValue()) + 0.5);  // 0.5 for crispness
+                line.setEndX(line.getStartX());
+                line.setStartY(0d);
+                line.setEndY(getBoundsInLocal().getHeight());
                 line.toFront();
             }
         }
