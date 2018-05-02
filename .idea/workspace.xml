@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/plot.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/plot.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,8 +46,8 @@
       <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="800" column="24" lean-forward="true" selection-start-line="800" selection-start-column="24" selection-end-line="800" selection-end-column="24" />
+            <state relative-caret-position="218">
+              <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#linecharts#0;class#porosityCalculation#0" />
@@ -80,8 +76,8 @@
       <file leaf-file-name="getPorWindow2Index.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
+            <state relative-caret-position="57">
+              <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -135,8 +131,8 @@
       <find>tortousityFactor</find>
       <find>modifi</find>
       <find>System.ou</find>
-      <find>Clav</find>
       <find>setLe</find>
+      <find>Clav</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -585,12 +581,12 @@
       <workItem from="1525225725284" duration="1759000" />
       <workItem from="1525252591872" duration="455000" />
       <workItem from="1525264030114" duration="2009000" />
-      <workItem from="1525280809254" duration="4479000" />
+      <workItem from="1525280809254" duration="5222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="353941000" />
+    <option name="totallyTimeSpent" value="354684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -885,13 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/control/CheckBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -921,10 +910,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="800" column="24" lean-forward="true" selection-start-line="800" selection-start-column="24" selection-end-line="800" selection-end-column="24" />
+        <state relative-caret-position="218">
+          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#linecharts#0;class#porosityCalculation#0" />

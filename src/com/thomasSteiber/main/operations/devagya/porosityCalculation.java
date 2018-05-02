@@ -57,9 +57,9 @@ public class porosityCalculation {
             curves.setPrefHeight(stage.getHeight()-100);
         });
         stage.widthProperty().addListener(e-> {
-            curves.setMinWidth(1.5*stage.getWidth());
-            curves.setMaxWidth(1.5*stage.getWidth());
-            curves.setPrefWidth(1.5*stage.getWidth());
+            curves.setMinWidth(stage.getWidth());
+            curves.setMaxWidth(stage.getWidth());
+            curves.setPrefWidth(stage.getWidth());
         });
         Scene scene = new Scene(layout,600,400);
         scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
@@ -793,12 +793,7 @@ public class porosityCalculation {
             curves.getItems().clear();
             HBox hb = new HBox(0, depthVb, lineChartGr);
             hb.setPadding(new Insets(0));
-            curves.getItems().addAll(hb, areaChartVshale, lineChartRhob, lineChartPhiDCDX[0], lineChartPhiNCNphi[0], lineChartphi[0], lineChartThomasSteiber[0], lineChartSf[0], lineChartSw[0]);
-
-            Scene sceneRhob = new Scene(new HBox(hb, lineChartRhob));
-            Stage rhob = new Stage();
-            rhob.setScene(sceneRhob);
-            rhob.show();
+            curves.getItems().addAll(hb, areaChartVshale, lineChartPhiNCNphi[0]);
 
         }
         catch (Exception ex) {
