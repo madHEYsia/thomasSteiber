@@ -569,6 +569,18 @@ public class porosityCalculation {
                                     ? intervalValues[i][phiTSDIndex] - intervalValues[i][VDispSDIndex]*phiSH*(1-intervalValues[i][VLamIndex])
                                     : nullValue;
                                 intervalValues[i][phieSDIndex] = (intervalValues[i][phieSDIndex]!=nullValue && intervalValues[i][phieSDIndex]<=0) ? 0.001 : intervalValues[i][phieSDIndex];
+
+                                if (finalRwfor[i]!=nullValue && isDRESHpresent && data[i][dRESHIndex]!=nullValue && intervalValues[i][phiTIndex]!=nullValue){
+                                    double cW = 1/finalRwfor[i];
+                                    double sWa = Math.pow((tortousityFactor*finalRwfor[i]/(data[i][dRESHIndex]*
+                                                    Math.pow(intervalValues[i][phiTIndex], cementArchie))),
+                                            (1/satArchie));
+                                    if(sWa>=0 && data[i][vShaleIndex]!=nullValue){
+                                        if (sWa>1 || data[i][vShaleIndex]>0.5)
+                                            sWa = 1;
+                                        sWSeries.getData().add(new Data(sWa, intervalValues[i][intervalDepthIndex]));
+                                    }
+                                }
                             }
 
                             lineChartphi[0].getData().clear();
