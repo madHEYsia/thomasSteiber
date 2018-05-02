@@ -44,9 +44,9 @@ public class getPorWindow2Index {
             {"Reservoir HC Density ","0.88"},
             {"Fluid Density [G/C3]","1"},
             {"Shale Porosity [V/V]","0.12"},
-            {"Tortuosity factory","0.62"},
+            {"Tortuosity factory","0.58"},
             {"Archie Cementation exponent","1.8"},
-            {"Archie Saturation exponent","2"},
+            {"Archie Saturation exponent","2.2"},
     };
     String[] output = new String[curvesRequired.length+flags.length+inputRequired.length];
 

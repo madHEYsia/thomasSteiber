@@ -14,7 +14,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -40,6 +43,7 @@ public class vshaleCalculation {
     CheckBox Steiber = new CheckBox("Steiber");
     CheckBox clavier = new CheckBox("Clavier");
     CheckBox larionovOld = new CheckBox("Larionov Older Rocks");
+    int depthDiv = 10;
 
     public void module(){
 
@@ -49,7 +53,7 @@ public class vshaleCalculation {
         clavier.setSelected(true);
         larionovOld.setSelected(true);
 
-        HBox checkboxes = new HBox(5, linear, larionovTer, Steiber, clavier, larionovOld);
+        HBox checkboxes = new HBox(5, linear, clavier, larionovTer, Steiber, larionovOld);
         checkboxes.setPadding(new Insets(5));
         BorderPane header = new BorderPane(null, null,checkboxes, null,lasLoadButton());
 
@@ -124,10 +128,13 @@ public class vshaleCalculation {
             curve = new String[1000][4];
             curveIndex = 0;
 
+            VBox[] depthVB = new VBox[1];
+            Rectangle[] rect = new Rectangle[1];
+            HBox depthVb =  new HBox(0);
             XYChart.Series grSeries = new XYChart.Series();
-            LineChartWithMarkers<Number, Number> lineChartGr = null;
+            LineChartWithMarkers<Number, Number>[] lineChartGr = new LineChartWithMarkers[1];
 
-            String[] titles = {"Linear", "Larionov Tertiary Rocks", "Steiber", "Clavier","Larionov Older Rocks"};
+            String[] titles = {"Linear", "Clavier", "Larionov Tertiary Rocks", "Steiber", "Larionov Older Rocks"};
             areaSeries = new XYChart.Series[titles.length];
             modifiedAreaPlot<Number, Number>[] vshale = new modifiedAreaPlot[titles.length];
 
@@ -170,20 +177,43 @@ public class vshaleCalculation {
                     dataSize = (int) Math.ceil((stopValue - startValue) / stepValue) + 1;
                     data = new double[dataSize][2];
 
-                    lineChartGr = new LineChartWithMarkers<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue));
-                    lineChartGr.setCreateSymbols(false);
-                    lineChartGr.setLegendVisible(false);
-                    lineChartGr.setAnimated(false);
-                    lineChartGr.setTitle("GR plot");
-                    lineChartGr.getYAxis().setTickLabelsVisible(false);
-                    lineChartGr.getYAxis().setOpacity(0);
-                    lineChartGr.getData().add(grSeries);
+                    depthVB[0] = new VBox();
+                    Label[] depthLabel = new Label[depthDiv+1];
+                    double interval = (stopValue - startValue)/depthDiv;
+                    for (int i = 0; i <= depthDiv; ++i) {
+                        double value = startValue + i*interval;
+                        depthLabel[i] = new Label(((int)value) + "");
+                        depthVB[0].getChildren().add(depthLabel[i]);
+                    }
+                    rect[0] = new Rectangle(2, 100);
+                    rect[0].setFill(Color.BLACK);
+                    rect[0].setStrokeWidth(0);
+                    depthVb.getChildren().clear();
+                    depthVb.getChildren().addAll(depthVB[0], rect[0]);
+                    depthVb.setPadding(new Insets(30, 0, 30, 5));
+                    depthVb.setMinWidth(50);
+                    depthVb.setMaxWidth(50);
+                    depthVb.setPrefWidth(50);
+
+                    lineChartGr[0] = new LineChartWithMarkers<>(new NumberAxis(), new NumberAxis(stopValue, startValue, -stepValue));
+                    lineChartGr[0].setCreateSymbols(false);
+                    lineChartGr[0].setLegendVisible(false);
+                    lineChartGr[0].setAnimated(false);
+                    lineChartGr[0].setTitle("GR plot");
+                    lineChartGr[0].getYAxis().setTickLabelsVisible(false);
+                    lineChartGr[0].getYAxis().setOpacity(0);
+                    lineChartGr[0].getData().add(grSeries);
+                    lineChartGr[0].heightProperty().addListener(e -> {
+                        final double height = lineChartGr[0].getHeight()-60;
+                        rect[0].setHeight(height);
+                        depthVB[0].setSpacing((height-(depthDiv+1)*16.6)/depthDiv);
+                    });
 
                     final double[] yValue = {0.0, 0.0};
                     MenuItem startDepth = new MenuItem("Add start of range");
                     MenuItem endDepth = new MenuItem("Add end of range");
                     endDepth.setDisable(true);
-                    LineChartWithMarkers<Number, Number> finalLineChartGr = lineChartGr;
+                    LineChartWithMarkers<Number, Number> finalLineChartGr = lineChartGr[0];
 
                     startDepth.setOnAction(e->{
                         startDepth.setDisable(true);
@@ -213,7 +243,7 @@ public class vshaleCalculation {
 
                     ContextMenu grMenus = new ContextMenu();
                     grMenus.getItems().addAll(startDepth, endDepth);
-                    lineChartGr.setOnContextMenuRequested(e -> {
+                    lineChartGr[0].setOnContextMenuRequested(e -> {
                         grMenus.show(finalLineChartGr, e.getScreenX(), e.getScreenY());
                         if (startDepth.isDisable())
                             yValue[1] = (double) finalLineChartGr.getYAxis().getValueForDisplay(e.getY()-38);
@@ -297,11 +327,14 @@ public class vshaleCalculation {
                 }
             }
 
-            lineChartGr.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+            lineChartGr[0].setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
             grSeries.getNode().setStyle("-fx-stroke-width: 1;-fx-stroke: #6ab25f;");
 
+            HBox hbb = new HBox(0, depthVb, lineChartGr[0]);
+            hbb.setPadding(new Insets(0));
+
             hb.getChildren().clear();
-            hb.getChildren().addAll(lineChartGr);
+            hb.getChildren().addAll(hbb);
             stage.setMaximized(true);
             Platform.runLater(() ->{
                 updateVshale(0, dataSize, grMin, grMax);

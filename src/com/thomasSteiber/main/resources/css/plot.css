@@ -35,7 +35,7 @@
 .check-box {
     -fx-font-size: 14;
     -fx-font-weight: bold;
-    -fx-text-fill: -fx-WhiteColor;
+    -fx-text-fill: black;
 }
 .chart-symbol{
     -fx-stroke: #a9e200;
