@@ -62,7 +62,7 @@ public class porosityCalculation {
             curves.setPrefWidth(1.5*stage.getWidth());
         });
         Scene scene = new Scene(layout,600,400);
-        scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
+        scene.getStylesheets().add(porosityCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
 
         stage.setTitle("Porosity Calculation");
         stage.setScene(scene);

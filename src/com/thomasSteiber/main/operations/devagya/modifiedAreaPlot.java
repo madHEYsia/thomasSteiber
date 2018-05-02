@@ -13,7 +13,7 @@ public class modifiedAreaPlot<X,Y> extends AreaChart<X,Y> {
 
     Series series;
 
-    public modifiedAreaPlot(Axis<X> xAxis, Axis<Y> yAxis, Series<X,Y> seriesArray) {
+    modifiedAreaPlot(Axis<X> xAxis, Axis<Y> yAxis, Series<X, Y> seriesArray) {
         super(xAxis, yAxis);
         series = seriesArray;
     }

@@ -1,34 +1,20 @@
 package com.thomasSteiber.main.operations.devagya;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.Objects;
 
 public class dbmlCalculation {
 
@@ -48,7 +34,7 @@ public class dbmlCalculation {
             hb.setMaxWidth(layout.getMaxWidth());
         });
         Scene scene = new Scene(layout,600,400);
-        scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
+        scene.getStylesheets().add(dbmlCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
 
         stage.setTitle("DBML Calculation");
         stage.setScene(scene);
