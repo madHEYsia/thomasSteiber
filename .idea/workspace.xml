@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java" afterDir="false" />
-    </list>
+    <list default="true" id="c57ffeb6-4ec3-4ea2-98ea-c43d58b4d8c1" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,10 +44,11 @@
       <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
-              <caret line="796" lean-forward="true" selection-start-line="796" selection-end-line="796" />
+            <state relative-caret-position="125">
+              <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2822#3140#0" expanded="true" />
+                <element signature="e#3139#3140#0" expanded="true" />
                 <element signature="method#linecharts#0;class#porosityCalculation#0" />
               </folding>
             </state>
@@ -59,7 +58,7 @@
       <file leaf-file-name="vshaleCalculation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
+            <state relative-caret-position="986">
               <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -76,8 +75,8 @@
       <file leaf-file-name="getPorWindow2Index.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+            <state relative-caret-position="272">
+              <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -85,8 +84,8 @@
       <file leaf-file-name="plot.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/plot.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="32" column="34" lean-forward="true" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+            <state relative-caret-position="544">
+              <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -215,7 +214,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1386" />
@@ -229,7 +228,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -290,8 +288,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -582,38 +581,39 @@
       <workItem from="1525252591872" duration="455000" />
       <workItem from="1525264030114" duration="2009000" />
       <workItem from="1525280809254" duration="5556000" />
+      <workItem from="1525288859486" duration="1306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="355018000" />
+    <option name="totallyTimeSpent" value="356324000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="5" />
-      <window_info anchor="bottom" id="Messages" order="6" weight="0.32673267" />
+      <window_info active="true" anchor="bottom" id="Messages" order="6" visible="true" weight="0.33828384" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="13" weight="0.29888713" />
       <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Run" order="13" weight="0.29888713" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32803467" />
       <window_info id="Capture Tool" order="1" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="9" visible="true" weight="0.23133236" />
+      <window_info content_ui="combo" id="Project" order="9" visible="true" weight="0.23903178" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info id="Structure" order="8" side_tool="true" weight="0.24962293" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.08744038" />
       <window_info id="Favorites" order="7" side_tool="true" weight="0.3295626" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.08744038" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info id="MaxCompute Job Explorer" order="3" />
@@ -630,6 +630,7 @@
     <layout-to-restore>
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Run" order="13" weight="0.25722542" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
@@ -643,14 +644,13 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="6" weight="0.3276923" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info id="Favorites" order="7" side_tool="true" weight="0.3295626" />
-      <window_info id="MaxCompute Job Explorer" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="MaxCompute Job" order="10" />
       <window_info id="Nl-Palette" order="0" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info id="MaxCompute Project Explorer" order="5" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info content_ui="combo" id="Project" order="9" visible="true" weight="0.06959153" />
       <window_info anchor="right" id="Database" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -658,8 +658,8 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Structure" order="8" side_tool="true" weight="0.24962293" />
-      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="MaxCompute Job Explorer" order="3" />
+      <window_info id="Favorites" order="7" side_tool="true" weight="0.3295626" />
       <window_info anchor="bottom" id="MaxCompute Console" order="11" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
     </layout-to-restore>
@@ -687,13 +687,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java</url>
-          <line>618</line>
+          <line>611</line>
           <properties />
           <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java</url>
-          <line>568</line>
+          <line>560</line>
           <properties />
           <option name="timeStamp" value="132" />
         </line-breakpoint>
@@ -890,7 +890,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/vshaleCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
+        <state relative-caret-position="986">
           <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -905,24 +905,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/resources/css/plot.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="32" column="34" lean-forward="true" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+        <state relative-caret-position="544">
+          <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/getPorWindow2Index.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+        <state relative-caret-position="272">
+          <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="796" lean-forward="true" selection-start-line="796" selection-end-line="796" />
+        <state relative-caret-position="125">
+          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#2822#3140#0" expanded="true" />
+            <element signature="e#3139#3140#0" expanded="true" />
             <element signature="method#linecharts#0;class#porosityCalculation#0" />
           </folding>
         </state>
