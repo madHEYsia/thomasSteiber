@@ -46,8 +46,8 @@
       <file leaf-file-name="porosityCalculation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+            <state relative-caret-position="547">
+              <caret line="796" lean-forward="true" selection-start-line="796" selection-end-line="796" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#linecharts#0;class#porosityCalculation#0" />
@@ -103,7 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>series2</find>
       <find>lineChartphi</find>
       <find>Ymin</find>
       <find>hb.get</find>
@@ -133,6 +132,7 @@
       <find>System.ou</find>
       <find>setLe</find>
       <find>Clav</find>
+      <find>stage.w</find>
     </findStrings>
     <replaceStrings>
       <replace>noOfData</replace>
@@ -581,12 +581,12 @@
       <workItem from="1525225725284" duration="1759000" />
       <workItem from="1525252591872" duration="455000" />
       <workItem from="1525264030114" duration="2009000" />
-      <workItem from="1525280809254" duration="5222000" />
+      <workItem from="1525280809254" duration="5556000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="354684000" />
+    <option name="totallyTimeSpent" value="355018000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -919,8 +919,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thomasSteiber/main/operations/devagya/porosityCalculation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+        <state relative-caret-position="547">
+          <caret line="796" lean-forward="true" selection-start-line="796" selection-end-line="796" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#linecharts#0;class#porosityCalculation#0" />
