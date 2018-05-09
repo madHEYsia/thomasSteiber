@@ -881,7 +881,7 @@ public class porosityCalculation {
 
         vrStage.setTitle("GR Max-Min picking");
         vrStage.setScene(scene);
-        vrStage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        vrStage.getIcons().add(new Image(getClass().getResourceAsStream("main_favicon.png")));
         vrStage.initModality(Modality.APPLICATION_MODAL);
         vrStage.showAndWait();
 
