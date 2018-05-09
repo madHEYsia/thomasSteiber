@@ -1,5 +1,3 @@
-package com.thomasSteiber.main.operations.devagya;
-
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -33,11 +31,11 @@ public class graphUI {
 
         displayValues(startIndex, endIndex, intervalVal, phiTindex, vShaleIndex, nullValue);
         Scene scene = new Scene(lineGraph(),500,500);
-        scene.getStylesheets().add(graphUI.class.getResource("../../resources/css/graphUI.css").toExternalForm());
+        scene.getStylesheets().add(graphUI.class.getResource("graphUI.css").toExternalForm());
 
         window.setTitle("Graphical representation");
         window.setScene(scene);
-        window.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        window.getIcons().add(new Image(getClass().getResourceAsStream("main_favicon.png")));
         window.setMinWidth(400);
         window.setMinHeight(400);
         window.showAndWait();

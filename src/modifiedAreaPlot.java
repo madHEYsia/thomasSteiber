@@ -1,5 +1,3 @@
-package com.thomasSteiber.main.operations.devagya;
-
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;

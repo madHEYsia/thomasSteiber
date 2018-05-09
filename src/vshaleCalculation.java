@@ -1,5 +1,3 @@
-package com.thomasSteiber.main.operations.devagya;
-
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -59,11 +57,11 @@ public class vshaleCalculation {
 
         BorderPane layout = new BorderPane(hb, header, null, null, null);
         Scene scene = new Scene(layout);
-        scene.getStylesheets().add(vshaleCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
+        scene.getStylesheets().add(vshaleCalculation.class.getResource("plot.css").toExternalForm());
 
         stage.setTitle("Vshale Calculation");
         stage.setScene(scene);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("main_favicon.png")));
         stage.show();
     }
 
@@ -392,7 +390,7 @@ public class vshaleCalculation {
         Scene scene = new Scene(layout);
         stage.setTitle("Choose GR value");
         stage.setScene(scene);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("main_favicon.png")));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
 
@@ -470,7 +468,7 @@ public class vshaleCalculation {
 
         vrStage.setTitle("GR Max-Min picking");
         vrStage.setScene(scene);
-        vrStage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        vrStage.getIcons().add(new Image(getClass().getResourceAsStream("main_favicon.png")));
         vrStage.initModality(Modality.APPLICATION_MODAL);
         vrStage.showAndWait();
 

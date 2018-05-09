@@ -1,5 +1,3 @@
-package com.thomasSteiber.main.operations.devagya;
-
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -34,11 +32,11 @@ public class dbmlCalculation {
             hb.setMaxWidth(layout.getMaxWidth());
         });
         Scene scene = new Scene(layout,600,400);
-        scene.getStylesheets().add(dbmlCalculation.class.getResource("../../resources/css/plot.css").toExternalForm());
+        scene.getStylesheets().add(dbmlCalculation.class.getResource("plot.css").toExternalForm());
 
         stage.setTitle("DBML Calculation");
         stage.setScene(scene);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("main_favicon.png")));
         stage.show();
     }
 

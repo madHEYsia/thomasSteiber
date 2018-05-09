@@ -1,5 +1,3 @@
-package com.thomasSteiber.main.operations.devagya;
-
 class indexes {
 
     static int totalIndexes = 8;

@@ -1,5 +1,3 @@
-package com.thomasSteiber.main.operations.devagya;
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -44,11 +42,11 @@ public class newHome extends Application {
         layout.setMinHeight(200);
 
         Scene scene = new Scene(layout);
-        scene.getStylesheets().add(newHome.class.getResource("../../resources/css/main.css").toExternalForm());
+        scene.getStylesheets().add(newHome.class.getResource("main.css").toExternalForm());
 
         primaryStage.setTitle("Sandy Shale Lamination using Thomas Steiber Method");
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/main_favicon.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("main_favicon.png")));
         primaryStage.show();
 
     }

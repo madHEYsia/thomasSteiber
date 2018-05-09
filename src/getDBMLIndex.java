@@ -1,5 +1,3 @@
-package com.thomasSteiber.main.operations.devagya;
-
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
@@ -12,41 +10,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class getPorWindow2Index {
+public class getDBMLIndex {
 
-    int flagFluidIndex = 0;
-    int sandDensityIndex = 1;
-    int shaleDensityLowerIndex = 2;
-    int shaleDensityUpperIndex = 3;
-    int mudFiltrateDensityIndex = 4;
-    int reservoirHCDensityIndex = 5;
-    int fluidDensityIndex = 6;
-    int ShalePorosityIndex = 7;
-    int tortuosityIndex = 8;
-    int archieCementationIndex = 9;
-    int archieSaturationIndex = 10;
+    int tvdIndex = 0;
+    int flaglocationIndex = 1;
+    int KBIndex = 2;
+    int WDIndex = 3;
 
     String[] curvesRequired = {
+            "True Vertical Depth:",
     };
     String[][] flags ={
-            {"Formation fluid ","Liquid","Gas"}
+            {"Default Offshore","1","Other"},
     };
     String[][] inputRequired = {
-            {"Sand Density [V/V]","2.79"},
-            {"Shale Density lower limit [V/V]","2.89"},
-            {"Shale Density Upper limit [V/V]","2.89"},
-            {"Mud filtrate Density [G/C3]","1.1"},
-            {"Reservoir HC Density ","0.88"},
-            {"Fluid Density [G/C3]","1"},
-            {"Shale Porosity [V/V]","0.12"},
-            {"Tortuosity factory","0.58"},
-            {"Archie Cementation exponent","1.8"},
-            {"Archie Saturation exponent","2.2"},
+            {"KB from surface(MSL) [FEET]","5"},
+            {"Water Depth plus KB [FEET]","0"},
     };
     String[] output = new String[curvesRequired.length+flags.length+inputRequired.length];
 
@@ -67,7 +50,7 @@ public class getPorWindow2Index {
         grids.setPadding(new Insets(10));
         grids.setHgap(15);
         grids.setVgap(10);
-        int rowIndex = 0, columnIndex = 0, inputsInRows = 3;
+        int rowIndex = 0, columnIndex = 0, inputsInRows = 1;
         for(int i=0;i<curvesRequired.length+flags.length+inputRequired.length;++i){
             int finalI = i;
             if (i<curvesRequired.length) {
@@ -98,7 +81,7 @@ public class getPorWindow2Index {
                 output[i] = inputRequired[TextI][1];
                 TextField value = new TextField(inputRequired[TextI][1] + "");
                 value.setMaxWidth(200);
-                value.textProperty().addListener((observable, oldValue, newValue) ->  output[finalI] = newValue );
+                value.textProperty().addListener((observable, oldValue, newValue) -> output[finalI] = newValue);
                 grids.add(new HBox(5, inputLabel, value), columnIndex, rowIndex, 5, 1);
             }
             columnIndex+=5;
@@ -128,7 +111,7 @@ public class getPorWindow2Index {
             boolean errorFound = false;
             inner: for(int i=0;i<curvesRequired.length+flags.length+inputRequired.length;++i) {
                 if (i < curvesRequired.length) {
-                    if (output[i] == null || output[i] == "0") {
+                    if (output[i] == null || output[i].equals("0")) {
                         errorFound = true;
                         error.setText("Please select parameter " + curvesRequired[i]);
                         sleeper.setOnSucceeded(event -> error.setText(""));
@@ -171,7 +154,7 @@ public class getPorWindow2Index {
 
         layout.getChildren().addAll(grids, error, bottomButton);
 
-        Scene scene = new Scene(layout, 1000,200);
+        Scene scene = new Scene(layout, 300,200);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
